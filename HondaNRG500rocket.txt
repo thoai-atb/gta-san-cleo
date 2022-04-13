@@ -1,0 +1,45 @@
+                 // This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'HONDA ROCKET'
+
+:Begin
+wait 0 
+if and            
+    0AB0:   key_pressed 88 
+    Player.Defined($PLAYER_CHAR)
+    Actor.Driving($PLAYER_ACTOR)
+    00DD:   actor $PLAYER_ACTOR driving_car_with_model #NRG500
+    84C8:   not actor $PLAYER_ACTOR driving_flying_vehicle 
+jf @Begin
+
+0@ = Actor.CurrentCar($PLAYER_ACTOR)
+for 1@ = 1 to 30 step 1 
+    wait 1
+    if
+        056E:   car 0@ defined
+    jf @Begin
+    0407: store_coords_to 14@ 15@ 16@ from_car 0@ with_offset 0.0 -1.0 0.0
+    064B: 10@ = create_particle "shootlight" at 14@ 15@ 16@ type 1      
+    064F: remove_references_to_particle 10@
+end
+
+if
+    056E:   car 0@ defined
+jf @Begin 
+
+0407: store_coords_to 11@ 12@ 13@ from_car 0@ with_offset 0.0 2.0 0.0
+0407: store_coords_to 14@ 15@ 16@ from_car 0@ with_offset 0.0 0.0 0.0
+0063: 11@ -= 14@ // (float) 
+0063: 12@ -= 15@ // (float) 
+0063: 13@ -= 16@ // (float) 
+07D5: set_car 0@ velocity_in_direction_XYZ 11@ 12@ 13@ rotation_velocitiesXY 0.0 0.0 unk 0.0
+
+Car.StorePos(0@, 14@, 15@, 16@) 
+064B: 10@ = create_particle "explosion_molotov" at 14@ 15@ 16@ type 1       
+064F: remove_references_to_particle 10@
+018C: play_sound 1135 at 14@ 15@ 16@   //1159 explosion
+wait 3000
+
+jump @Begin

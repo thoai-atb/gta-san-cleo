@@ -1,0 +1,114 @@
+{$CLEO}
+
+0000: "hotknife"
+
+:nn
+wait 0
+077E: get_active_interior_to 20@ 
+if and
+0ADC:   test_cheat "hotkni" 
+20@ == 0
+80DF: not  actor $PLAYER_ACTOR driving
+jf @nn
+
+:nn1
+wait 0
+Model.Load(#CELLPHONE) 
+Model.Load(#HOTKNIFE)
+if and
+Model.Available(#CELLPHONE)
+Model.Available(#HOTKNIFE)
+jf @nn1
+
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+wait 4500 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+   
+0109: player $PLAYER_CHAR money += -5000
+
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset 0.0 4.0 10.0 
+
+064B: 4@ = create_particle "explosion_small" at 0@ 1@ 2@ type 1
+064F: remove_references_to_particle 4@
+3@ = Car.Create(#HOTKNIFE, 0@, 1@, 2@) 
+0@ = Actor.Angle($PLAYER_ACTOR) 
+000B: 0@ += 90.0
+Car.Angle(3@) = 0@
+
+wait 2000
+0689: set_car 3@ remove_door 2 removed_door_visible 0
+0689: set_car 3@ remove_door 3 removed_door_visible 0
+
+    
+Model.Destroy(#CELLPHONE)
+
+for 5@ = 1 to 10 step 1
+    if or
+        0741:   actor $PLAYER_ACTOR busted
+        0117:   player $PLAYER_CHAR wasted
+        Car.Wrecked(3@)
+    then
+        jump @nn2
+    end
+    0560: create_random_actor_in_car 3@ handle_as 10@ 
+    //0561: 10@ = create_passenger_in_car 3@ seat 0
+    0561: 11@ = create_passenger_in_car 3@ seat 0
+    
+    0407: store_coords_to 0@ 1@ 2@ from_car 3@ with_offset 0.6 0.0 0.0
+    064B: 4@ = create_particle "shootlight" at 0@ 1@ 2@ type 1
+    064F: remove_references_to_particle 4@ 
+    0407: store_coords_to 0@ 1@ 2@ from_car 3@ with_offset -0.6 0.0 0.0
+    064B: 4@ = create_particle "shootlight" at 0@ 1@ 2@ type 1
+    064F: remove_references_to_particle 4@
+    
+    0633: AS_actor 10@ exit_car                       
+    0633: AS_actor 11@ exit_car 
+    Actor.RemoveReferences(10@) 
+    Actor.RemoveReferences(11@)
+    
+    
+    // CAR JUMP RANDOM
+    0208: 0@ = random_float_in_ranges -0.1 0.1 
+    0208: 1@ = random_float_in_ranges -0.1 0.1
+    0208: 2@ = random_float_in_ranges -0.1 0.1
+    07D5: set_car 3@ velocity_in_direction_XYZ 0@ 1@ 2@ rotation_velocitiesXY 0.0 0.0 unk 0.0
+    // SOUND
+    Car.StorePos(3@, 0@, 1@, 2@)
+    018C: play_sound 1141 at 0@ 1@ 2@
+    
+    for 6@ = 1 to 4 step 1
+        wait 300
+        // RANDOM PARTICLE
+        0208: 0@ = random_float_in_ranges -1.0 1.0 
+        0208: 1@ = random_float_in_ranges -1.0 1.0
+        0208: 2@ = random_float_in_ranges -1.0 1.0
+        0407: store_coords_to 0@ 1@ 2@ from_car 3@ with_offset 0@ 1@ 2@
+        064B: 4@ = create_particle "shootlight" at 0@ 1@ 2@ type 1
+        064F: remove_references_to_particle 4@
+    end
+    
+    wait 500
+end
+
+:nn2
+wait 1000
+/*
+07D5: set_car 3@ velocity_in_direction_XYZ 0.0 0.0 0.8 rotation_velocitiesXY 0.0 0.0 unk 0.0
+wait 2000                      
+Car.SetSpeedInstantly(3@, 100.0)
+wait 2000
+*/
+
+/*
+Car.StorePos(3@, 0@, 1@, 2@)
+018C: play_sound 1159 at 0@ 1@ 2@
+064B: 4@ = create_particle "explosion_small" at 0@ 1@ 2@ type 1
+064F: remove_references_to_particle 4@
+00A6: destroy_car 3@
+*/
+
+Car.RemoveReferences(3@)
+Model.Destroy(#HOTKNIFE)    
+jump @nn
+
+  

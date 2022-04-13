@@ -1,0 +1,28 @@
+// This file was decompiled using SASCM.ini published on 2021-07-05
+{$CLEO .cs}
+
+0000: NOP 
+wait 100 
+script_name "SON" 
+04ED: load_animation "CRACK" 
+0@ = 304500 
+
+:SON_32
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SON_32 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @SON_32 
+  &0(0@,1i) == 255 
+jf @SON_32 
+0605: actor $PLAYER_ACTOR perform_animation "CRCKIDLE2" IFP "CRACK" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 11000 
+wait 5000 
+fade 0 time 1500 
+wait 2000 
+$TIME += 9 
+00C0: set_current_time_hours_to $TIME minutes_to 0 
+wait 1500 
+fade 1 time 1500 
+jump @SON_32 

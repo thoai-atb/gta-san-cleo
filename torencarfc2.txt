@@ -1,0 +1,48 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+0000: NOP 
+04ED: load_animation "POOL" 
+04ED: load_animation "GANGS" 
+
+:NONAME_19
+wait 0 
+if and
+04EE:   animation "POOL" loaded 
+04EE:   animation "GANGS" loaded 
+   Player.Defined($PLAYER_CHAR)
+jf @NONAME_19 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @NONAME_19 
+1@ = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+03C9:   car 1@ damaged 
+jf @NONAME_363 
+jump @NONAME_103 
+
+:NONAME_103
+wait 0 
+if and
+   not Actor.InCar($PLAYER_ACTOR, 1@)
+0203:   actor $PLAYER_ACTOR near_car 1@ radius 3.0 5.0 flag 0 on_foot 
+0AB0:   key_pressed 8 
+0AB0:   key_pressed 82 
+jf @NONAME_103 
+0605: actor $PLAYER_ACTOR perform_animation "POOL_XLONG_SHOT" IFP "POOL" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+0657: car 1@ open_door 0 
+0605: actor $PLAYER_ACTOR perform_animation "PRTIAL_GNGTLKF" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 5000 
+0605: actor $PLAYER_ACTOR perform_animation "POOL_CHALKCUE" IFP "POOL" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 5000 
+0605: actor $PLAYER_ACTOR perform_animation "POOL_LONG_START" IFP "POOL" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+0A30: repair_car 1@ 
+jump @NONAME_363 
+
+:NONAME_363
+wait 100 
+Car.RemoveReferences(1@)
+jump @NONAME_19 

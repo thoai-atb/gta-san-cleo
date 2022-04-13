@@ -1,0 +1,179 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'HONDA JUMP'
+
+:LOADMODEL
+wait 0 
+0247: load_model 1225   // 1370
+
+:CARJUMP_11
+wait 0 
+if and            
+    Player.Defined($PLAYER_CHAR) 
+    056D:   actor $PLAYER_ACTOR defined
+    Actor.Driving($PLAYER_ACTOR)
+    00DD:   actor $PLAYER_ACTOR driving_car_with_model #NRG500
+jf @CARJUMP_11 
+
+if
+    0AB0:   key_pressed 9 
+then
+    jump @Car_Jumping
+else
+    jump @CARJUMP_11
+end
+    
+:Car_Jumping // DETECTED KEY PRESS TAB
+wait 0
+if 
+8AB0:   not key_pressed 88 
+jf @CARJUMP_124 
+if 
+8AB0:   not key_pressed 67 
+jf @CARJUMP_145 
+1@ = 0.15 
+$2657 = 18 
+04F7: status_text $2657 type 1 line 1 GXT '' // global_variable 
+059C: enable_status_text $2657 flashing 0 // global_variable 
+jump @CARJUMP_166 
+
+:CARJUMP_124
+wait 0 
+1@ = 0.45 
+jump @CARJUMP_368 
+
+:CARJUMP_145
+wait 0 
+1@ = 3.0 
+jump @CARJUMP_368 
+
+:CARJUMP_166 // INCREASING MAGNITUDE
+wait 0 
+0087: 2@ = 1@ // (float) 
+2@ *= 133.3333 
+0090: $2657 = float 2@ to_integer 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CARJUMP_564 
+if 
+    8AB0:   not key_pressed 109 // 16   SHIFT -> MINUS KEY (HOLD BACK ENERGY)
+jf @CARJUMP_280 
+if 
+    0AB0:   key_pressed 9 
+jf @CARJUMP_337 
+if 
+  3.0 > 1@ 
+jf @CARJUMP_166 
+1@ += 0.02 
+jump @CARJUMP_166 
+
+:CARJUMP_280
+wait 100 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CARJUMP_564 
+if 
+    0AB0:   key_pressed 9 
+jf @CARJUMP_337 
+if 
+    0AB0:   key_pressed 109 // 16   SHIFT -> MINUS KEY (HOLD BACK ENERGY)
+jf @CARJUMP_280 
+jump @CARJUMP_166 
+
+:CARJUMP_337 // JUMP
+wait 0 
+0151: remove_status_text $2657 
+if 
+8AB0:   not key_pressed 82 
+jf @CARJUMP_11 
+jump @CARJUMP_368 
+
+
+
+
+
+:CARJUMP_368  // JUMP
+wait 0 
+0@ = Actor.CurrentCar($PLAYER_ACTOR)     
+if
+    056E:   car 0@ defined
+jf @CARJUMP_11
+
+// JUMP & SOUND EFFECT
+0407: store_coords_to 11@ 12@ 13@ from_car 0@ with_offset 0.0 0.0 1@ 
+0407: store_coords_to 14@ 15@ 16@ from_car 0@ with_offset 0.0 0.0 0.0
+0063: 11@ -= 14@ // (float) 
+0063: 12@ -= 15@ // (float) 
+0063: 13@ -= 16@ // (float)
+if
+    056E:   car 0@ defined
+jf @CARJUMP_11 
+07D5: set_car 0@ velocity_in_direction_XYZ 11@ 12@ 13@ rotation_velocitiesXY 0.0 0.0 unk 0.0
+if  
+    01F3:  car 0@ in_air
+then
+    064B: 10@ = create_particle "explosion_crate" at 14@ 15@ 16@ type 1
+else   
+    064B: 10@ = create_particle "shootlight" at 14@ 15@ 16@ type 1
+end       
+064F: remove_references_to_particle 10@
+018C: play_sound 1141 at 14@ 15@ 16@ // 1141
+
+// BOAT THING
+if 
+    04A7:   actor $PLAYER_ACTOR driving_boat 
+then 
+    0087: 3@ = 1@ // (float) 
+    3@ *= 5000.0 
+    0092: 4@ = float 3@ to_integer 
+    wait 4@
+end
+
+// COOL DOWN CHECK
+if                  
+    01F3:  car 0@ in_air 
+then
+    jump @COOL_DOWN
+end
+
+jump @CARJUMP_11 
+
+
+:COOL_DOWN // Cool down after jumping in the air
+wait 0
+if and            
+    Player.Defined($PLAYER_CHAR) 
+    056D:   actor $PLAYER_ACTOR defined
+    Actor.Driving($PLAYER_ACTOR)
+    00DD:   actor $PLAYER_ACTOR driving_car_with_model #NRG500
+jf @CARJUMP_11
+0@ = Actor.CurrentCar($PLAYER_ACTOR)     
+if
+    056E:   car 0@ defined
+jf @CARJUMP_11
+if
+    01F3:  car 0@ in_air
+then
+    jump @COOL_DOWN
+end
+jump @CARJUMP_11
+
+
+:CARJUMP_564
+wait 0 
+0151: remove_status_text $2657 
+jump @CARJUMP_11
+
+:DISPENSE_EXPLOSIVE
+wait 0                  
+0109: player $PLAYER_CHAR money += -100
+0007: 5@ = -1.0
+                                        
+04C4: store_coords_to 11@ 12@ 13@ from_actor $PLAYER_ACTOR with_offset 0.0 5@ -0.2
+Object.Create(7@, 1225, 11@, 12@, 13@) // 1370
+
+0392: make_object 7@ moveable 1
+Object.RemoveReferences(7@)
+return 

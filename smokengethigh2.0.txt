@@ -1,0 +1,133 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'SSMK' 
+9@ = 0 
+
+:SSMK_18
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SSMK_18 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @SSMK_18 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @SSMK_18 
+if 
+    0ADC:   test_cheat "GETHIGH"
+jf @SSMK_18 
+8@ = Object.Init(3044, 0.0, 0.0, 0.0)
+7@ = Object.Init(3045, 0.0, 0.0, 0.0)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+069A: attach_object 7@ to_object $ZAMALA45 with_offset 0.0 0.0 0.0 rotation 0.0 0.0 0.0 
+070A: AS_actor $PLAYER_ACTOR attach_to_object 8@ offset 0.04 0.1 0.05 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time -1 
+0669: 29@ = attach_particle "EXHALE" to_actor $PLAYER_ACTOR with_offset 0.05 0.0 -0.05 type 2 
+jump @SSMK_258 
+
+:SSMK_258
+0650: destroy_particle 29@ 
+04ED: load_animation "GANGS" 
+
+:SSMK_272
+wait 0 
+if 
+04EE:   animation "GANGS" loaded 
+jf @SSMK_303 
+jump @SSMK_319 
+
+:SSMK_303
+04ED: load_animation "GANGS" 
+jump @SSMK_272 
+
+:SSMK_319
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+0605: actor $PLAYER_ACTOR perform_animation "SMKCIG_PRTL" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 6000 
+0669: 29@ = attach_particle "EXHALE" to_actor $PLAYER_ACTOR with_offset 0.05 0.0 -0.05 type 2 
+0883: attach_particle 29@ to_actor $PLAYER_ACTOR mode 5 
+wait 1000 
+064C: make_particle 29@ visible 
+9@ = 1 
+33@ = 0 
+wait 5000 
+Player.SetDrunkVisuals($PLAYER_CHAR, 100)
+
+// ATBASH ADDED
+29@ = Audiostream.Load("CLEO\MP3\Gethigh.wav")
+Audiostream.PerformAction(29@, PLAY)
+Actor.Driving($PLAYER_ACTOR)
+0169: set_fade_color_RGB 50 100 50 
+fade 0 400 
+wait 500 
+fade 1 7000
+
+jump @SSMK_482 
+
+:SSMK_482
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SSMK_482 
+if or
+00E1:   player 0 pressed_key 14 
+00E1:   player 0 pressed_key 15 
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 4 
+00E1:   player 0 pressed_key 1 
+00E1:   player 0 pressed_key 0 
+jf @SSMK_556 
+jump @SSMK_781 
+
+:SSMK_556
+wait 1000 
+0650: destroy_particle 29@ 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+0605: actor $PLAYER_ACTOR perform_animation "SMKCIG_PRTL" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 6000 
+0669: 29@ = attach_particle "EXHALE" to_actor $PLAYER_ACTOR with_offset 0.05 0.2 -0.05 type 2 
+0883: attach_particle 29@ to_actor $PLAYER_ACTOR mode 5 
+wait 1000 
+064C: make_particle 29@ visible 
+9@ = 1 
+33@ = 0 
+jump @SSMK_688 
+
+:SSMK_688
+if and
+  9@ == 1 
+  33@ > 3000 
+jf @SSMK_482 
+0650: destroy_particle 29@ 
+0669: 29@ = attach_particle "EXHALE" to_actor $PLAYER_ACTOR with_offset 0.0 0.15 0.0 type 2 
+0883: attach_particle 29@ to_actor $PLAYER_ACTOR mode 4 
+064C: make_particle 29@ visible 
+9@ = 0 
+jump @SSMK_482 
+
+:SSMK_781
+0687: clear_actor $PLAYER_ACTOR task 
+04EB: AS_actor $PLAYER_ACTOR crouch 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+9@ = 0 
+wait 1000 
+04EF: release_animation "GANGS" 
+Object.Destroy(8@)
+Object.Destroy(7@)
+0650: destroy_particle 29@ 
+
+// ATBASH ADDED 
+wait 100000
+Audiostream.Release(29@)
+0169: set_fade_color_RGB 150 56 0 
+fade 0 500 
+wait 400 
+fade 1 250 
+0169: set_fade_color_RGB 0 0 0 
+wait 600 
+
+
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+015D: set_gamespeed 1.0 
+jump @SSMK_18 

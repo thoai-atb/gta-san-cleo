@@ -1,0 +1,8 @@
+{$CLEO .cs}
+thread 'Fast reload'
+
+:nn
+0331: set_player $PLAYER_CHAR fast_reload 1
+
+004E: end_thread
+

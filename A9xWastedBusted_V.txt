@@ -1,0 +1,462 @@
+{$CLEO .cs}
+
+0000:
+0ADF: add_dynamic_GXT_entry '9xWst' text "~h~Wasted"
+0ADF: add_dynamic_GXT_entry '9xBst' text "~h~Busted"
+0ADF: add_dynamic_GXT_entry '9xHvt' text "Hospital_Visit_:"
+0ADF: add_dynamic_GXT_entry '9xTbt' text "Times_Busted_:"
+0ADF: add_dynamic_GXT_entry 'DEAD' text ""
+0ADF: add_dynamic_GXT_entry 'BUSTED' text ""
+:Starto
+wait 0
+0ADF: add_dynamic_GXT_entry 'DEAD' text ""
+0ADF: add_dynamic_GXT_entry 'BUSTED' text ""
+wait 0
+if
+0118:   actor $PLAYER_ACTOR dead
+jf @StartoBus
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 3.0 0.5 -0.0
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+7@ = Audiostream.Load("CLEO\SOUND9X\WBFirst_9x.mp3")
+wait 0
+if
+0118:   actor $PLAYER_ACTOR dead
+jf @Startoc
+Audiostream.PerformAction(7@, PLAY)
+:Startoz
+wait 0
+if
+0118:   actor $PLAYER_ACTOR dead
+jf @Startoc
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 1@ 2@ 3@ 
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2             
+015D: set_gamespeed 0.3
+if
+8256:   player $PLAYER_CHAR defined
+jf @Startoz
+8@ = Audiostream.Load("CLEO\SOUND9X\WBSec_9x.mp3")
+068D: get_camera_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+015D: set_gamespeed 1.0
+0169: set_fade_color_RGB 255 255 255
+fade 0 500
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+Audiostream.PerformAction(8@, PLAY)
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+Audiostream.PerformAction(7@, STOP)
+015D: set_gamespeed 0.5
+fade 1 600
+0581: enable_radar 0
+0826: enable_hud 0
+052C: set_player $PLAYER_CHAR drunk_visuals 10
+0924: enable_screen_darkness 1 with_value 50
+038E: draw_box_position 320.0 224.0 size 640.0 448.0 RGBA 255 1 1 30
+038E: draw_box_position 320.0 200.0 size 640.0 100.0 RGBA 0 0 0 100
+0349: set_text_draw_font 3 
+033F: set_text_draw_letter_size 1.5 4.8                        
+0340: set_text_draw_RGBA 150 0 0 255
+033E: set_draw_text_position 225.0 170.0 GXT '9xWst'
+0922: set_camera_zoom_from 90.0 to 90.0 timelimit 10000 smooth_transition 2
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.2 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+0922: set_camera_zoom_from 80.0 to 80.0 timelimit 10000 smooth_transition 2
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.4 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+0922: set_camera_zoom_from 75.0 to 75.0 timelimit 10000 smooth_transition 2
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.6 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+0922: set_camera_zoom_from 65.0 to 65.0 timelimit 10000 smooth_transition 2
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.8 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+0922: set_camera_zoom_from 55.0 to 55.0 timelimit 10000 smooth_transition 2
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 1.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+7@ = 255
+:Starto1
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 1.2 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 0
+if
+0256:   player $PLAYER_CHAR defined
+jf @Starto1
+035F: actor $PLAYER_ACTOR armour = 150
+0924: enable_screen_darkness 1 with_value 0
+0922: set_camera_zoom_from 70.0 to 70.0 timelimit 0 smooth_transition 2
+052C: set_player $PLAYER_CHAR drunk_visuals 0
+03F0: enable_text_draw 0 
+wait 0
+0581: enable_radar 1
+0826: enable_hud 1
+0652: 1@ = integer_stat 135
+045A: draw_text_1number 397.0 370.0 GXT '9xHvt' number 0
+045A: draw_text_1number 520.0 370.0 GXT 'NUMBER' number 1@
+0169: set_fade_color_RGB 0 0 0
+01B4: set_player $PLAYER_CHAR can_move 0
+02A3: enable_widescreen 1
+fade 0 0
+fade 1 500
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset -3.0 3.5 -0.0
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+05D3: AS_actor  $PLAYER_ACTOR goto_point 1@ 2@ 3@  mode 4 time -1 ms // versionA
+wait 2000
+03F0: enable_text_draw 0 
+01B4: set_player $PLAYER_CHAR can_move 1
+0687: clear_actor $PLAYER_ACTOR task
+015A: restore_camera
+02A3: enable_widescreen 0
+jump @Starto
+
+:Startoc
+015D: set_gamespeed 1.0
+015A: restore_camera
+0581: enable_radar 1
+0826: enable_hud 1
+jump @Starto
+
+:StartoBus
+wait 0
+if
+0741:   actor $PLAYER_ACTOR busted
+jf @Starto
+0ADF: add_dynamic_GXT_entry 'Busted' text ""
+00A0: store_actor $PLAYER_ACTOR position_to 1@ 2@ 3@ 
+08E5: get_actor_in_sphere 1@ 2@ 3@ radius 20.0 handle_as 7@
+if
+not 4@ == -1
+jf @Basted
+089F: get_actor 7@ pedtype_to 5@
+if
+5@ == 6
+jf @Basted
+0169: set_fade_color_RGB 255 255 255
+8@ = Audiostream.Load("CLEO\SOUND9X\WBSec_9x.mp3")
+fade 0 500
+0619: enable_actor $PLAYER_ACTOR collision_detection 0
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+Audiostream.PerformAction(8@, PLAY)
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+fade 1 300
+0581: enable_radar 0
+0826: enable_hud 0
+038E: draw_box_position 320.0 224.0 size 640.0 448.0 RGBA 1 1 255 30
+038E: draw_box_position 320.0 200.0 size 640.0 100.0 RGBA 0 0 0 100
+0349: set_text_draw_font 3 
+033F: set_text_draw_letter_size 1.5 4.8                        
+0340: set_text_draw_RGBA 0 115 180 255                               
+033E: set_draw_text_position 230.0 170.0 GXT '9xBst'
+:lolerti
+wait 0
+04C4: store_coords_to 1@ 2@ 3@ from_actor 7@ with_offset 0.9 -1.0 0.8
+0889: store_actor $PLAYER_ACTOR center_of_body_position_to 4@ 5@ 6@
+015F: set_camera_position 1@ 2@ 3@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 4@ 5@ 6@ switchstyle 2
+if
+8741:   actor $PLAYER_ACTOR busted
+jf @lolerti
+035F: actor $PLAYER_ACTOR armour = 150
+009B: destroy_actor 7@
+03F0: enable_text_draw 0 
+wait 0
+0581: enable_radar 1
+0826: enable_hud 1
+0652: 1@ = integer_stat 133
+045A: draw_text_1number 400.0 370.0 GXT '9xTbt' number 0
+045A: draw_text_1number 520.0 370.0 GXT 'NUMBER' number 1@
+02EB: restore_camera_with_jumpcut
+0619: enable_actor $PLAYER_ACTOR collision_detection 1
+0169: set_fade_color_RGB 0 0 0
+01B4: set_player $PLAYER_CHAR can_move 0
+02A3: enable_widescreen 1
+fade 0 0
+fade 1 300
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 3.0 3.5 0.5
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+05D3: AS_actor  $PLAYER_ACTOR goto_point 1@ 2@ 3@  mode 4 time -1 ms // versionA
+wait 2000
+03F0: enable_text_draw 0 
+01B4: set_player $PLAYER_CHAR can_move 1
+0687: clear_actor $PLAYER_ACTOR task
+015A: restore_camera
+02A3: enable_widescreen 0
+jump @Starto
+
+:Basted
+0169: set_fade_color_RGB 255 255 255
+8@ = Audiostream.Load("CLEO\SOUND9X\WBSec_9x.mp3")
+fade 0 500
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+Audiostream.PerformAction(8@, PLAY)
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+wait 10
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+
+015D: set_gamespeed 0.5
+fade 1 300
+0581: enable_radar 0
+0826: enable_hud 0
+038E: draw_box_position 320.0 224.0 size 640.0 448.0 RGBA 1 1 255 30
+038E: draw_box_position 320.0 200.0 size 640.0 100.0 RGBA 0 0 0 100
+0349: set_text_draw_font 3 
+033F: set_text_draw_letter_size 1.5 4.8                        
+0340: set_text_draw_RGBA 0 115 180 255                               
+033E: set_draw_text_position 225.0 170.0 GXT '9xBst'
+wait 0
+:Basted1s
+if
+8741:   actor $PLAYER_ACTOR busted
+jf @Basted1s
+02EB: restore_camera_with_jumpcut
+03F0: enable_text_draw 0 
+wait 0
+0652: 1@ = integer_stat 133
+045A: draw_text_1number 400.0 370.0 GXT '9xTbt' number 0
+045A: draw_text_1number 520.0 370.0 GXT 'NUMBER' number 1@
+0169: set_fade_color_RGB 0 0 0
+01B4: set_player $PLAYER_CHAR can_move 0
+02A3: enable_widescreen 1
+fade 0 0
+fade 1 500
+0581: enable_radar 1
+0826: enable_hud 1
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 3.0 3.5 -0.0
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+015F: set_camera_position 4@ 5@ 6@ rotation 0.0 0.0 0.0
+0160: set_camera_point_at 1@ 2@ 3@ switchstyle 2
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.5 -0.0
+05D3: AS_actor  $PLAYER_ACTOR goto_point 1@ 2@ 3@  mode 4 time -1 ms // versionA
+wait 2000
+03F0: enable_text_draw 0 
+01B4: set_player $PLAYER_CHAR can_move 1
+0687: clear_actor $PLAYER_ACTOR task
+015A: restore_camera
+02A3: enable_widescreen 0
+jump @Starto
+
+
+
+
+

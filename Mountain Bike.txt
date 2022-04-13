@@ -1,0 +1,44 @@
+{$CLEO}
+
+0000: "mountain bike"
+
+:nn
+wait 0
+if and
+ 0AB0:   key_pressed 106
+ 8965:  not actor $PLAYER_ACTOR swimming
+ 80DF: not  actor $PLAYER_ACTOR driving
+ not Actor.Animation($PLAYER_ACTOR) == "CLIMB_IDLE"
+ not Actor.Animation($PLAYER_ACTOR) == "CLIMB_JUMP_B"
+ not Actor.Animation($PLAYER_ACTOR) == "CLIMB_PULL"
+ not Actor.Animation($PLAYER_ACTOR) == "CLIMB_STAND"
+ not Actor.Animation($PLAYER_ACTOR) == "FALL_FALL"
+
+jf @nn
+
+083D: get_actor $PLAYER_ACTOR velocity_in_direction_XYZ 21@ 22@ 23@ 
+if 
+  23@ > -30.0
+jf @nn        
+
+04ED: load_animation "CARRY"
+Model.Load(#MTBIKE)
+:lod
+wait 0
+if and
+04EE:   animation "CARRY" loaded
+Model.Available(#MTBIKE)
+else_jump @lod
+
+0605: actor $PLAYER_ACTOR perform_animation "PUTDWN" IFP "CARRY" rate 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+wait 1000
+04C4: store_coords_to 10@ 11@ 12@ from_actor $PLAYER_ACTOR with_offset 0.0 1.0 -1.0
+2@ = Actor.Angle($PLAYER_ACTOR)
+0109: player $PLAYER_CHAR money += -1000
+00A5: 1@ = create_car #MTBIKE at 10@ 11@ 12@
+000B: 2@ += 90.0
+0175: set_car 1@ Z_angle_to 2@
+Car.RemoveReferences(1@)
+Model.Destroy(#MTBIKE)
+jump @nn
+

@@ -1,0 +1,4216 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'WHELP' 
+20@ = 0.1 
+25@ = 0.3 
+20@ = 0.1 
+21@ = 1.8 
+18@ = 0.6 
+
+:WHELP_61
+wait 20 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_61 
+if 
+   Player.Controllable($PLAYER_CHAR)
+else_jump @WHELP_61 
+if and
+   not Actor.Driving($PLAYER_ACTOR)
+0ADC:   test_cheat "CLOTH"
+else_jump @WHELP_61 
+if 
+  $ONMISSION == 0 
+else_jump @WHELP_61 
+jump @WHELP_267 
+
+:WHELP_142
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_61 
+if and
+   not Actor.Driving($PLAYER_ACTOR)
+  $ONMISSION == 0 
+else_jump @WHELP_61 
+if 
+   Player.Controllable($PLAYER_CHAR)
+else_jump @WHELP_208 
+jump @WHELP_267 
+
+:WHELP_208
+if 
+00E1:   player 0 pressed_key 15 
+else_jump @WHELP_142 
+0826: enable_hud 1 
+0581: enable_radar 1 
+03F0: enable_text_draw 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+wait 500 
+Player.CanMove($PLAYER_CHAR) = True
+jump @WHELP_61 
+
+:WHELP_267
+05A9: s$2518 = 'TORSO' // s$  // Torso
+05A9: s$2520 = 'LEGS' // s$  // Legs
+05A9: s$2522 = 'FEET' // s$  // Shoes
+05A9: s$2524 = 'HATS' // s$  // Hats
+05A9: s$2526 = 'CHAINS' // s$  // Chains
+05A9: s$2528 = 'WATCHES' // s$  // Watches
+05A9: s$2530 = 'SHADES' // s$  // Shades
+05A9: s$2532 = '12BNDIT' // s$  // Masks
+05A9: s$2534 = 'TATTO' // s$  // Tattoo
+05A9: s$2536 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2538 = 'SHOP7' // s$  // Special
+05A9: s$2540 = 'REMCLT' // s$  // Remove Items
+06D1: v$1225 = "FIGHTIDLE" // v$ = string 
+13@ = Actor.Angle($PLAYER_ACTOR)
+wait 500 
+0512: show_permanent_text_box 'WARDH3'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select an item.~N~~k~~PED_SPRINT~ View~N~~k~~VEHICLE_ENTER_EXIT~ Back
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+0826: enable_hud 0 
+0581: enable_radar 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+08D4: 1@ = create_panel_with_title 'FEO_PLA' position 29.0 140.0 width 240.0 columns 1 interactive 1 background 1 alignment 0  // Player Setup
+08DB: set_panel 1@ column 0 header 'PLA_19' data s$2518 s$2520 s$2522 s$2524 s$2526 s$2528 s$2530 s$2532 s$2534 s$2536 s$2538 s$2540  // SELECT
+090E: set_panel 1@ active_row 0 
+
+:WHELP_600
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_1146 
+if 
+00E1:   player 0 pressed_key 15 
+else_jump @WHELP_644 
+jump @WHELP_1146 
+
+:WHELP_644
+if 
+00E1:   player 0 pressed_key 16 
+else_jump @WHELP_600 
+03E6: remove_text_box 
+08D7: 2@ = panel 1@ active_row 
+2@ += 1 
+if 
+  2@ == 1 
+else_jump @WHELP_717 
+3@ = 1 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_717
+if 
+  2@ == 2 
+else_jump @WHELP_756 
+3@ = 2 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_756
+if 
+  2@ == 3 
+else_jump @WHELP_795 
+3@ = 3 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_795
+if 
+  2@ == 4 
+else_jump @WHELP_834 
+3@ = 4 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_834
+if 
+  2@ == 5 
+else_jump @WHELP_873 
+3@ = 5 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_873
+if 
+  2@ == 6 
+else_jump @WHELP_912 
+3@ = 6 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_912
+if 
+  2@ == 7 
+else_jump @WHELP_951 
+3@ = 7 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_951
+if 
+  2@ == 8 
+else_jump @WHELP_990 
+3@ = 8 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_990
+if 
+  2@ == 9 
+else_jump @WHELP_1029 
+3@ = 9 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_1029
+if 
+  2@ == 10 
+else_jump @WHELP_1068 
+3@ = 10 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_1068
+if 
+  2@ == 11 
+else_jump @WHELP_1107 
+3@ = 11 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_1107
+if 
+  2@ == 12 
+else_jump @WHELP_600 
+3@ = 12 
+gosub @WHELP_1195 
+jump @WHELP_1576 
+
+:WHELP_1146
+08DA: remove_panel 1@ 
+03E6: remove_text_box 
+0826: enable_hud 1 
+0581: enable_radar 1 
+03F0: enable_text_draw 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+wait 500 
+Player.CanMove($PLAYER_CHAR) = True
+jump @WHELP_61 
+
+:WHELP_1195
+08DA: remove_panel 1@ 
+03E6: remove_text_box 
+03F0: enable_text_draw 0 
+return 
+
+:WHELP_1208
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_61 
+if and
+   not Actor.Driving($PLAYER_ACTOR)
+  $ONMISSION == 0 
+else_jump @WHELP_61 
+wait 500 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+0826: enable_hud 0 
+0581: enable_radar 0 
+08D4: 1@ = create_panel_with_title s$2752 position 29.0 140.0 width 240.0 columns 1 interactive 1 background 1 alignment 0 
+08DB: set_panel 1@ column 0 header 'PLA_19' data s$2518 s$2520 s$2522 s$2524 s$2526 s$2528 s$2530 s$2532 s$2534 s$2536 s$2538 s$2540  // SELECT
+090E: set_panel 1@ active_row 0 
+
+:WHELP_1368
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_1491 
+if 
+00E1:   player 0 pressed_key 15 
+else_jump @WHELP_1427 
+0085: 3@ = 8@ // (int) 
+gosub @WHELP_1550 
+jump @WHELP_1576 
+
+:WHELP_1427
+if 
+00E1:   player 0 pressed_key 16 
+else_jump @WHELP_1368 
+03E6: remove_text_box 
+08D7: 2@ = panel 1@ active_row 
+0760: store_shopping_data_index 2@ textureCRC_to $9733 
+2@ += 1 
+0085: 3@ = 5@ // (int) 
+gosub @WHELP_1550 
+jump @WHELP_1576 
+
+:WHELP_1491
+08DA: remove_panel 1@ 
+0826: enable_hud 1 
+0581: enable_radar 1 
+03E6: remove_text_box 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03F0: enable_text_draw 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+08FE:   text_box_displayed 
+else_jump @WHELP_142 
+03E6: remove_text_box 
+jump @WHELP_142 
+
+:WHELP_1550
+08DA: remove_panel 1@ 
+if 
+08FE:   text_box_displayed 
+else_jump @WHELP_1570 
+03E6: remove_text_box 
+
+:WHELP_1570
+03F0: enable_text_draw 0 
+return 
+
+:WHELP_1576
+0871: init_jump_table 3@ total_jumps 69 default_jump 0 @WHELP_2094 jumps 0 @WHELP_2094 1 @WHELP_2127 2 @WHELP_2349 3 @WHELP_2571 4 @WHELP_2793 5 @WHELP_3015 6 @WHELP_3226 
+0872: jump_table_jumps 7 @WHELP_3437 8 @WHELP_3648 9 @WHELP_3859 10 @WHELP_4081 11 @WHELP_4303 12 @WHELP_4536 13 @WHELP_4747 14 @WHELP_6173 15 @WHELP_7599 
+0872: jump_table_jumps 16 @WHELP_9025 17 @WHELP_10451 18 @WHELP_12422 19 @WHELP_13716 20 @WHELP_14433 21 @WHELP_15156 22 @WHELP_15951 23 @WHELP_16549 24 @WHELP_17169 
+0872: jump_table_jumps 25 @WHELP_17895 26 @WHELP_18657 27 @WHELP_19430 28 @WHELP_20190 29 @WHELP_20947 30 @WHELP_21710 31 @WHELP_22239 32 @WHELP_22845 33 @WHELP_23408 
+0872: jump_table_jumps 34 @WHELP_23987 35 @WHELP_24409 36 @WHELP_24796 37 @WHELP_25217 38 @WHELP_25803 39 @WHELP_26410 40 @WHELP_26965 41 @WHELP_27299 42 @WHELP_27595 
+0872: jump_table_jumps 43 @WHELP_27897 44 @WHELP_28652 45 @WHELP_29326 46 @WHELP_30089 47 @WHELP_30643 48 @WHELP_31187 49 @WHELP_31811 50 @WHELP_32147 51 @WHELP_32524 
+0872: jump_table_jumps 52 @WHELP_32906 53 @WHELP_33286 54 @WHELP_33829 55 @WHELP_34277 56 @WHELP_34816 57 @WHELP_35386 58 @WHELP_35861 59 @WHELP_36244 60 @WHELP_36669 
+0872: jump_table_jumps 61 @WHELP_37030 62 @WHELP_37601 63 @WHELP_38327 64 @WHELP_2094 65 @WHELP_2094 66 @WHELP_2094 67 @WHELP_2094 68 @WHELP_2094 69 @WHELP_2094 
+
+:WHELP_2094
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+wait 250 
+0A25: set_camera_on_players_X_angle 0.031 Z_angle 200.0 
+wait 250 
+jump @WHELP_142 
+
+:WHELP_2127
+0512: show_permanent_text_box 'WARDH1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a shop.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'SHOP1' // s$  // Binco
+05A9: s$2520 = 'SHOP2' // s$  // Pro-Laps
+05A9: s$2522 = 'SHOP3' // s$  // Sub Urban
+05A9: s$2524 = 'SHOP4' // s$  // Zip
+05A9: s$2526 = 'SHOP5' // s$  // Victim
+05A9: s$2528 = 'SHOP6' // s$  // Didier Sachs
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 13 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_2349
+0512: show_permanent_text_box 'WARDH1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a shop.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'SHOP1' // s$  // Binco
+05A9: s$2520 = 'SHOP2' // s$  // Pro-Laps
+05A9: s$2522 = 'SHOP3' // s$  // Sub Urban
+05A9: s$2524 = 'SHOP4' // s$  // Zip
+05A9: s$2526 = 'SHOP5' // s$  // Victim
+05A9: s$2528 = 'SHOP6' // s$  // Didier Sachs
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 14 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_2571
+0512: show_permanent_text_box 'WARDH1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a shop.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'SHOP1' // s$  // Binco
+05A9: s$2520 = 'SHOP2' // s$  // Pro-Laps
+05A9: s$2522 = 'SHOP3' // s$  // Sub Urban
+05A9: s$2524 = 'SHOP4' // s$  // Zip
+05A9: s$2526 = 'SHOP5' // s$  // Victim
+05A9: s$2528 = 'SHOP6' // s$  // Didier Sachs
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 15 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_2793
+0512: show_permanent_text_box 'WARDH1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a shop.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'SHOP1' // s$  // Binco
+05A9: s$2520 = 'SHOP2' // s$  // Pro-Laps
+05A9: s$2522 = 'SHOP3' // s$  // Sub Urban
+05A9: s$2524 = 'SHOP4' // s$  // Zip
+05A9: s$2526 = 'SHOP5' // s$  // Victim
+05A9: s$2528 = 'SHOP6' // s$  // Didier Sachs
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 16 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_3015
+05A9: s$2752 = 'CHAINS' // s$  // Chains
+05A9: s$2518 = 'DOGTAG' // s$  // Dogtags
+05A9: s$2520 = 'NECKAFR' // s$  // Africa Pendant
+05A9: s$2522 = 'STOPWAT' // s$  // Stop Watch
+05A9: s$2524 = 'NECKSNT' // s$  // Saints Chain
+05A9: s$2526 = 'NECKHA' // s$  // Leaf Chain
+05A9: s$2528 = 'NECKCU1' // s$  // Silver Cuban
+05A9: s$2530 = 'NECKCU2' // s$  // Gold Cuban
+05A9: s$2532 = 'NECKRP1' // s$  // Silver Chain
+05A9: s$2534 = 'NECKRP2' // s$  // Gold Chain
+05A9: s$2536 = 'NECKLS' // s$  // L.S. Chain
+05A9: s$2538 = 'NECKDL' // s$  // Dollar Chain
+05A9: s$2540 = 'NECKCR' // s$  // Cross Chain
+5@ = 19 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_3226
+05A9: s$2752 = 'WATCHES' // s$  // Watches
+05A9: s$2518 = 'WATCH7' // s$  // Pink Watch
+05A9: s$2520 = 'WATCH8' // s$  // Yellow Watch
+05A9: s$2522 = 'WATCH3' // s$  // Pro-Laps White
+05A9: s$2524 = 'WATCH4' // s$  // Pro-Laps Black
+05A9: s$2526 = 'WATCH9' // s$  // Face Watch
+05A9: s$2528 = 'WATCH10' // s$  // Face Black
+05A9: s$2530 = 'WATCH11' // s$  // Zip Blue
+05A9: s$2532 = 'WATCH12' // s$  // Zip Gold
+05A9: s$2534 = 'WATCH2' // s$  // Gold Gnocchi
+05A9: s$2536 = 'WATCH5' // s$  // Silver Gnocchi
+05A9: s$2538 = 'WATCH1' // s$  // Gold Crowex
+05A9: s$2540 = 'WATCH6' // s$  // Silver Crowex
+5@ = 20 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_3437
+05A9: s$2752 = 'SHADES' // s$  // Shades
+05A9: s$2518 = 'GROUCH1' // s$  // Joke Glasses
+05A9: s$2520 = 'EYEPCH' // s$  // Eyepatch
+05A9: s$2522 = 'GLASS1' // s$  // Black Shades
+05A9: s$2524 = 'GLASS4' // s$  // Brown Shades
+05A9: s$2526 = 'GLASS5' // s$  // Aviators
+05A9: s$2528 = 'GLASS6' // s$  // Sun Glasses
+05A9: s$2530 = 'GLASS3' // s$  // Green Tint
+05A9: s$2532 = 'GLASS8' // s$  // Red Tint
+05A9: s$2534 = 'GLASS9' // s$  // Blue Tint
+05A9: s$2536 = 'GLASS7' // s$  // Black Shades
+05A9: s$2538 = 'GLASS10' // s$  // Black Shades
+05A9: s$2540 = 'GLASS11' // s$  // Black Rim
+5@ = 21 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_3648
+05A9: s$2752 = '12BNDIT' // s$  // Masks
+05A9: s$2518 = 'ZORRO' // s$  // Joke Mask
+05A9: s$2520 = 'BANDA15' // s$  // Red Rag
+05A9: s$2522 = 'BANDA16' // s$  // Blue Rag
+05A9: s$2524 = 'BANDA17' // s$  // Green Rag
+05A9: s$2526 = 'BANDA18' // s$  // Black Rag
+05A9: s$2528 = 'BALACLA' // s$  // Ski Mask
+05A9: s$2530 = 'CAP16' // s$  // Hockey Mask
+05A9: s$2532 = 'CAP15' // s$  // Boxing Helmet
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 22 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_3859
+0512: show_permanent_text_box 'TATTA'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select an area.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = 'LARMTP' // s$  // Upper Left Arm
+05A9: s$2520 = 'LARMLW' // s$  // Lower Left Arm
+05A9: s$2522 = 'RARMTP' // s$  // Upper Right Arm
+05A9: s$2524 = 'RARMLW' // s$  // Lower Right Arm
+05A9: s$2526 = 'BACK' // s$  // Back
+05A9: s$2528 = 'LCHEST' // s$  // Left Chest
+05A9: s$2530 = 'RCHEST' // s$  // Right Chest
+05A9: s$2532 = 'BELLY' // s$  // Stomach
+05A9: s$2534 = 'LBACK' // s$  // Lower Back
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 17 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_4081
+0512: show_permanent_text_box 'BARB_H1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a haircut.~n~~k~~PED_SPRINT~ = View~n~~k~~VEHICLE_ENTER_EXIT~ = Quit
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'BALD' // s$  // Bald Head
+05A9: s$2520 = 'afro' // s$  // Afro
+05A9: s$2522 = 'mohawk' // s$  // Mohawk
+05A9: s$2524 = 'CARM1' // s$  // Colors
+05A9: s$2526 = 'FED_BL4' // s$  // Other
+05A9: s$2528 = 'FED_BL4' // s$  // Other
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 18 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_4303
+075E: load_shopping_data_PRICES_subsection "UNIFORM" // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'SHOP7' // s$  // Special
+05A9: s$2518 = 'GIMP' // s$  // Gimp Suit
+05A9: s$2520 = 'VALETU' // s$  // Valet Uniform
+05A9: s$2522 = 'COUNTRY' // s$  // Rural Clothes
+05A9: s$2524 = 'CROUP' // s$  // Croupier
+05A9: s$2526 = 'POLICE' // s$  // Cop
+05A9: s$2528 = 'BURGLAR' // s$  // 'Burglar'
+05A9: s$2530 = 'PIMPSUT' // s$  // Pimp Suit
+05A9: s$2532 = 'RDRIVER' // s$  // Racing Suit
+05A9: s$2534 = 'PAMEDIC' // s$  // Medic Uniform
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 23 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_4536
+05A9: s$2752 = 'REMCLT' // s$  // Remove Items
+05A9: s$2518 = 'TORSO' // s$  // Torso
+05A9: s$2520 = 'LEGS' // s$  // Legs
+05A9: s$2522 = 'FEET' // s$  // Shoes
+05A9: s$2524 = 'HATS' // s$  // Hats
+05A9: s$2526 = 'CHAINS' // s$  // Chains
+05A9: s$2528 = 'WATCHES' // s$  // Watches
+05A9: s$2530 = 'SHADES' // s$  // Shades
+05A9: s$2532 = '12BNDIT' // s$  // Masks
+05A9: s$2534 = 'TATTO' // s$  // Tattoo
+05A9: s$2536 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2538 = 'SHOP7' // s$  // Special
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 24 
+8@ = 0 
+0085: 9@ = 3@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_4747
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_4810 jumps 0 @WHELP_4810 1 @WHELP_4817 2 @WHELP_5043 3 @WHELP_5269 4 @WHELP_5495 5 @WHELP_5721 6 @WHELP_5947 
+
+:WHELP_4810
+jump @WHELP_1208 
+
+:WHELP_4817
+075E: load_shopping_data_PRICES_subsection 'CSCHP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'VESTA' // s$  // Black Tank
+05A9: s$2520 = 'VESTWH' // s$  // White Tank
+05A9: s$2522 = 'TSRTHS1' // s$  // Striped T-Shirt
+05A9: s$2524 = 'TSHIRTC' // s$  // White T-Shirt
+05A9: s$2526 = 'LOVETS1' // s$  // L.S. T-Shirt
+05A9: s$2528 = 'TSHIRTA' // s$  // Sharps T-Shirt
+05A9: s$2530 = 'SHIRTBB' // s$  // Plaid Shirt
+05A9: s$2532 = 'CHEKSH1' // s$  // Checkered Shirt
+05A9: s$2534 = 'FIELDA' // s$  // Combat Jacket
+05A9: s$2536 = 'ERSTSH1' // s$  // Eris T-Shirt
+05A9: s$2538 = 'ERISTS2' // s$  // Eris T-Shirt2
+05A9: s$2540 = 'TRAKER1' // s$  // Track Top
+5@ = 25 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_5043
+075E: load_shopping_data_PRICES_subsection 'CSSPRT' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'BASJCT2' // s$  // Rimmers Jacket
+05A9: s$2520 = 'BASJCT3' // s$  // R-Star Jacket
+05A9: s$2522 = 'BASKA' // s$  // Dribblers Vest
+05A9: s$2524 = 'BASKC' // s$  // Saint's Shirt
+05A9: s$2526 = 'TSHRT69' // s$  // 69ers T-Shirt
+05A9: s$2528 = 'BANDITS' // s$  // Bandits Top
+05A9: s$2530 = 'PROSHRD' // s$  // ProLaps T-Shirt
+05A9: s$2532 = 'PROTSH1' // s$  // ProLaps Black T
+05A9: s$2534 = 'TRAKPR1' // s$  // Track Top
+05A9: s$2536 = 'HCKYTOP' // s$  // Slappers Top
+05A9: s$2538 = 'BBJERY1' // s$  // Baseball T
+05A9: s$2540 = 'SHELSUT' // s$  // Leisure Top
+5@ = 26 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_5269
+075E: load_shopping_data_PRICES_subsection 'LACS1' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'HEATSH1' // s$  // White Heat T
+05A9: s$2520 = 'TSHRBO1' // s$  // Bobo Ape T
+05A9: s$2522 = 'TSHRBO2' // s$  // Red Bobo T
+05A9: s$2524 = 'TSRTBA1' // s$  // Base 5 T
+05A9: s$2526 = 'TSRTSB1' // s$  // Suburban T
+05A9: s$2528 = 'HODMRC1' // s$  // Mercury Hood
+05A9: s$2530 = 'HODBSE1' // s$  // Base 5 Hood
+05A9: s$2532 = 'HODRST1' // s$  // Rockstar Hood
+05A9: s$2534 = 'WCOATA' // s$  // Vest & T-Shirt
+05A9: s$2536 = 'COACHA' // s$  // Grn Windbreaker
+05A9: s$2538 = 'COACHB' // s$  // Blk Windbreaker
+05A9: s$2540 = 'RSTRSWE' // s$  // Rockstar Sweat
+5@ = 27 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_5495
+075E: load_shopping_data_PRICES_subsection 'CLOTHGP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'HOODB' // s$  // Blue Hoody
+05A9: s$2520 = 'HOODBL' // s$  // Black Hoody
+05A9: s$2522 = 'HOODG' // s$  // Green Hoody
+05A9: s$2524 = 'SLEVB1' // s$  // Brown Shirt
+05A9: s$2526 = 'BSHIRT' // s$  // Sky Blue Shirt
+05A9: s$2528 = 'YSHIRT' // s$  // Yellow Shirt
+05A9: s$2530 = 'GSHIRT' // s$  // Gray Shirt
+05A9: s$2532 = 'SHTBG1' // s$  // Green Shirt
+05A9: s$2534 = 'TSHZIP1' // s$  // Cream Logo T
+05A9: s$2536 = 'TSHZIP2' // s$  // Gray Logo T
+05A9: s$2538 = 'DENJCK1' // s$  // Jean Jacket
+05A9: s$2540 = 'BOWLSH1' // s$  // Bowling shirt
+5@ = 28 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_5721
+075E: load_shopping_data_PRICES_subsection 'CSDESGN' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'HODJCK1' // s$  // Hooded Jacket
+05A9: s$2520 = 'BASKB' // s$  // Loc-Down Vest
+05A9: s$2522 = 'TSHIRTB' // s$  // Loc-Down T
+05A9: s$2524 = 'TSHRTMG' // s$  // Madd Tagg T
+05A9: s$2526 = 'TSRTMGN' // s$  // Green Tagg T
+05A9: s$2528 = 'SUT1GRY' // s$  // Gray Jacket
+05A9: s$2530 = 'SUT1BLK' // s$  // Black Jacket
+05A9: s$2532 = 'BIKERJ' // s$  // Biker Jacket
+05A9: s$2534 = 'PAINT1' // s$  // Chore Coat
+05A9: s$2536 = 'HAWAI1' // s$  // Hawaiian Shirt
+05A9: s$2538 = 'HAWAI2' // s$  // Blue Hawaiian
+05A9: s$2540 = 'SPRJCT' // s$  // Sports Jacket
+5@ = 29 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_5947
+075E: load_shopping_data_PRICES_subsection 'CSEXL' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'TORSO' // s$  // Torso
+05A9: s$2518 = 'SUIT1' // s$  // Red Jacket
+05A9: s$2520 = 'SUIT2' // s$  // Blue Jacket
+05A9: s$2522 = 'SUIT3' // s$  // Yellow Jacket
+05A9: s$2524 = 'SUT2GRN' // s$  // Tweed Jacket
+05A9: s$2526 = 'TUXEDO' // s$  // Tuxedo
+05A9: s$2528 = 'SUITGNG' // s$  // Green Jacket
+05A9: s$2530 = 'LETTER' // s$  // Letterman Top
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 30 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_6173
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_6236 jumps 0 @WHELP_6236 1 @WHELP_6243 2 @WHELP_6469 3 @WHELP_6695 4 @WHELP_6921 5 @WHELP_7147 6 @WHELP_7373 
+
+:WHELP_6236
+jump @WHELP_1208 
+
+:WHELP_6243
+075E: load_shopping_data_PRICES_subsection 'CSCHP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'WORKA' // s$  // Woodland Camo
+05A9: s$2520 = 'WORKB' // s$  // Urban Camo
+05A9: s$2522 = 'WORKC' // s$  // Gray Pants
+05A9: s$2524 = 'WORKD' // s$  // Olive Pants
+05A9: s$2526 = 'TRABOTA' // s$  // Sweat Pants
+05A9: s$2528 = 'TRAKERI' // s$  // Track Pants
+05A9: s$2530 = 'JEANSBL' // s$  // Blue Jeans
+05A9: s$2532 = 'BOXBLK' // s$  // Black Boxers
+05A9: s$2534 = 'BOXHRT' // s$  // Heart Boxers
+05A9: s$2536 = 'BEITROS' // s$  // Beige Pants
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 31 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_6469
+075E: load_shopping_data_PRICES_subsection 'CSSPRT' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'TRACKT1' // s$  // Track Pants
+05A9: s$2520 = 'TRACKT2' // s$  // Blk Track Pants
+05A9: s$2522 = 'TRACKT3' // s$  // Blu Track Pants
+05A9: s$2524 = 'TRACKT4' // s$  // Grn Track Pants
+05A9: s$2526 = 'BOXSRT1' // s$  // Ball Shorts
+05A9: s$2528 = 'BOXSRT2' // s$  // Boxing Shorts
+05A9: s$2530 = 'BOXSRT3' // s$  // Dribbler Shorts
+05A9: s$2532 = 'SHELBOT' // s$  // Leisure Pants
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 32 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_6695
+075E: load_shopping_data_PRICES_subsection 'LACS1' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'SHORT1' // s$  // Gray Shorts
+05A9: s$2520 = 'SHORT2' // s$  // Olive Shorts
+05A9: s$2522 = 'CHONG1' // s$  // Gray Chonglers
+05A9: s$2524 = 'CHONG2' // s$  // Green Chonglers
+05A9: s$2526 = 'CHONG3' // s$  // Red Chonglers
+05A9: s$2528 = 'CHONG4' // s$  // Blue Chonglers
+05A9: s$2530 = 'SHORT3' // s$  // Green Shorts
+05A9: s$2532 = 'DENIM1' // s$  // Green Jeans
+05A9: s$2534 = 'DENIM2' // s$  // Red Jeans
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 33 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_6921
+075E: load_shopping_data_PRICES_subsection 'CLOTHGP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'CHINBIE' // s$  // Beige Khakis
+05A9: s$2520 = 'CHINOK' // s$  // Olive Khakis
+05A9: s$2522 = 'CUTCHI' // s$  // Beige Shorts
+05A9: s$2524 = 'CUTCHBU' // s$  // Blue Shorts
+05A9: s$2526 = 'CHINO3' // s$  // Black Khakis
+05A9: s$2528 = 'CHINO4' // s$  // Blue Khakis
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 34 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_7147
+075E: load_shopping_data_PRICES_subsection 'CSDESGN' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'LEATHA' // s$  // Leather Pants
+05A9: s$2520 = 'LEATHB' // s$  // Leather Chaps
+05A9: s$2522 = 'SUTR1GR' // s$  // Gray Pants
+05A9: s$2524 = 'SUTR1BL' // s$  // Black Pants
+05A9: s$2526 = 'CUTDENM' // s$  // Jean Shorts
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 35 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_7373
+075E: load_shopping_data_PRICES_subsection 'CSEXL' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'LEGS' // s$  // Legs
+05A9: s$2518 = 'SUITTR1' // s$  // Red Pants
+05A9: s$2520 = 'SUITTR2' // s$  // Blue Pants
+05A9: s$2522 = 'SUITTR3' // s$  // Yellow Pants
+05A9: s$2524 = 'SUTR1GN' // s$  // Tweed Pants
+05A9: s$2526 = 'SUTR2BL' // s$  // Tuxedo Pants
+05A9: s$2528 = 'SUTRGNG' // s$  // Green Pants
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 36 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_7599
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_7662 jumps 0 @WHELP_7662 1 @WHELP_7669 2 @WHELP_7895 3 @WHELP_8121 4 @WHELP_8347 5 @WHELP_8573 6 @WHELP_8799 
+
+:WHELP_7662
+jump @WHELP_1208 
+
+:WHELP_7669
+075E: load_shopping_data_PRICES_subsection 'CSCHP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'COWBOT2' // s$  // Cowboy Boots
+05A9: s$2520 = 'BASKBO1' // s$  // Hi-Top Kicks
+05A9: s$2522 = 'BASKBO2' // s$  // Hi-Top Sneaks
+05A9: s$2524 = 'SNKBGAN' // s$  // Green Low-Tops
+05A9: s$2526 = 'SNKBBLU' // s$  // Blue Low-Tops
+05A9: s$2528 = 'SNKBBLK' // s$  // Black Low-Tops
+05A9: s$2530 = 'SANDIL1' // s$  // Sandals
+05A9: s$2532 = 'SANDIL2' // s$  // Sandal & Socks
+05A9: s$2534 = 'SANDIL3' // s$  // Flip-Flops
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 37 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_7895
+075E: load_shopping_data_PRICES_subsection 'CSSPRT' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'HITOP' // s$  // Mid-Top Sneaker
+05A9: s$2520 = 'CHUBLK' // s$  // Black Hi-Tops
+05A9: s$2522 = 'CONBLUE' // s$  // Blue Hi-Tops
+05A9: s$2524 = 'CONGREN' // s$  // Green Hi-Tops
+05A9: s$2526 = 'PROTRA1' // s$  // Red Sneakers
+05A9: s$2528 = 'PROTRA2' // s$  // Blue Sneakers
+05A9: s$2530 = 'PROTRA3' // s$  // White Sneakers
+05A9: s$2532 = 'PROWHT1' // s$  // White Mid-Tops
+05A9: s$2534 = 'PROBLK1' // s$  // Black Mid-Tops
+05A9: s$2536 = 'BOXSHO1' // s$  // Boxing Shoes
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 38 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_8121
+075E: load_shopping_data_PRICES_subsection 'LACS1' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'COHEAT1' // s$  // Black Hi-Tops
+05A9: s$2520 = 'COHEAT2' // s$  // Red Hi-Tops
+05A9: s$2522 = 'COHEAT3' // s$  // Orange Hi-Tops
+05A9: s$2524 = 'SNHEAT1' // s$  // White Low-Tops
+05A9: s$2526 = 'SNHEAT2' // s$  // Gray Low-Tops
+05A9: s$2528 = 'SNHEAT3' // s$  // Black Low-Tops
+05A9: s$2530 = 'BSHEAT1' // s$  // White Hi-Tops
+05A9: s$2532 = 'BSHEAT2' // s$  // Strap Sneakers
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 39 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_8347
+075E: load_shopping_data_PRICES_subsection 'CLOTHGP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'TIMBER1' // s$  // Gray Boots
+05A9: s$2520 = 'TIMBER2' // s$  // Red Boots
+05A9: s$2522 = 'TIMBER3' // s$  // Brown Boots
+05A9: s$2524 = 'TIMBER4' // s$  // Hiking Boots
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 40 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_8573
+075E: load_shopping_data_PRICES_subsection 'CSDESGN' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'COWBOY' // s$  // Cowboy Boots
+05A9: s$2520 = 'BIKEBOT' // s$  // Biker Boots
+05A9: s$2522 = 'SNAKESN' // s$  // Snake Skin
+05A9: s$2524 = 'DUMMY' // s$ 
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 41 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_8799
+075E: load_shopping_data_PRICES_subsection 'CSEXL' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'FEET' // s$  // Shoes
+05A9: s$2518 = 'SHOEDR1' // s$  // Black Shoes
+05A9: s$2520 = 'SHOEDR2' // s$  // Brown Shoes
+05A9: s$2522 = 'SHOEDR3' // s$  // Spats
+05A9: s$2524 = 'DUMMY' // s$ 
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 42 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_9025
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_9088 jumps 0 @WHELP_9088 1 @WHELP_9095 2 @WHELP_9321 3 @WHELP_9547 4 @WHELP_9773 5 @WHELP_9999 6 @WHELP_10225 
+
+:WHELP_9088
+jump @WHELP_1208 
+
+:WHELP_9095
+075E: load_shopping_data_PRICES_subsection 'CSCHP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'BANDAN7' // s$  // Red Rag Back
+05A9: s$2520 = 'BANDAN8' // s$  // Blue Rag Back
+05A9: s$2522 = 'BANDAN9' // s$  // Green Rag Back
+05A9: s$2524 = 'BANDA10' // s$  // Black Rag Back
+05A9: s$2526 = 'BANDA11' // s$  // Red Rag Front
+05A9: s$2528 = 'BANDA12' // s$  // Blue Rag Front
+05A9: s$2530 = 'BANDA13' // s$  // Black Rag Front
+05A9: s$2532 = 'BANDA14' // s$  // Green Rag Front
+05A9: s$2534 = 'CAP25' // s$  // Watch Cap
+05A9: s$2536 = 'CAP26' // s$  // Trucker Hat
+05A9: s$2538 = 'CAP28' // s$  // Cowboy Hat
+05A9: s$2540 = 'CAP29' // s$  // Leopard Cowboy
+5@ = 43 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_9321
+075E: load_shopping_data_PRICES_subsection 'CSSPRT' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'CAP27' // s$  // Fullface Helmet
+05A9: s$2520 = 'CAP30' // s$  // MotoX Helmet
+05A9: s$2522 = 'CAP15' // s$  // Boxing Helmet
+05A9: s$2524 = 'CAP16' // s$  // Hockey Mask
+05A9: s$2526 = 'CAP31' // s$  // Green Cap
+05A9: s$2528 = 'CAP32' // s$  // Grn Cap (Back)
+05A9: s$2530 = 'CAP33' // s$  // Grn Cap (Side)
+05A9: s$2532 = 'CAP34' // s$  // Grn Cap (Tilt)
+05A9: s$2534 = 'CAP35' // s$  // Grn Cap (Up)
+05A9: s$2536 = 'CAP56' // s$  // Helmut
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 44 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_9547
+075E: load_shopping_data_PRICES_subsection 'LACS1' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'CAP36' // s$  // Red Cap
+05A9: s$2520 = 'CAP37' // s$  // Red Cap (Back)
+05A9: s$2522 = 'CAP38' // s$  // Red Cap (Side)
+05A9: s$2524 = 'CAP39' // s$  // Red Cap (Tilt)
+05A9: s$2526 = 'CAP40' // s$  // Red Cap (Up)
+05A9: s$2528 = 'CAP41' // s$  // Blue Cap
+05A9: s$2530 = 'CAP42' // s$  // Blue Cap (Back)
+05A9: s$2532 = 'CAP43' // s$  // Blue Cap (Side)
+05A9: s$2534 = 'CAP44' // s$  // Blue Cap (Tilt)
+05A9: s$2536 = 'CAP45' // s$  // Blue Cap (Up)
+05A9: s$2538 = 'CAP57' // s$  // Black Skully
+05A9: s$2540 = 'CAP58' // s$  // Green Skully
+5@ = 45 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_9773
+075E: load_shopping_data_PRICES_subsection 'CLOTHGP' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'MANCBLK' // s$  // Black Sun Hat
+05A9: s$2520 = 'MANCPLD' // s$  // Plaid Sun Hat
+05A9: s$2522 = 'CAP46' // s$  // Cap
+05A9: s$2524 = 'CAP47' // s$  // Cap (Back)
+05A9: s$2526 = 'CAP48' // s$  // Cap (Side)
+05A9: s$2528 = 'CAP49' // s$  // Cap Tilted
+05A9: s$2530 = 'CAP50' // s$  // Cap Rim Up
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 46 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_9999
+075E: load_shopping_data_PRICES_subsection 'CSDESGN' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'CAP17' // s$  // Red Beret
+05A9: s$2520 = 'CAP18' // s$  // Black Beret
+05A9: s$2522 = 'CAP51' // s$  // Black Cap
+05A9: s$2524 = 'CAP52' // s$  // Black Cap (Back)
+05A9: s$2526 = 'CAP53' // s$  // Black Cap (Side)
+05A9: s$2528 = 'CAP54' // s$  // Black Cap (Tilt)
+05A9: s$2530 = 'CAP55' // s$  // Black Cap (Up)
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 47 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_10225
+075E: load_shopping_data_PRICES_subsection 'CSEXL' // "string" 
+075D: load_shopping_data_SHOPS_subsection "CLOTHES" // "string" 
+05A9: s$2752 = 'HATS' // s$  // Hats
+05A9: s$2518 = 'TRIBY1' // s$  // Dark Trilby
+05A9: s$2520 = 'TRIBY2' // s$  // Light Trilby
+05A9: s$2522 = 'BOWLER1' // s$  // Black Derby
+05A9: s$2524 = 'BOWLER2' // s$  // Red Derby
+05A9: s$2526 = 'BOWLER3' // s$  // Blue Derby
+05A9: s$2528 = 'BOWLER4' // s$  // Yellow Derby
+05A9: s$2530 = 'BOATHA1' // s$  // Gray Boater
+05A9: s$2532 = 'BOWLER5' // s$  // Green Derby
+05A9: s$2534 = 'BOATHA2' // s$  // Black Boater
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 48 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_10451
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_10579 jumps 0 @WHELP_10579 1 @WHELP_10586 2 @WHELP_10790 3 @WHELP_10994 4 @WHELP_11198 5 @WHELP_11402 6 @WHELP_11606 
+0872: jump_table_jumps 7 @WHELP_11810 8 @WHELP_12014 9 @WHELP_12218 10 @WHELP_10586 11 @WHELP_10790 12 @WHELP_10994 13 @WHELP_10579 14 @WHELP_10579 15 @WHELP_10579 
+
+:WHELP_10579
+jump @WHELP_1208 
+
+:WHELP_10586
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '4WEED' // s$  // Weed
+05A9: s$2520 = '4RIP' // s$  // Grave
+05A9: s$2522 = '4SPIDER' // s$  // Spider
+05A9: s$2524 = 'DUMMY' // s$ 
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 49 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_10790
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '5GUN' // s$  // Gun
+05A9: s$2520 = '5CROSS' // s$  // Cross
+05A9: s$2522 = '5CROSS2' // s$  // Rose
+05A9: s$2524 = '5CROSS3' // s$  // Clown
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 50 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_10994
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '6AZTEC' // s$  // Aztec
+05A9: s$2520 = '6CROWN' // s$  // Web
+05A9: s$2522 = '6CLOWN' // s$  // Clown
+05A9: s$2524 = '6AFRICA' // s$  // Africa
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 51 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_11198
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '7CROSS' // s$  // Cross
+05A9: s$2520 = '7CROSS2' // s$  // Cross
+05A9: s$2522 = '7CROSS3' // s$  // Cross
+05A9: s$2524 = '7MARY' // s$  // Mary
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 52 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_11402
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '8SA' // s$  // Grove St.
+05A9: s$2520 = '8SA2' // s$  // San Andreas
+05A9: s$2522 = '8SA3' // s$  // San Fierro
+05A9: s$2524 = '8WESTSD' // s$  // Westside
+05A9: s$2526 = '8SANTOS' // s$  // Los Santos
+05A9: s$2528 = '8POKER' // s$  // Card
+05A9: s$2530 = '8GUN' // s$  // Gun
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 53 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_11606
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '9CROWN' // s$  // Crown
+05A9: s$2520 = '9GUN' // s$  // Gun
+05A9: s$2522 = '9GUN2' // s$  // Gun
+05A9: s$2524 = '9HOMBY' // s$  // Homeboy
+05A9: s$2526 = '9BULLT' // s$  // Bullet
+05A9: s$2528 = '9RASTA' // s$  // Rasta
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 54 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_11810
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '10LS' // s$  // Los Santos
+05A9: s$2520 = '10LS2' // s$  // Los Santos
+05A9: s$2522 = '10LS3' // s$  // Los Santos
+05A9: s$2524 = '10LS4' // s$  // Los Santos
+05A9: s$2526 = '10LS5' // s$  // Los Santos
+05A9: s$2528 = '10OG' // s$  // O.G.
+05A9: s$2530 = '10WEED' // s$  // Weed
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 55 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_12014
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '11GROVE' // s$  // Grove
+05A9: s$2520 = '11GROV2' // s$  // Grove
+05A9: s$2522 = '11GROV3' // s$  // Grove
+05A9: s$2524 = '11DICE' // s$  // Dice
+05A9: s$2526 = '11DICE2' // s$  // Dice
+05A9: s$2528 = '11JAIL' // s$  // Jail
+05A9: s$2530 = '11GGIFT' // s$  // God's Gift
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 56 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_12218
+05A9: s$2752 = 'TATTO' // s$  // Tattoo
+05A9: s$2518 = '12ANGEL' // s$  // Angel
+05A9: s$2520 = '12MAYBR' // s$  // Mayan Bird
+05A9: s$2522 = '12DAGER' // s$  // Dagger
+05A9: s$2524 = '12BNDIT' // s$  // Masks
+05A9: s$2526 = '12CROSS' // s$  // Cross
+05A9: s$2528 = '12MYFAC' // s$  // Mayan Face
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 57 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_12422
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_12485 jumps 0 @WHELP_12485 1 @WHELP_12492 2 @WHELP_12696 3 @WHELP_12900 4 @WHELP_13104 5 @WHELP_13308 6 @WHELP_13512 
+
+:WHELP_12485
+jump @WHELP_1208 
+
+:WHELP_12492
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'BALD' // s$  // Bald Head
+05A9: s$2520 = 'BLADBEA' // s$  // Bald & Beard
+05A9: s$2522 = 'BALDTSH' // s$  // Bald & 'stash
+05A9: s$2524 = 'BALDGOT' // s$  // Bald & Goatee
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 58 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_12696
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'AFRO' // s$  // Afro
+05A9: s$2520 = 'AFROHI' // s$  // High Afro
+05A9: s$2522 = 'AFROT' // s$  // Afro & 'stash
+05A9: s$2524 = 'AFROB' // s$  // Afro & Beard
+05A9: s$2526 = 'AFROBL' // s$  // Blonde Afro
+05A9: s$2528 = 'AFROGOT' // s$  // Afro & Goatee
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 59 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_12900
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'MOHAWK' // s$  // Mohawk
+05A9: s$2520 = 'MOHAWKB' // s$  // Blonde Mohawk
+05A9: s$2522 = 'MOHAWKP' // s$  // Pink Mohawk
+05A9: s$2524 = 'MOHAKBE' // s$  // Mohawk & Beard
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 60 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_13104
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'BLHAIR' // s$  // Blonde Hair
+05A9: s$2520 = 'REDHAIR' // s$  // Red Hair
+05A9: s$2522 = 'BLUHAIR' // s$  // Blue Hair
+05A9: s$2524 = 'GRNHAIR' // s$  // Green Hair
+05A9: s$2526 = 'PNKHAIR' // s$  // Pink Hair
+05A9: s$2528 = 'MOHAWKB' // s$  // Blonde Mohawk
+05A9: s$2530 = 'MOHAWKP' // s$  // Pink Mohawk
+05A9: s$2532 = 'AFROBL' // s$  // Blonde Afro
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 61 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_13308
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'HIGHFAD' // s$  // High Fade
+05A9: s$2520 = 'WEDGE' // s$  // Wedge
+05A9: s$2522 = 'SLOPE' // s$  // Slope
+05A9: s$2524 = 'JHERI' // s$  // Jheri Curl
+05A9: s$2526 = 'CORNROW' // s$  // Cornrow
+05A9: s$2528 = 'CORNRO2' // s$  // Blonde Cornrow
+05A9: s$2530 = 'TRAMLIN' // s$  // Detail Cut
+05A9: s$2532 = 'GROOVE' // s$  // Groove Cut
+05A9: s$2534 = 'AFROFL' // s$  // FlatTop
+05A9: s$2536 = 'ELVISHA' // s$  // Elvis Hair
+05A9: s$2538 = 'BEARD' // s$  // Cesar & Beard
+05A9: s$2540 = 'TASH' // s$  // Cesar & 'stash
+5@ = 62 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_13512
+05A9: s$2752 = 'HAIRSTY' // s$  // Hairstyle
+05A9: s$2518 = 'GOATEE' // s$  // Cesar & Goatee
+05A9: s$2520 = 'HEAD' // s$  // Cesar
+05A9: s$2522 = 'DUMMY' // s$ 
+05A9: s$2524 = 'DUMMY' // s$ 
+05A9: s$2526 = 'DUMMY' // s$ 
+05A9: s$2528 = 'DUMMY' // s$ 
+05A9: s$2530 = 'DUMMY' // s$ 
+05A9: s$2532 = 'DUMMY' // s$ 
+05A9: s$2534 = 'DUMMY' // s$ 
+05A9: s$2536 = 'DUMMY' // s$ 
+05A9: s$2538 = 'DUMMY' // s$ 
+05A9: s$2540 = 'DUMMY' // s$ 
+5@ = 63 
+0085: 8@ = 9@ // (int) 
+jump @WHELP_1208 
+
+:WHELP_13716
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_13846 jumps 0 @WHELP_13846 1 @WHELP_13853 2 @WHELP_13888 3 @WHELP_13927 4 @WHELP_13965 5 @WHELP_14004 6 @WHELP_14041 
+0872: jump_table_jumps 7 @WHELP_14081 8 @WHELP_14119 9 @WHELP_14158 10 @WHELP_14197 11 @WHELP_14232 12 @WHELP_14271 13 @WHELP_13846 14 @WHELP_13846 15 @WHELP_13846 
+
+:WHELP_13846
+jump @WHELP_142 
+
+:WHELP_13853
+Player.SetClothes($PLAYER_CHAR, "dogtag", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_13888
+Player.SetClothes($PLAYER_CHAR, "neckafrica", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_13927
+Player.SetClothes($PLAYER_CHAR, "stopwatch", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_13965
+Player.SetClothes($PLAYER_CHAR, "necksaints", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14004
+Player.SetClothes($PLAYER_CHAR, "neckhash", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14041
+Player.SetClothes($PLAYER_CHAR, "necksilver", "neck2", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14081
+Player.SetClothes($PLAYER_CHAR, "neckgold", "neck2", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14119
+Player.SetClothes($PLAYER_CHAR, "neckropes", "neck2", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14158
+Player.SetClothes($PLAYER_CHAR, "neckropeg", "neck2", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14197
+Player.SetClothes($PLAYER_CHAR, "neckls", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14232
+Player.SetClothes($PLAYER_CHAR, "neckdollar", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14271
+Player.SetClothes($PLAYER_CHAR, "neckcross", "neck", 13)
+5@ = 19 
+jump @WHELP_14309 
+
+:WHELP_14309
+18@ = 0.6 
+25@ = 0.2 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_14433
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_14563 jumps 0 @WHELP_14563 1 @WHELP_14570 2 @WHELP_14609 3 @WHELP_14650 4 @WHELP_14688 5 @WHELP_14727 6 @WHELP_14766 
+0872: jump_table_jumps 7 @WHELP_14805 8 @WHELP_14844 9 @WHELP_14883 10 @WHELP_14921 11 @WHELP_14960 12 @WHELP_14998 13 @WHELP_14563 14 @WHELP_14563 15 @WHELP_14563 
+
+:WHELP_14563
+jump @WHELP_142 
+
+:WHELP_14570
+Player.SetClothes($PLAYER_CHAR, "watchpink", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14609
+Player.SetClothes($PLAYER_CHAR, "watchyellow", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14650
+Player.SetClothes($PLAYER_CHAR, "watchpro", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14688
+Player.SetClothes($PLAYER_CHAR, "watchpro2", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14727
+Player.SetClothes($PLAYER_CHAR, "watchsub1", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14766
+Player.SetClothes($PLAYER_CHAR, "watchsub2", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14805
+Player.SetClothes($PLAYER_CHAR, "watchzip1", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14844
+Player.SetClothes($PLAYER_CHAR, "watchzip2", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14883
+Player.SetClothes($PLAYER_CHAR, "watchgno", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14921
+Player.SetClothes($PLAYER_CHAR, "watchgno2", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14960
+Player.SetClothes($PLAYER_CHAR, "watchcro", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_14998
+Player.SetClothes($PLAYER_CHAR, "watchcro2", "watch", 14)
+5@ = 20 
+jump @WHELP_15037 
+
+:WHELP_15037
+18@ = 0.4 
+25@ = -0.1 
+20@ = 0.3 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset -0.5 1.2 18@ rotation 25@ 0.5 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "bomber" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_15156
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_15286 jumps 0 @WHELP_15286 1 @WHELP_15293 2 @WHELP_15333 3 @WHELP_15374 4 @WHELP_15417 5 @WHELP_15460 6 @WHELP_15507 
+0872: jump_table_jumps 7 @WHELP_15554 8 @WHELP_15597 9 @WHELP_15643 10 @WHELP_15690 11 @WHELP_15737 12 @WHELP_15784 13 @WHELP_15286 14 @WHELP_15286 15 @WHELP_15286 
+
+:WHELP_15286
+jump @WHELP_142 
+
+:WHELP_15293
+Player.SetClothes($PLAYER_CHAR, "groucho", "grouchos", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15333
+Player.SetClothes($PLAYER_CHAR, "eyepatch", "eyepatch", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15374
+Player.SetClothes($PLAYER_CHAR, "glasses01", "glasses01", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15417
+Player.SetClothes($PLAYER_CHAR, "glasses04", "glasses04", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15460
+Player.SetClothes($PLAYER_CHAR, "glasses01dark", "glasses01", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15507
+Player.SetClothes($PLAYER_CHAR, "glasses04dark", "glasses04", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15554
+Player.SetClothes($PLAYER_CHAR, "glasses03", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15597
+Player.SetClothes($PLAYER_CHAR, "glasses03red", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15643
+Player.SetClothes($PLAYER_CHAR, "glasses03blue", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15690
+Player.SetClothes($PLAYER_CHAR, "glasses03dark", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15737
+Player.SetClothes($PLAYER_CHAR, "glasses05dark", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15784
+Player.SetClothes($PLAYER_CHAR, "glasses05", "glasses03", 15)
+5@ = 21 
+jump @WHELP_15827 
+
+:WHELP_15827
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_15951
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 9 default_jump 0 @WHELP_16081 jumps 0 @WHELP_16081 1 @WHELP_16088 2 @WHELP_16127 3 @WHELP_16168 4 @WHELP_16210 5 @WHELP_16252 6 @WHELP_16295 
+0872: jump_table_jumps 7 @WHELP_16338 8 @WHELP_16379 9 @WHELP_16081 10 @WHELP_16081 11 @WHELP_16081 12 @WHELP_16081 13 @WHELP_16081 14 @WHELP_16081 15 @WHELP_16081 
+
+:WHELP_16081
+jump @WHELP_142 
+
+:WHELP_16088
+Player.SetClothes($PLAYER_CHAR, "zorro", "zorromask", 15)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16127
+Player.SetClothes($PLAYER_CHAR, "bandred3", "bandmask", 15)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16168
+Player.SetClothes($PLAYER_CHAR, "bandblue3", "bandmask", 15)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16210
+Player.SetClothes($PLAYER_CHAR, "bandgang3", "bandmask", 15)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16252
+Player.SetClothes($PLAYER_CHAR, "bandblack3", "bandmask", 15)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16295
+Player.SetClothes($PLAYER_CHAR, "balaclava", "balaclava", Special)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16338
+Player.SetClothes($PLAYER_CHAR, "hockey", "hockeymask", 16)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16379
+Player.SetClothes($PLAYER_CHAR, "boxingcap", "boxingcap", 16)
+5@ = 22 
+jump @WHELP_16422 
+
+:WHELP_16422
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_16549
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 10 default_jump 0 @WHELP_16679 jumps 0 @WHELP_16679 1 @WHELP_16686 2 @WHELP_16725 3 @WHELP_16760 4 @WHELP_16803 5 @WHELP_16841 6 @WHELP_16882 
+0872: jump_table_jumps 7 @WHELP_16925 8 @WHELP_16962 9 @WHELP_17004 10 @WHELP_16679 11 @WHELP_16679 12 @WHELP_16679 13 @WHELP_16679 14 @WHELP_16679 15 @WHELP_16679 
+
+:WHELP_16679
+jump @WHELP_1208 
+
+:WHELP_16686
+Player.SetClothes($PLAYER_CHAR, "gimpleg", "gimpleg", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16725
+Player.SetClothes($PLAYER_CHAR, "valet", "valet", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16760
+Player.SetClothes($PLAYER_CHAR, "countrytr", "countrytr", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16803
+Player.SetClothes($PLAYER_CHAR, "croupier", "valet", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16841
+Player.SetClothes($PLAYER_CHAR, "policetr", "policetr", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16882
+Player.SetClothes($PLAYER_CHAR, "balaclava", "balaclava", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16925
+Player.SetClothes($PLAYER_CHAR, "pimptr", "pimptr", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_16962
+Player.SetClothes($PLAYER_CHAR, "garageleg", "garagetr", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_17004
+Player.SetClothes($PLAYER_CHAR, "medictr", "medictr", Special)
+5@ = 23 
+jump @WHELP_17043 
+
+:WHELP_17043
+18@ = 0.6 
+25@ = 0.3 
+20@ = 0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 0.3 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_17169
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_17299 jumps 0 @WHELP_17299 1 @WHELP_17306 2 @WHELP_17331 3 @WHELP_17356 4 @WHELP_17381 5 @WHELP_17406 6 @WHELP_17431 
+0872: jump_table_jumps 7 @WHELP_17456 8 @WHELP_17481 9 @WHELP_17506 10 @WHELP_17619 11 @WHELP_17644 12 @WHELP_17669 13 @WHELP_17694 14 @WHELP_17719 15 @WHELP_17744 
+
+:WHELP_17299
+jump @WHELP_1208 
+
+:WHELP_17306
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17331
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 2 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17356
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 3 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17381
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 16 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17406
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 13 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17431
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 14 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17456
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 15 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17481
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 15 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17506
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 4 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 5 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 6 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 7 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 8 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 9 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 10 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 11 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 12 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17619
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 1 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17644
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17669
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17694
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17719
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17744
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+5@ = 24 
+jump @WHELP_17769 
+
+:WHELP_17769
+18@ = 0.6 
+25@ = 0.3 
+20@ = 0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 0.3 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_17895
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_18025 jumps 0 @WHELP_18025 1 @WHELP_18032 2 @WHELP_18070 3 @WHELP_18103 4 @WHELP_18147 5 @WHELP_18189 6 @WHELP_18233 
+0872: jump_table_jumps 7 @WHELP_18276 8 @WHELP_18318 9 @WHELP_18360 10 @WHELP_18395 11 @WHELP_18440 12 @WHELP_18484 13 @WHELP_18025 14 @WHELP_18025 15 @WHELP_18025 
+
+:WHELP_18025
+jump @WHELP_142 
+
+:WHELP_18032
+Player.SetClothes($PLAYER_CHAR, "vestblack", "vest", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18070
+Player.SetClothes($PLAYER_CHAR, "vest", "vest", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18103
+Player.SetClothes($PLAYER_CHAR, "tshirt2horiz", "tshirt2", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18147
+Player.SetClothes($PLAYER_CHAR, "tshirtwhite", "tshirt", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18189
+Player.SetClothes($PLAYER_CHAR, "tshirtilovels", "tshirt", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18233
+Player.SetClothes($PLAYER_CHAR, "tshirtblunts", "tshirt", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18276
+Player.SetClothes($PLAYER_CHAR, "shirtbplaid", "shirtb", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18318
+Player.SetClothes($PLAYER_CHAR, "shirtbcheck", "shirtb", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18360
+Player.SetClothes($PLAYER_CHAR, "field", "field", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18395
+Player.SetClothes($PLAYER_CHAR, "tshirterisyell", "tshirt", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18440
+Player.SetClothes($PLAYER_CHAR, "tshirterisorn", "tshirt", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18484
+Player.SetClothes($PLAYER_CHAR, "trackytop2eris", "trackytop1", Torso)
+5@ = 25 
+jump @WHELP_18533 
+
+:WHELP_18533
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_18657
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_18787 jumps 0 @WHELP_18787 1 @WHELP_18794 2 @WHELP_18834 3 @WHELP_18879 4 @WHELP_18924 5 @WHELP_18968 6 @WHELP_19010 
+0872: jump_table_jumps 7 @WHELP_19050 8 @WHELP_19093 9 @WHELP_19136 10 @WHELP_19184 11 @WHELP_19223 12 @WHELP_19262 13 @WHELP_18787 14 @WHELP_18787 15 @WHELP_18787 
+
+:WHELP_18787
+jump @WHELP_142 
+
+:WHELP_18794
+Player.SetClothes($PLAYER_CHAR, "bbjackrim", "bbjack", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_18834
+Player.SetClothes($PLAYER_CHAR, "bballjackrstar", "bbjack", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_18879
+Player.SetClothes($PLAYER_CHAR, "baskballdrib", "baskball", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_18924
+Player.SetClothes($PLAYER_CHAR, "baskballrim", "baskball", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_18968
+Player.SetClothes($PLAYER_CHAR, "sixtyniners", "tshirt", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19010
+Player.SetClothes($PLAYER_CHAR, "bandits", "baseball", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19050
+Player.SetClothes($PLAYER_CHAR, "tshirtprored", "tshirt", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19093
+Player.SetClothes($PLAYER_CHAR, "tshirtproblk", "tshirt", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19136
+Player.SetClothes($PLAYER_CHAR, "trackytop1pro", "trackytop1", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19184
+Player.SetClothes($PLAYER_CHAR, "hockeytop", "sweat", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19223
+Player.SetClothes($PLAYER_CHAR, "bbjersey", "sleevt", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19262
+Player.SetClothes($PLAYER_CHAR, "shellsuit", "trackytop1", Torso)
+5@ = 26 
+jump @WHELP_19306 
+
+:WHELP_19306
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_19430
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_19560 jumps 0 @WHELP_19560 1 @WHELP_19567 2 @WHELP_19611 3 @WHELP_19656 4 @WHELP_19700 5 @WHELP_19742 6 @WHELP_19785 
+0872: jump_table_jumps 7 @WHELP_19826 8 @WHELP_19868 9 @WHELP_19913 10 @WHELP_19952 11 @WHELP_19987 12 @WHELP_20026 13 @WHELP_19560 14 @WHELP_19560 15 @WHELP_19560 
+
+:WHELP_19560
+jump @WHELP_142 
+
+:WHELP_19567
+Player.SetClothes($PLAYER_CHAR, "tshirtheatwht", "tshirt", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19611
+Player.SetClothes($PLAYER_CHAR, "tshirtbobomonk", "tshirt", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19656
+Player.SetClothes($PLAYER_CHAR, "tshirtbobored", "tshirt", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19700
+Player.SetClothes($PLAYER_CHAR, "tshirtbase5", "tshirt", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19742
+Player.SetClothes($PLAYER_CHAR, "tshirtsuburb", "tshirt", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19785
+Player.SetClothes($PLAYER_CHAR, "hoodyamerc", "hoodya", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19826
+Player.SetClothes($PLAYER_CHAR, "hoodyabase5", "hoodya", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19868
+Player.SetClothes($PLAYER_CHAR, "hoodyarockstar", "hoodya", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19913
+Player.SetClothes($PLAYER_CHAR, "wcoatblue", "wcoat", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19952
+Player.SetClothes($PLAYER_CHAR, "coach", "coach", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_19987
+Player.SetClothes($PLAYER_CHAR, "coachsemi", "coach", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_20026
+Player.SetClothes($PLAYER_CHAR, "sweatrstar", "sweat", Torso)
+5@ = 27 
+jump @WHELP_20066 
+
+:WHELP_20066
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_20190
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_20320 jumps 0 @WHELP_20320 1 @WHELP_20327 2 @WHELP_20368 3 @WHELP_20410 4 @WHELP_20452 5 @WHELP_20494 6 @WHELP_20535 
+0872: jump_table_jumps 7 @WHELP_20578 8 @WHELP_20619 9 @WHELP_20660 10 @WHELP_20703 11 @WHELP_20746 12 @WHELP_20785 13 @WHELP_20320 14 @WHELP_20320 15 @WHELP_20320 
+
+:WHELP_20320
+jump @WHELP_142 
+
+:WHELP_20327
+Player.SetClothes($PLAYER_CHAR, "hoodyAblue", "hoodyA", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20368
+Player.SetClothes($PLAYER_CHAR, "hoodyAblack", "hoodyA", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20410
+Player.SetClothes($PLAYER_CHAR, "hoodyAgreen", "hoodyA", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20452
+Player.SetClothes($PLAYER_CHAR, "sleevtbrown", "sleevt", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20494
+Player.SetClothes($PLAYER_CHAR, "shirtablue", "shirta", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20535
+Player.SetClothes($PLAYER_CHAR, "shirtayellow", "shirta", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20578
+Player.SetClothes($PLAYER_CHAR, "shirtagrey", "shirta", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20619
+Player.SetClothes($PLAYER_CHAR, "shirtbgang", "shirtb", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20660
+Player.SetClothes($PLAYER_CHAR, "tshirtzipcrm", "tshirt", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20703
+Player.SetClothes($PLAYER_CHAR, "tshirtzipgry", "tshirt", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20746
+Player.SetClothes($PLAYER_CHAR, "denimfade", "denim", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20785
+Player.SetClothes($PLAYER_CHAR, "bowling", "hawaii", Torso)
+5@ = 28 
+jump @WHELP_20823 
+
+:WHELP_20823
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_20947
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_21077 jumps 0 @WHELP_21077 1 @WHELP_21084 2 @WHELP_21130 3 @WHELP_21174 4 @WHELP_21218 5 @WHELP_21263 6 @WHELP_21307 
+0872: jump_table_jumps 7 @WHELP_21346 8 @WHELP_21384 9 @WHELP_21423 10 @WHELP_21462 11 @WHELP_21502 12 @WHELP_21542 13 @WHELP_21077 14 @WHELP_21077 15 @WHELP_21077 
+
+:WHELP_21077
+jump @WHELP_142 
+
+:WHELP_21084
+Player.SetClothes($PLAYER_CHAR, "hoodjackbeige", "hoodjack", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21130
+Player.SetClothes($PLAYER_CHAR, "baskballloc", "baskball", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21174
+Player.SetClothes($PLAYER_CHAR, "tshirtlocgrey", "tshirt", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21218
+Player.SetClothes($PLAYER_CHAR, "tshirtmaddgrey", "tshirt", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21263
+Player.SetClothes($PLAYER_CHAR, "tshirtmaddgrn", "tshirt", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21307
+Player.SetClothes($PLAYER_CHAR, "suit1grey", "suit1", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21346
+Player.SetClothes($PLAYER_CHAR, "suit1blk", "suit1", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21384
+Player.SetClothes($PLAYER_CHAR, "leather", "leather", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21423
+Player.SetClothes($PLAYER_CHAR, "painter", "painter", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21462
+Player.SetClothes($PLAYER_CHAR, "hawaiiwht", "hawaii", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21502
+Player.SetClothes($PLAYER_CHAR, "hawaiired", "hawaii", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21542
+Player.SetClothes($PLAYER_CHAR, "sportjack", "trackytop1", Torso)
+5@ = 29 
+jump @WHELP_21586 
+
+:WHELP_21586
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_21710
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_21840 jumps 0 @WHELP_21840 1 @WHELP_21847 2 @WHELP_21885 3 @WHELP_21924 4 @WHELP_21965 5 @WHELP_22003 6 @WHELP_22039 
+0872: jump_table_jumps 7 @WHELP_22078 8 @WHELP_21840 9 @WHELP_21840 10 @WHELP_21840 11 @WHELP_21840 12 @WHELP_21840 13 @WHELP_21840 14 @WHELP_21840 15 @WHELP_21840 
+
+:WHELP_21840
+jump @WHELP_142 
+
+:WHELP_21847
+Player.SetClothes($PLAYER_CHAR, "suit1red", "suit1", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_21885
+Player.SetClothes($PLAYER_CHAR, "suit1blue", "suit1", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_21924
+Player.SetClothes($PLAYER_CHAR, "suit1yellow", "suit1", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_21965
+Player.SetClothes($PLAYER_CHAR, "suit2grn", "suit2", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_22003
+Player.SetClothes($PLAYER_CHAR, "tuxedo", "suit2", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_22039
+Player.SetClothes($PLAYER_CHAR, "suit1gang", "suit1", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_22078
+Player.SetClothes($PLAYER_CHAR, "letter", "sleevt", Torso)
+5@ = 30 
+jump @WHELP_22115 
+
+:WHELP_22115
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.35 
+21@ = 1.4 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_22239
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 11 default_jump 0 @WHELP_22369 jumps 0 @WHELP_22369 1 @WHELP_22376 2 @WHELP_22413 3 @WHELP_22450 4 @WHELP_22484 5 @WHELP_22519 6 @WHELP_22551 
+0872: jump_table_jumps 7 @WHELP_22587 8 @WHELP_22620 9 @WHELP_22651 10 @WHELP_22682 11 @WHELP_22369 12 @WHELP_22369 13 @WHELP_22369 14 @WHELP_22369 15 @WHELP_22369 
+
+:WHELP_22369
+jump @WHELP_142 
+
+:WHELP_22376
+Player.SetClothes($PLAYER_CHAR, "worktrcamogrn", "worktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22413
+Player.SetClothes($PLAYER_CHAR, "worktrcamogry", "worktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22450
+Player.SetClothes($PLAYER_CHAR, "worktrgrey", "worktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22484
+Player.SetClothes($PLAYER_CHAR, "worktrkhaki", "worktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22519
+Player.SetClothes($PLAYER_CHAR, "tracktr", "tracktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22551
+Player.SetClothes($PLAYER_CHAR, "tracktreris", "tracktr", Legs)
+jump @WHELP_22714 
+
+:WHELP_22587
+Player.SetClothes($PLAYER_CHAR, "jeansdenim", "jeans", Legs)
+jump @WHELP_22714 
+
+:WHELP_22620
+Player.SetClothes($PLAYER_CHAR, "legsblack", "legs", Legs)
+jump @WHELP_22714 
+
+:WHELP_22651
+Player.SetClothes($PLAYER_CHAR, "legsheart", "legs", Legs)
+jump @WHELP_22714 
+
+:WHELP_22682
+Player.SetClothes($PLAYER_CHAR, "biegetr", "chinosb", Legs)
+jump @WHELP_22714 
+
+:WHELP_22714
+5@ = 31 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_22845
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 9 default_jump 0 @WHELP_22975 jumps 0 @WHELP_22975 1 @WHELP_22982 2 @WHELP_23017 3 @WHELP_23054 4 @WHELP_23090 5 @WHELP_23126 6 @WHELP_23165 
+0872: jump_table_jumps 7 @WHELP_23202 8 @WHELP_23241 9 @WHELP_22975 10 @WHELP_22975 11 @WHELP_22975 12 @WHELP_22975 13 @WHELP_22975 14 @WHELP_22975 15 @WHELP_22975 
+
+:WHELP_22975
+jump @WHELP_142 
+
+:WHELP_22982
+Player.SetClothes($PLAYER_CHAR, "tracktrpro", "tracktr", Legs)
+jump @WHELP_23277 
+
+:WHELP_23017
+Player.SetClothes($PLAYER_CHAR, "tracktrwhstr", "tracktr", Legs)
+jump @WHELP_23277 
+
+:WHELP_23054
+Player.SetClothes($PLAYER_CHAR, "tracktrblue", "tracktr", Legs)
+jump @WHELP_23277 
+
+:WHELP_23090
+Player.SetClothes($PLAYER_CHAR, "tracktrgang", "tracktr", Legs)
+jump @WHELP_23277 
+
+:WHELP_23126
+Player.SetClothes($PLAYER_CHAR, "bbshortwht", "boxingshort", Legs)
+jump @WHELP_23277 
+
+:WHELP_23165
+Player.SetClothes($PLAYER_CHAR, "boxshort", "boxingshort", Legs)
+jump @WHELP_23277 
+
+:WHELP_23202
+Player.SetClothes($PLAYER_CHAR, "bbshortred", "boxingshort", Legs)
+jump @WHELP_23277 
+
+:WHELP_23241
+Player.SetClothes($PLAYER_CHAR, "shellsuittr", "tracktr", Legs)
+jump @WHELP_23277 
+
+:WHELP_23277
+5@ = 32 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_23408
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 10 default_jump 0 @WHELP_23538 jumps 0 @WHELP_23538 1 @WHELP_23545 2 @WHELP_23579 3 @WHELP_23614 4 @WHELP_23650 5 @WHELP_23686 6 @WHELP_23721 
+0872: jump_table_jumps 7 @WHELP_23757 8 @WHELP_23791 9 @WHELP_23824 10 @WHELP_23538 11 @WHELP_23538 12 @WHELP_23538 13 @WHELP_23538 14 @WHELP_23538 15 @WHELP_23538 
+
+:WHELP_23538
+jump @WHELP_142 
+
+:WHELP_23545
+Player.SetClothes($PLAYER_CHAR, "shortsgrey", "shorts", Legs)
+jump @WHELP_23856 
+
+:WHELP_23579
+Player.SetClothes($PLAYER_CHAR, "shortskhaki", "shorts", Legs)
+jump @WHELP_23856 
+
+:WHELP_23614
+Player.SetClothes($PLAYER_CHAR, "chongergrey", "chonger", Legs)
+jump @WHELP_23856 
+
+:WHELP_23650
+Player.SetClothes($PLAYER_CHAR, "chongergang", "chonger", Legs)
+jump @WHELP_23856 
+
+:WHELP_23686
+Player.SetClothes($PLAYER_CHAR, "chongerred", "chonger", Legs)
+jump @WHELP_23856 
+
+:WHELP_23721
+Player.SetClothes($PLAYER_CHAR, "chongerblue", "chonger", Legs)
+jump @WHELP_23856 
+
+:WHELP_23757
+Player.SetClothes($PLAYER_CHAR, "shortsgang", "shorts", Legs)
+jump @WHELP_23856 
+
+:WHELP_23791
+Player.SetClothes($PLAYER_CHAR, "denimsgang", "jeans", Legs)
+jump @WHELP_23856 
+
+:WHELP_23824
+Player.SetClothes($PLAYER_CHAR, "denimsred", "jeans", Legs)
+jump @WHELP_23856 
+
+:WHELP_23856
+5@ = 33 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_23987
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_24052 jumps 0 @WHELP_24052 1 @WHELP_24059 2 @WHELP_24095 3 @WHELP_24131 4 @WHELP_24167 5 @WHELP_24207 6 @WHELP_24243 
+
+:WHELP_24052
+jump @WHELP_142 
+
+:WHELP_24059
+Player.SetClothes($PLAYER_CHAR, "chinosbiege", "chinosb", Legs)
+jump @WHELP_24278 
+
+:WHELP_24095
+Player.SetClothes($PLAYER_CHAR, "chinoskhaki", "chinosb", Legs)
+jump @WHELP_24278 
+
+:WHELP_24131
+Player.SetClothes($PLAYER_CHAR, "cutoffchinos", "shorts", Legs)
+jump @WHELP_24278 
+
+:WHELP_24167
+Player.SetClothes($PLAYER_CHAR, "cutoffchinosblue", "shorts", Legs)
+jump @WHELP_24278 
+
+:WHELP_24207
+Player.SetClothes($PLAYER_CHAR, "chinosblack", "chinosb", Legs)
+jump @WHELP_24278 
+
+:WHELP_24243
+Player.SetClothes($PLAYER_CHAR, "chinosblue", "chinosb", Legs)
+jump @WHELP_24278 
+
+:WHELP_24278
+5@ = 34 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_24409
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 6 default_jump 0 @WHELP_24474 jumps 0 @WHELP_24474 1 @WHELP_24481 2 @WHELP_24517 3 @WHELP_24558 4 @WHELP_24594 5 @WHELP_24629 6 @WHELP_24474 
+
+:WHELP_24474
+jump @WHELP_142 
+
+:WHELP_24481
+Player.SetClothes($PLAYER_CHAR, "leathertr", "leathertr", Legs)
+jump @WHELP_24665 
+
+:WHELP_24517
+Player.SetClothes($PLAYER_CHAR, "leathertrchaps", "leathertr", Legs)
+jump @WHELP_24665 
+
+:WHELP_24558
+Player.SetClothes($PLAYER_CHAR, "suit1trgrey", "suit1tr", Legs)
+jump @WHELP_24665 
+
+:WHELP_24594
+Player.SetClothes($PLAYER_CHAR, "suit1trblk", "suit1tr", Legs)
+jump @WHELP_24665 
+
+:WHELP_24629
+Player.SetClothes($PLAYER_CHAR, "cutoffdenims", "shorts", Legs)
+jump @WHELP_24665 
+
+:WHELP_24665
+5@ = 35 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_24796
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_24861 jumps 0 @WHELP_24861 1 @WHELP_24868 2 @WHELP_24903 3 @WHELP_24939 4 @WHELP_24977 5 @WHELP_25014 6 @WHELP_25050 
+
+:WHELP_24861
+jump @WHELP_142 
+
+:WHELP_24868
+Player.SetClothes($PLAYER_CHAR, "suit1trred", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_24903
+Player.SetClothes($PLAYER_CHAR, "suit1trblue", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_24939
+Player.SetClothes($PLAYER_CHAR, "suit1tryellow", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_24977
+Player.SetClothes($PLAYER_CHAR, "suit1trgreen", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_25014
+Player.SetClothes($PLAYER_CHAR, "suit1trblk2", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_25050
+Player.SetClothes($PLAYER_CHAR, "suit1trgang", "suit1tr", Legs)
+jump @WHELP_25086 
+
+:WHELP_25086
+5@ = 36 
+18@ = 0.0 
+25@ = 0.2 
+20@ = -0.1 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_25217
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 10 default_jump 0 @WHELP_25347 jumps 0 @WHELP_25347 1 @WHELP_25354 2 @WHELP_25388 3 @WHELP_25420 4 @WHELP_25452 5 @WHELP_25492 6 @WHELP_25531 
+0872: jump_table_jumps 7 @WHELP_25570 8 @WHELP_25602 9 @WHELP_25638 10 @WHELP_25347 11 @WHELP_25347 12 @WHELP_25347 13 @WHELP_25347 14 @WHELP_25347 15 @WHELP_25347 
+
+:WHELP_25347
+jump @WHELP_142 
+
+:WHELP_25354
+Player.SetClothes($PLAYER_CHAR, "cowboyboot2", "biker", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25388
+Player.SetClothes($PLAYER_CHAR, "bask2semi", "bask1", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25420
+Player.SetClothes($PLAYER_CHAR, "bask1eris", "bask1", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25452
+Player.SetClothes($PLAYER_CHAR, "sneakerbincgang", "sneaker", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25492
+Player.SetClothes($PLAYER_CHAR, "sneakerbincblu", "sneaker", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25531
+Player.SetClothes($PLAYER_CHAR, "sneakerbincblk", "sneaker", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25570
+Player.SetClothes($PLAYER_CHAR, "sandal", "flipflop", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25602
+Player.SetClothes($PLAYER_CHAR, "sandalsock", "flipflop", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25638
+Player.SetClothes($PLAYER_CHAR, "flipflop", "flipflop", Shoes)
+jump @WHELP_25672 
+
+:WHELP_25672
+5@ = 37 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_25803
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 11 default_jump 0 @WHELP_25933 jumps 0 @WHELP_25933 1 @WHELP_25940 2 @WHELP_25968 3 @WHELP_26000 4 @WHELP_26032 5 @WHELP_26064 6 @WHELP_26102 
+0872: jump_table_jumps 7 @WHELP_26140 8 @WHELP_26178 9 @WHELP_26212 10 @WHELP_26246 11 @WHELP_25933 12 @WHELP_25933 13 @WHELP_25933 14 @WHELP_25933 15 @WHELP_25933 
+
+:WHELP_25933
+jump @WHELP_142 
+
+:WHELP_25940
+Player.SetClothes($PLAYER_CHAR, "hitop", "bask1", Shoes)
+jump @WHELP_26279 
+
+:WHELP_25968
+Player.SetClothes($PLAYER_CHAR, "convproblk", "conv", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26000
+Player.SetClothes($PLAYER_CHAR, "convproblu", "conv", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26032
+Player.SetClothes($PLAYER_CHAR, "convprogrn", "conv", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26064
+Player.SetClothes($PLAYER_CHAR, "sneakerprored", "sneaker", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26102
+Player.SetClothes($PLAYER_CHAR, "sneakerproblu", "sneaker", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26140
+Player.SetClothes($PLAYER_CHAR, "sneakerprowht", "sneaker", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26178
+Player.SetClothes($PLAYER_CHAR, "bask1prowht", "bask1", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26212
+Player.SetClothes($PLAYER_CHAR, "bask1problk", "bask1", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26246
+Player.SetClothes($PLAYER_CHAR, "boxingshoe", "biker", Shoes)
+jump @WHELP_26279 
+
+:WHELP_26279
+5@ = 38 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_26410
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 9 default_jump 0 @WHELP_26540 jumps 0 @WHELP_26540 1 @WHELP_26547 2 @WHELP_26580 3 @WHELP_26613 4 @WHELP_26646 5 @WHELP_26685 6 @WHELP_26724 
+0872: jump_table_jumps 7 @WHELP_26763 8 @WHELP_26798 9 @WHELP_26540 10 @WHELP_26540 11 @WHELP_26540 12 @WHELP_26540 13 @WHELP_26540 14 @WHELP_26540 15 @WHELP_26540 
+
+:WHELP_26540
+jump @WHELP_142 
+
+:WHELP_26547
+Player.SetClothes($PLAYER_CHAR, "convheatblk", "conv", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26580
+Player.SetClothes($PLAYER_CHAR, "convheatred", "conv", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26613
+Player.SetClothes($PLAYER_CHAR, "convheatorn", "conv", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26646
+Player.SetClothes($PLAYER_CHAR, "sneakerheatwht", "sneaker", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26685
+Player.SetClothes($PLAYER_CHAR, "sneakerheatgry", "sneaker", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26724
+Player.SetClothes($PLAYER_CHAR, "sneakerheatblk", "sneaker", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26763
+Player.SetClothes($PLAYER_CHAR, "bask2heatwht", "bask1", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26798
+Player.SetClothes($PLAYER_CHAR, "bask2heatband", "bask1", Shoes)
+jump @WHELP_26834 
+
+:WHELP_26834
+5@ = 39 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_26965
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 5 default_jump 0 @WHELP_27030 jumps 0 @WHELP_27030 1 @WHELP_27037 2 @WHELP_27070 3 @WHELP_27102 4 @WHELP_27135 5 @WHELP_27030 6 @WHELP_27030 
+
+:WHELP_27030
+jump @WHELP_142 
+
+:WHELP_27037
+Player.SetClothes($PLAYER_CHAR, "timbergrey", "bask1", Shoes)
+jump @WHELP_27168 
+
+:WHELP_27070
+Player.SetClothes($PLAYER_CHAR, "timberred", "bask1", Shoes)
+jump @WHELP_27168 
+
+:WHELP_27102
+Player.SetClothes($PLAYER_CHAR, "timberfawn", "bask1", Shoes)
+jump @WHELP_27168 
+
+:WHELP_27135
+Player.SetClothes($PLAYER_CHAR, "timberhike", "bask1", Shoes)
+jump @WHELP_27168 
+
+:WHELP_27168
+5@ = 40 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_27299
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 4 default_jump 0 @WHELP_27364 jumps 0 @WHELP_27364 1 @WHELP_27371 2 @WHELP_27404 3 @WHELP_27432 4 @WHELP_27364 5 @WHELP_27364 6 @WHELP_27364 
+
+:WHELP_27364
+jump @WHELP_142 
+
+:WHELP_27371
+Player.SetClothes($PLAYER_CHAR, "cowboyboot", "biker", Shoes)
+jump @WHELP_27464 
+
+:WHELP_27404
+Player.SetClothes($PLAYER_CHAR, "biker", "biker", Shoes)
+jump @WHELP_27464 
+
+:WHELP_27432
+Player.SetClothes($PLAYER_CHAR, "snakeskin", "biker", Shoes)
+jump @WHELP_27464 
+
+:WHELP_27464
+5@ = 41 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_27595
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 4 default_jump 0 @WHELP_27660 jumps 0 @WHELP_27660 1 @WHELP_27667 2 @WHELP_27701 3 @WHELP_27735 4 @WHELP_27660 5 @WHELP_27660 6 @WHELP_27660 
+
+:WHELP_27660
+jump @WHELP_142 
+
+:WHELP_27667
+Player.SetClothes($PLAYER_CHAR, "shoedressblk", "shoe", Shoes)
+jump @WHELP_27766 
+
+:WHELP_27701
+Player.SetClothes($PLAYER_CHAR, "shoedressbrn", "shoe", Shoes)
+jump @WHELP_27766 
+
+:WHELP_27735
+Player.SetClothes($PLAYER_CHAR, "shoespatz", "shoe", Shoes)
+jump @WHELP_27766 
+
+:WHELP_27766
+5@ = 42 
+18@ = -0.2 
+25@ = 0.2 
+20@ = -0.35 
+21@ = 1.8 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_27897
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_28027 jumps 0 @WHELP_28027 1 @WHELP_28034 2 @WHELP_28073 3 @WHELP_28113 4 @WHELP_28153 5 @WHELP_28194 6 @WHELP_28236 
+0872: jump_table_jumps 7 @WHELP_28279 8 @WHELP_28323 9 @WHELP_28366 10 @WHELP_28408 11 @WHELP_28449 12 @WHELP_28486 13 @WHELP_28027 14 @WHELP_28027 15 @WHELP_28027 
+
+:WHELP_28027
+jump @WHELP_142 
+
+:WHELP_28034
+Player.SetClothes($PLAYER_CHAR, "bandred", "bandana", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28073
+Player.SetClothes($PLAYER_CHAR, "bandblue", "bandana", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28113
+Player.SetClothes($PLAYER_CHAR, "bandgang", "bandana", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28153
+Player.SetClothes($PLAYER_CHAR, "bandblack", "bandana", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28194
+Player.SetClothes($PLAYER_CHAR, "bandred2", "bandknots", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28236
+Player.SetClothes($PLAYER_CHAR, "bandblue2", "bandknots", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28279
+Player.SetClothes($PLAYER_CHAR, "bandblack2", "bandknots", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28323
+Player.SetClothes($PLAYER_CHAR, "bandgang2", "bandknots", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28366
+Player.SetClothes($PLAYER_CHAR, "capknitgrn", "capknit", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28408
+Player.SetClothes($PLAYER_CHAR, "captruck", "captruck", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28449
+Player.SetClothes($PLAYER_CHAR, "cowboy", "cowboy", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28486
+Player.SetClothes($PLAYER_CHAR, "hattiger", "cowboy", 16)
+5@ = 43 
+jump @WHELP_28525 
+
+:WHELP_28525
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_28652
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 11 default_jump 0 @WHELP_28782 jumps 0 @WHELP_28782 1 @WHELP_28789 2 @WHELP_28826 3 @WHELP_28859 4 @WHELP_28902 5 @WHELP_28943 6 @WHELP_28978 
+0872: jump_table_jumps 7 @WHELP_29021 8 @WHELP_29064 9 @WHELP_29110 10 @WHELP_29152 11 @WHELP_28782 12 @WHELP_28782 13 @WHELP_28782 14 @WHELP_28782 15 @WHELP_28782 
+
+:WHELP_28782
+jump @WHELP_142 
+
+:WHELP_28789
+Player.SetClothes($PLAYER_CHAR, "helmet", "helmet", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_28826
+Player.SetClothes($PLAYER_CHAR, "moto", "moto", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_28859
+Player.SetClothes($PLAYER_CHAR, "boxingcap", "boxingcap", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_28902
+Player.SetClothes($PLAYER_CHAR, "hockey", "hockeymask", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_28943
+Player.SetClothes($PLAYER_CHAR, "capgang", "cap", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_28978
+Player.SetClothes($PLAYER_CHAR, "capgangback", "capback", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_29021
+Player.SetClothes($PLAYER_CHAR, "capgangside", "capside", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_29064
+Player.SetClothes($PLAYER_CHAR, "capgangover", "capovereye", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_29110
+Player.SetClothes($PLAYER_CHAR, "capgangup", "caprimup", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_29152
+Player.SetClothes($PLAYER_CHAR, "bikerhelmet", "bikerhelmet", 16)
+5@ = 44 
+jump @WHELP_29199 
+
+:WHELP_29199
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_29326
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_29456 jumps 0 @WHELP_29456 1 @WHELP_29463 2 @WHELP_29497 3 @WHELP_29539 4 @WHELP_29581 5 @WHELP_29626 6 @WHELP_29667 
+0872: jump_table_jumps 7 @WHELP_29702 8 @WHELP_29745 9 @WHELP_29788 10 @WHELP_29834 11 @WHELP_29876 12 @WHELP_29919 13 @WHELP_29456 14 @WHELP_29456 15 @WHELP_29456 
+
+:WHELP_29456
+jump @WHELP_142 
+
+:WHELP_29463
+Player.SetClothes($PLAYER_CHAR, "capred", "cap", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29497
+Player.SetClothes($PLAYER_CHAR, "capredback", "capback", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29539
+Player.SetClothes($PLAYER_CHAR, "capredside", "capside", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29581
+Player.SetClothes($PLAYER_CHAR, "capredover", "capovereye", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29626
+Player.SetClothes($PLAYER_CHAR, "capredup", "caprimup", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29667
+Player.SetClothes($PLAYER_CHAR, "capblue", "cap", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29702
+Player.SetClothes($PLAYER_CHAR, "capblueback", "capback", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29745
+Player.SetClothes($PLAYER_CHAR, "capblueside", "capside", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29788
+Player.SetClothes($PLAYER_CHAR, "capblueover", "capovereye", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29834
+Player.SetClothes($PLAYER_CHAR, "capblueup", "caprimup", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29876
+Player.SetClothes($PLAYER_CHAR, "skullyblk", "skullycap", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29919
+Player.SetClothes($PLAYER_CHAR, "skullygrn", "skullycap", 16)
+5@ = 45 
+jump @WHELP_29962 
+
+:WHELP_29962
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_30089
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_30219 jumps 0 @WHELP_30219 1 @WHELP_30226 2 @WHELP_30268 3 @WHELP_30312 4 @WHELP_30346 5 @WHELP_30388 6 @WHELP_30430 
+0872: jump_table_jumps 7 @WHELP_30475 8 @WHELP_30219 9 @WHELP_30219 10 @WHELP_30219 11 @WHELP_30219 12 @WHELP_30219 13 @WHELP_30219 14 @WHELP_30219 15 @WHELP_30219 
+
+:WHELP_30219
+jump @WHELP_142 
+
+:WHELP_30226
+Player.SetClothes($PLAYER_CHAR, "hatmancblk", "hatmanc", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30268
+Player.SetClothes($PLAYER_CHAR, "hatmancplaid", "hatmanc", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30312
+Player.SetClothes($PLAYER_CHAR, "capzip", "cap", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30346
+Player.SetClothes($PLAYER_CHAR, "capzipback", "capback", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30388
+Player.SetClothes($PLAYER_CHAR, "capzipside", "capside", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30430
+Player.SetClothes($PLAYER_CHAR, "capzipover", "capovereye", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30475
+Player.SetClothes($PLAYER_CHAR, "capzipup", "caprimup", 16)
+5@ = 46 
+jump @WHELP_30516 
+
+:WHELP_30516
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_30643
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_30773 jumps 0 @WHELP_30773 1 @WHELP_30780 2 @WHELP_30818 3 @WHELP_30856 4 @WHELP_30890 5 @WHELP_30932 6 @WHELP_30974 
+0872: jump_table_jumps 7 @WHELP_31019 8 @WHELP_30773 9 @WHELP_30773 10 @WHELP_30773 11 @WHELP_30773 12 @WHELP_30773 13 @WHELP_30773 14 @WHELP_30773 15 @WHELP_30773 
+
+:WHELP_30773
+jump @WHELP_142 
+
+:WHELP_30780
+Player.SetClothes($PLAYER_CHAR, "beretred", "beret", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_30818
+Player.SetClothes($PLAYER_CHAR, "beretblk", "beret", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_30856
+Player.SetClothes($PLAYER_CHAR, "capblk", "cap", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_30890
+Player.SetClothes($PLAYER_CHAR, "capblkback", "capback", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_30932
+Player.SetClothes($PLAYER_CHAR, "capblkside", "capside", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_30974
+Player.SetClothes($PLAYER_CHAR, "capblkover", "capovereye", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_31019
+Player.SetClothes($PLAYER_CHAR, "capblkup", "caprimup", 16)
+5@ = 47 
+jump @WHELP_31060 
+
+:WHELP_31060
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_31187
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 10 default_jump 0 @WHELP_31317 jumps 0 @WHELP_31317 1 @WHELP_31324 2 @WHELP_31364 3 @WHELP_31405 4 @WHELP_31442 5 @WHELP_31482 6 @WHELP_31523 
+0872: jump_table_jumps 7 @WHELP_31566 8 @WHELP_31603 9 @WHELP_31644 10 @WHELP_31317 11 @WHELP_31317 12 @WHELP_31317 13 @WHELP_31317 14 @WHELP_31317 15 @WHELP_31317 
+
+:WHELP_31317
+jump @WHELP_142 
+
+:WHELP_31324
+Player.SetClothes($PLAYER_CHAR, "trilbydrk", "trilby", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31364
+Player.SetClothes($PLAYER_CHAR, "trilbylght", "trilby", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31405
+Player.SetClothes($PLAYER_CHAR, "bowler", "bowler", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31442
+Player.SetClothes($PLAYER_CHAR, "bowlerred", "bowler", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31482
+Player.SetClothes($PLAYER_CHAR, "bowlerblue", "bowler", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31523
+Player.SetClothes($PLAYER_CHAR, "bowleryellow", "bowler", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31566
+Player.SetClothes($PLAYER_CHAR, "boater", "boater", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31603
+Player.SetClothes($PLAYER_CHAR, "bowlergang", "bowler", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31644
+Player.SetClothes($PLAYER_CHAR, "boaterblk", "boater", 16)
+5@ = 48 
+jump @WHELP_31684 
+
+:WHELP_31684
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_31811
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 4 default_jump 0 @WHELP_31889 jumps 0 @WHELP_31889 1 @WHELP_31896 2 @WHELP_31931 3 @WHELP_31964 4 @WHELP_31889 5 @WHELP_31889 6 @WHELP_31889 
+
+:WHELP_31889
+jump @WHELP_142 
+
+:WHELP_31896
+Player.SetClothes($PLAYER_CHAR, "4weed", "4WEED", 4)
+5@ = 49 
+jump @WHELP_32003 
+
+:WHELP_31931
+Player.SetClothes($PLAYER_CHAR, "4rip", "4RIP", 4)
+5@ = 49 
+jump @WHELP_32003 
+
+:WHELP_31964
+Player.SetClothes($PLAYER_CHAR, "4spider", "4SPIDER", 4)
+5@ = 49 
+jump @WHELP_32003 
+
+:WHELP_32003
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = -0.1 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset -0.5 1.2 18@ rotation 25@ 0.5 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "FIGHTIDLE" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_32147
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 5 default_jump 0 @WHELP_32225 jumps 0 @WHELP_32225 1 @WHELP_32232 2 @WHELP_32265 3 @WHELP_32302 4 @WHELP_32341 5 @WHELP_32225 6 @WHELP_32225 
+
+:WHELP_32225
+jump @WHELP_142 
+
+:WHELP_32232
+Player.SetClothes($PLAYER_CHAR, "5gun", "5GUN", 5)
+5@ = 50 
+jump @WHELP_32380 
+
+:WHELP_32265
+Player.SetClothes($PLAYER_CHAR, "5cross", "5CROSS", 5)
+5@ = 50 
+jump @WHELP_32380 
+
+:WHELP_32302
+Player.SetClothes($PLAYER_CHAR, "5cross2", "5CROSS2", 5)
+5@ = 50 
+jump @WHELP_32380 
+
+:WHELP_32341
+Player.SetClothes($PLAYER_CHAR, "5cross3", "5CROSS3", 5)
+5@ = 50 
+jump @WHELP_32380 
+
+:WHELP_32380
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.5 
+25@ = -0.1 
+20@ = 0.4 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset -0.5 1.2 18@ rotation 25@ 0.5 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "FIGHTIDLE" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_32524
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 5 default_jump 0 @WHELP_32602 jumps 0 @WHELP_32602 1 @WHELP_32609 2 @WHELP_32646 3 @WHELP_32683 4 @WHELP_32720 5 @WHELP_32602 6 @WHELP_32602 
+
+:WHELP_32602
+jump @WHELP_142 
+
+:WHELP_32609
+Player.SetClothes($PLAYER_CHAR, "6aztec", "6AZTEC", 6)
+5@ = 51 
+jump @WHELP_32759 
+
+:WHELP_32646
+Player.SetClothes($PLAYER_CHAR, "6crown", "6CROWN", 6)
+5@ = 51 
+jump @WHELP_32759 
+
+:WHELP_32683
+Player.SetClothes($PLAYER_CHAR, "6clown", "6CLOWN", 6)
+5@ = 51 
+jump @WHELP_32759 
+
+:WHELP_32720
+Player.SetClothes($PLAYER_CHAR, "6africa", "6AFRICA", 6)
+5@ = 51 
+jump @WHELP_32759 
+
+:WHELP_32759
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = 0.2 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.5 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "FIGHTA_block" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_32906
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 5 default_jump 0 @WHELP_32984 jumps 0 @WHELP_32984 1 @WHELP_32991 2 @WHELP_33028 3 @WHELP_33067 4 @WHELP_33106 5 @WHELP_32984 6 @WHELP_32984 
+
+:WHELP_32984
+jump @WHELP_142 
+
+:WHELP_32991
+Player.SetClothes($PLAYER_CHAR, "7cross", "7CROSS", 7)
+5@ = 52 
+jump @WHELP_33141 
+
+:WHELP_33028
+Player.SetClothes($PLAYER_CHAR, "7cross2", "7CROSS2", 7)
+5@ = 52 
+jump @WHELP_33141 
+
+:WHELP_33067
+Player.SetClothes($PLAYER_CHAR, "7cross3", "7CROSS3", 7)
+5@ = 52 
+jump @WHELP_33141 
+
+:WHELP_33106
+Player.SetClothes($PLAYER_CHAR, "7mary", "7MARY", 7)
+5@ = 52 
+jump @WHELP_33141 
+
+:WHELP_33141
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.5 
+25@ = 0.2 
+20@ = 0.3 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.5 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "endchat_01" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_33286
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_33429 jumps 0 @WHELP_33429 1 @WHELP_33436 2 @WHELP_33467 3 @WHELP_33500 4 @WHELP_33533 5 @WHELP_33574 6 @WHELP_33613 
+0872: jump_table_jumps 7 @WHELP_33650 8 @WHELP_33429 9 @WHELP_33429 10 @WHELP_33429 11 @WHELP_33429 12 @WHELP_33429 13 @WHELP_33429 14 @WHELP_33429 15 @WHELP_33429 
+
+:WHELP_33429
+jump @WHELP_142 
+
+:WHELP_33436
+Player.SetClothes($PLAYER_CHAR, "8sa", "8SA", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33467
+Player.SetClothes($PLAYER_CHAR, "8sa2", "8SA2", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33500
+Player.SetClothes($PLAYER_CHAR, "8sa3", "8SA3", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33533
+Player.SetClothes($PLAYER_CHAR, "8westside", "8WESTSD", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33574
+Player.SetClothes($PLAYER_CHAR, "8santos", "8SANTOS", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33613
+Player.SetClothes($PLAYER_CHAR, "8poker", "8POKER", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33650
+Player.SetClothes($PLAYER_CHAR, "8gun", "8GUN", 8)
+5@ = 53 
+jump @WHELP_33683 
+
+:WHELP_33683
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = -0.2 
+20@ = 0.5 
+21@ = -1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 -1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_33829
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_33907 jumps 0 @WHELP_33907 1 @WHELP_33914 2 @WHELP_33951 3 @WHELP_33984 4 @WHELP_34019 5 @WHELP_34058 6 @WHELP_34096 
+
+:WHELP_33907
+jump @WHELP_142 
+
+:WHELP_33914
+Player.SetClothes($PLAYER_CHAR, "9crown", "9CROWN", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_33951
+Player.SetClothes($PLAYER_CHAR, "9gun", "9GUN", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_33984
+Player.SetClothes($PLAYER_CHAR, "9gun2", "9GUN2", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_34019
+Player.SetClothes($PLAYER_CHAR, "9homeboy", "9HOMBY", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_34058
+Player.SetClothes($PLAYER_CHAR, "9bullet", "9BULLT", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_34096
+Player.SetClothes($PLAYER_CHAR, "9rasta", "9RASTA", 9)
+5@ = 54 
+jump @WHELP_34133 
+
+:WHELP_34133
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = 0.2 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "FIGHTIDLE" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_34277
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_34420 jumps 0 @WHELP_34420 1 @WHELP_34427 2 @WHELP_34460 3 @WHELP_34495 4 @WHELP_34530 5 @WHELP_34565 6 @WHELP_34600 
+0872: jump_table_jumps 7 @WHELP_34633 8 @WHELP_34420 9 @WHELP_34420 10 @WHELP_34420 11 @WHELP_34420 12 @WHELP_34420 13 @WHELP_34420 14 @WHELP_34420 15 @WHELP_34420 
+
+:WHELP_34420
+jump @WHELP_142 
+
+:WHELP_34427
+Player.SetClothes($PLAYER_CHAR, "10ls", "10LS", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34460
+Player.SetClothes($PLAYER_CHAR, "10ls2", "10LS2", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34495
+Player.SetClothes($PLAYER_CHAR, "10ls3", "10LS3", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34530
+Player.SetClothes($PLAYER_CHAR, "10ls4", "10LS4", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34565
+Player.SetClothes($PLAYER_CHAR, "10ls5", "10LS5", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34600
+Player.SetClothes($PLAYER_CHAR, "10og", "10OG", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34633
+Player.SetClothes($PLAYER_CHAR, "10weed", "10WEED", 10)
+5@ = 55 
+jump @WHELP_34670 
+
+:WHELP_34670
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = 0.2 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_34816
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @WHELP_34959 jumps 0 @WHELP_34959 1 @WHELP_34966 2 @WHELP_35005 3 @WHELP_35045 4 @WHELP_35085 5 @WHELP_35122 6 @WHELP_35161 
+0872: jump_table_jumps 7 @WHELP_35198 8 @WHELP_34959 9 @WHELP_34959 10 @WHELP_34959 11 @WHELP_34959 12 @WHELP_34959 13 @WHELP_34959 14 @WHELP_34959 15 @WHELP_34959 
+
+:WHELP_34959
+jump @WHELP_142 
+
+:WHELP_34966
+Player.SetClothes($PLAYER_CHAR, "11grove", "11GROVE", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35005
+Player.SetClothes($PLAYER_CHAR, "11grove2", "11GROV2", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35045
+Player.SetClothes($PLAYER_CHAR, "11grove3", "11GROV3", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35085
+Player.SetClothes($PLAYER_CHAR, "11dice", "11DICE", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35122
+Player.SetClothes($PLAYER_CHAR, "11dice2", "11DICE2", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35161
+Player.SetClothes($PLAYER_CHAR, "11jail", "11JAIL", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35198
+Player.SetClothes($PLAYER_CHAR, "11godsgift", "11GGIFT", 11)
+5@ = 56 
+jump @WHELP_35240 
+
+:WHELP_35240
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = 0.2 
+20@ = 0.5 
+21@ = 1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_35386
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 0 textureCRC_to 11@ modelCRC_to 12@ 
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_35464 jumps 0 @WHELP_35464 1 @WHELP_35471 2 @WHELP_35511 3 @WHELP_35553 4 @WHELP_35593 5 @WHELP_35633 6 @WHELP_35673 
+
+:WHELP_35464
+jump @WHELP_142 
+
+:WHELP_35471
+Player.SetClothes($PLAYER_CHAR, "12angels", "12ANGEL", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35511
+Player.SetClothes($PLAYER_CHAR, "12mayabird", "12MAYBR", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35553
+Player.SetClothes($PLAYER_CHAR, "12dagger", "12DAGER", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35593
+Player.SetClothes($PLAYER_CHAR, "12bandit", "12BNDIT", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35633
+Player.SetClothes($PLAYER_CHAR, "12cross7", "12CROSS", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35673
+Player.SetClothes($PLAYER_CHAR, "12mayaface", "12MYFAC", 12)
+5@ = 57 
+jump @WHELP_35715 
+
+:WHELP_35715
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 0 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+18@ = 0.6 
+25@ = -0.2 
+20@ = 0.5 
+21@ = -1.2 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 -1.2 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "IDLE_stance" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_35861
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 6 default_jump 0 @WHELP_35926 jumps 0 @WHELP_35926 1 @WHELP_35933 2 @WHELP_35966 3 @WHELP_36004 4 @WHELP_36041 5 @WHELP_36078 6 @WHELP_35926 
+
+:WHELP_35926
+jump @WHELP_1208 
+
+:WHELP_35933
+Player.SetClothes($PLAYER_CHAR, "bald", "head", Head)
+5@ = 58 
+jump @WHELP_36117 
+
+:WHELP_35966
+Player.SetClothes($PLAYER_CHAR, "baldbeard", "head", Head)
+5@ = 58 
+jump @WHELP_36117 
+
+:WHELP_36004
+Player.SetClothes($PLAYER_CHAR, "baldtash", "head", Head)
+5@ = 58 
+jump @WHELP_36117 
+
+:WHELP_36041
+Player.SetClothes($PLAYER_CHAR, "baldtash", "head", Head)
+5@ = 58 
+jump @WHELP_36117 
+
+:WHELP_36078
+Player.SetClothes($PLAYER_CHAR, "baldgoatee", "head", Head)
+5@ = 58 
+jump @WHELP_36117 
+
+:WHELP_36117
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_36244
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 7 default_jump 0 @WHELP_36309 jumps 0 @WHELP_36309 1 @WHELP_36316 2 @WHELP_36357 3 @WHELP_36390 4 @WHELP_36427 5 @WHELP_36465 6 @WHELP_36503 
+
+:WHELP_36309
+jump @WHELP_1208 
+
+:WHELP_36316
+Player.SetClothes($PLAYER_CHAR, "highafro", "highafro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36357
+Player.SetClothes($PLAYER_CHAR, "afro", "afro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36390
+Player.SetClothes($PLAYER_CHAR, "afrotash", "afro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36427
+Player.SetClothes($PLAYER_CHAR, "afrobeard", "afro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36465
+Player.SetClothes($PLAYER_CHAR, "afroblond", "afro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36503
+Player.SetClothes($PLAYER_CHAR, "afrogoatee", "afro", Head)
+5@ = 59 
+jump @WHELP_36542 
+
+:WHELP_36542
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_36669
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 5 default_jump 0 @WHELP_36734 jumps 0 @WHELP_36734 1 @WHELP_36741 2 @WHELP_36778 3 @WHELP_36820 4 @WHELP_36861 5 @WHELP_36734 6 @WHELP_36734 
+
+:WHELP_36734
+jump @WHELP_142 
+
+:WHELP_36741
+Player.SetClothes($PLAYER_CHAR, "mohawk", "mohawk", Head)
+5@ = 60 
+jump @WHELP_36903 
+
+:WHELP_36778
+Player.SetClothes($PLAYER_CHAR, "mohawkblond", "mohawk", Head)
+5@ = 60 
+jump @WHELP_36903 
+
+:WHELP_36820
+Player.SetClothes($PLAYER_CHAR, "mohawkpink", "mohawk", Head)
+5@ = 60 
+jump @WHELP_36903 
+
+:WHELP_36861
+Player.SetClothes($PLAYER_CHAR, "mohawkbeard", "mohawk", Head)
+5@ = 60 
+jump @WHELP_36903 
+
+:WHELP_36903
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_37030
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 9 default_jump 0 @WHELP_37160 jumps 0 @WHELP_37160 1 @WHELP_37167 2 @WHELP_37205 3 @WHELP_37241 4 @WHELP_37278 5 @WHELP_37316 6 @WHELP_37353 
+0872: jump_table_jumps 7 @WHELP_37395 8 @WHELP_37436 9 @WHELP_37160 10 @WHELP_37160 11 @WHELP_37160 12 @WHELP_37160 13 @WHELP_37160 14 @WHELP_37160 15 @WHELP_37160 
+
+:WHELP_37160
+jump @WHELP_142 
+
+:WHELP_37167
+Player.SetClothes($PLAYER_CHAR, "hairblond", "head", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37205
+Player.SetClothes($PLAYER_CHAR, "hairred", "head", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37241
+Player.SetClothes($PLAYER_CHAR, "hairblue", "head", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37278
+Player.SetClothes($PLAYER_CHAR, "hairgreen", "head", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37316
+Player.SetClothes($PLAYER_CHAR, "hairpink", "head", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37353
+Player.SetClothes($PLAYER_CHAR, "mohawkblond", "mohawk", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37395
+Player.SetClothes($PLAYER_CHAR, "mohawkpink", "mohawk", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37436
+Player.SetClothes($PLAYER_CHAR, "afroblond", "afro", Head)
+5@ = 61 
+jump @WHELP_37474 
+
+:WHELP_37474
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_37601
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_37731 jumps 0 @WHELP_37731 1 @WHELP_37738 2 @WHELP_37775 3 @WHELP_37810 4 @WHELP_37845 5 @WHELP_37884 6 @WHELP_37925 
+0872: jump_table_jumps 7 @WHELP_37967 8 @WHELP_38008 9 @WHELP_38051 10 @WHELP_38090 11 @WHELP_38133 12 @WHELP_38167 13 @WHELP_37731 14 @WHELP_37731 15 @WHELP_37731 
+
+:WHELP_37731
+jump @WHELP_142 
+
+:WHELP_37738
+Player.SetClothes($PLAYER_CHAR, "highfade", "head", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37775
+Player.SetClothes($PLAYER_CHAR, "wedge", "wedge", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37810
+Player.SetClothes($PLAYER_CHAR, "slope", "slope", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37845
+Player.SetClothes($PLAYER_CHAR, "jhericurl", "jheri", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37884
+Player.SetClothes($PLAYER_CHAR, "cornrows", "cornrows", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37925
+Player.SetClothes($PLAYER_CHAR, "cornrowsb", "cornrows", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_37967
+Player.SetClothes($PLAYER_CHAR, "tramline", "tramline", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38008
+Player.SetClothes($PLAYER_CHAR, "groovecut", "groovecut", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38051
+Player.SetClothes($PLAYER_CHAR, "flattop", "flattop", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38090
+Player.SetClothes($PLAYER_CHAR, "elvishair", "elvishair", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38133
+Player.SetClothes($PLAYER_CHAR, "beard", "head", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38167
+Player.SetClothes($PLAYER_CHAR, "tash", "head", Head)
+5@ = 62 
+jump @WHELP_38200 
+
+:WHELP_38200
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_38327
+0793: save_player_clothes 
+0871: init_jump_table 2@ total_jumps 3 default_jump 0 @WHELP_38392 jumps 0 @WHELP_38392 1 @WHELP_38399 2 @WHELP_38434 3 @WHELP_38392 4 @WHELP_38392 5 @WHELP_38392 6 @WHELP_38392 
+
+:WHELP_38392
+jump @WHELP_142 
+
+:WHELP_38399
+Player.SetClothes($PLAYER_CHAR, "goatee", "head", Head)
+5@ = 63 
+jump @WHELP_38474 
+
+:WHELP_38434
+Player.SetClothes($PLAYER_CHAR, "player_face", "head", Head)
+5@ = 63 
+jump @WHELP_38474 
+
+:WHELP_38474
+18@ = 0.7 
+25@ = 0.1 
+20@ = 0.7 
+21@ = 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.0 18@ rotation 25@ 0.5 20@ tilt 0.0 switchstyle 2 
+06D1: v$1225 = "roadcross_gang" // v$ = string 
+jump @WHELP_38601 
+
+:WHELP_38601
+0871: init_jump_table 2@ total_jumps 13 default_jump 0 @WHELP_38729 jumps 0 @WHELP_38729 1 @WHELP_38744 2 @WHELP_38759 3 @WHELP_38774 4 @WHELP_38789 5 @WHELP_38804 6 @WHELP_38819 
+0872: jump_table_jumps 7 @WHELP_38834 8 @WHELP_38849 9 @WHELP_38864 10 @WHELP_38879 11 @WHELP_38894 12 @WHELP_38909 13 @WHELP_38729 14 @WHELP_38729 15 @WHELP_38729 
+
+:WHELP_38729
+05A9: s$9742 = s$2752 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38744
+05A9: s$9742 = s$2518 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38759
+05A9: s$9742 = s$2520 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38774
+05A9: s$9742 = s$2522 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38789
+05A9: s$9742 = s$2524 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38804
+05A9: s$9742 = s$2526 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38819
+05A9: s$9742 = s$2528 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38834
+05A9: s$9742 = s$2530 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38849
+05A9: s$9742 = s$2532 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38864
+05A9: s$9742 = s$2534 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38879
+05A9: s$9742 = s$2536 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38894
+05A9: s$9742 = s$2538 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38909
+05A9: s$9742 = s$2540 // s$ 
+jump @WHELP_38924 
+
+:WHELP_38924
+Player.CanMove($PLAYER_CHAR) = False
+0390: load_txd_dictionary 'LD_BEAT' 
+038F: load_texture "LEFT" as 2 // Load dictionary with 0390 first 
+038F: load_texture "RIGHT" as 4 // Load dictionary with 0390 first 
+wait 250 
+fade 1 500 
+wait 500 
+08D4: 1@ = create_panel_with_title s$2752 position 29.0 100.0 width 200.0 columns 1 interactive 0 background 1 alignment 1 
+08D6: set_panel 1@ column 0 alignment 0 
+08DB: set_panel 1@ column 0 header 'DUMMY' data s$9742 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 
+0512: show_permanent_text_box 'REMOH2'  // ~k~~PED_SPRINT~ Keep~N~~k~~VEHICLE_ENTER_EXIT~ Back
+gosub @WHELP_40028 
+0343: set_text_draw_linewidth 680.0 
+033E: set_draw_text_position 220.0 400.0 GXT 'FEC_MCA'  // Manual camera
+0341: set_text_draw_align_justify 0 
+033F: set_text_draw_letter_size 1.2 3.8 
+038D: draw_texture 2 position 165.0 410.0 size 32.0 16.0 RGBA 150 0 0 255 
+0341: set_text_draw_align_justify 0 
+033F: set_text_draw_letter_size 1.2 3.8 
+038D: draw_texture 4 position 410.0 410.0 size 32.0 16.0 RGBA 150 0 0 255 
+0@ = 0.0 
+17@ = -0.005 
+0087: 19@ = 25@ // (float) 
+0605: actor $PLAYER_ACTOR perform_animation v$1225 IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:WHELP_39340
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+else_jump @WHELP_39671 
+if 
+00E1:   player 0 pressed_key 15 
+else_jump @WHELP_39384 
+jump @WHELP_39432 
+
+:WHELP_39384
+if 
+00E1:   player 0 pressed_key 16 
+else_jump @WHELP_39408 
+jump @WHELP_39536 
+
+:WHELP_39408
+if 
+00E1:   player 0 pressed_key 0 
+else_jump @WHELP_39340 
+jump @WHELP_39698 
+
+:WHELP_39432
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+Player.Build($PLAYER_CHAR)
+08DA: remove_panel 1@ 
+03E6: remove_text_box 
+03F0: enable_text_draw 0 
+0391: release_textures 
+0794: restore_player_clothes 
+Player.Build($PLAYER_CHAR)
+wait 250 
+fade 1 500 
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 0.5 rotation 0.3 0.5 0.1 tilt 0.0 switchstyle 2 
+jump @WHELP_1208 
+
+:WHELP_39536
+08DA: remove_panel 1@ 
+03E6: remove_text_box 
+03F0: enable_text_draw 0 
+0391: release_textures 
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 1.8 0.5 rotation 0.3 0.5 0.1 tilt 0.0 switchstyle 2 
+if and
+  3@ > 48 
+  58 > 3@ 
+else_jump @WHELP_1208 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+wait 50 
+0784: set_player $PLAYER_CHAR textureCRC 11@ modelCRC 12@ bodypart 0 
+Player.Build($PLAYER_CHAR)
+wait 250 
+fade 1 500 
+jump @WHELP_1208 
+
+:WHELP_39671
+08DA: remove_panel 1@ 
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = True
+03F0: enable_text_draw 0 
+0391: release_textures 
+jump @WHELP_61 
+
+:WHELP_39698
+0494: get_joystick 0 direction_offset_to 27@ 26@ 28@ 29@ 
+if 
+  27@ == 0 
+else_jump @WHELP_39739 
+jump @WHELP_39825 
+
+:WHELP_39739
+if 
+  27@ > 0 
+else_jump @WHELP_39782 
+0@ -= 2.5 
+005B: 25@ += 17@ // (float) 
+jump @WHELP_39825 
+
+:WHELP_39782
+if 
+  0 > 27@ 
+else_jump @WHELP_39825 
+0@ += 2.5 
+005B: 25@ += 17@ // (float) 
+jump @WHELP_39825 
+
+:WHELP_39825
+if 
+  0@ > 165.0 
+else_jump @WHELP_39891 
+17@ *= -1.0 
+19@ *= -1.0 
+0087: 25@ = 19@ // (float) 
+0@ = -165.0 
+jump @WHELP_39957 
+
+:WHELP_39891
+if 
+  -165.0 > 0@ 
+else_jump @WHELP_39957 
+17@ *= -1.0 
+19@ *= -1.0 
+0087: 25@ = 19@ // (float) 
+0@ = 165.0 
+jump @WHELP_39957 
+
+:WHELP_39957
+02F6: 22@ = sine 0@ // (float) 
+02F7: 23@ = cosine 0@ // (float) 
+006B: 22@ *= 21@ // (float) 
+006B: 23@ *= 21@ // (float) 
+067C: put_camera_on_actor $PLAYER_ACTOR offset 22@ 23@ 18@ rotation 25@ 0.1 20@ tilt 0.0 switchstyle 2 
+jump @WHELP_39340 
+
+:WHELP_40028
+0340: set_text_draw_RGBA 180 180 180 255 
+033F: set_text_draw_letter_size 0.5 2.5 
+03E4: set_text_draw_align_right 0 
+0341: set_text_draw_align_justify 0 
+0342: set_text_draw_centered 0 
+0343: set_text_draw_linewidth 200.0 
+0348: enable_text_draw_proportional 1 
+0345: enable_text_draw_background 0 
+return 

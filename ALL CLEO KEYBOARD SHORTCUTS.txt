@@ -1,0 +1,31 @@
+Activations Once:
+	xxx: throw knife
+	*: mountain bike
+	BIK: call bike service
+	.: facepalm
+	`: insult
+	hohoho: insult all
+	hohohim: make him insult all
+	/: death ball
+	GETHIGH: get high
+	HELLO: hello
+	ROMANCE: careless whispher
+	TAI: Taichi group
+	
+HONDA (After activating bike service and on bike):
+	Tab: jump
+	x: activate rocket
+	
+Pair fights: 2 people fight each other
+	-: pair fight #1
+	+: pair fight #2
+
+Taichi:
+	RMB + T: Tai chi
+	Space + R: Dive
+	
+Car On/Off Engine and Lights
+	I - on / off the engine. The radio will not disappear and you can continue listening to it.
+	L - on / off headlights.
+	O - lock/unlock doors. When closing, a "negative" sound will be heard (how to drive into the paint shop in a police car), and when opened, a "positive" sound (how to pass a checkpoint).
+

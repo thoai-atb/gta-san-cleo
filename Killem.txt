@@ -1,0 +1,106 @@
+{$CLEO}
+
+0000: "killem"
+
+10@ = 0 // lock = 0
+11@ = 0 // 0 = kill both way, 1 = kill one way
+
+:nn
+wait 0
+if
+    0AB0:   key_pressed 49 // num 1
+then
+    0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 1@
+end
+
+if
+    0AB0:   key_pressed 50 // num 2
+then
+    0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 2@
+    if
+        10@ == 1
+    then
+        11@ = 0
+        jump @nn
+    end               
+    jump @KILL_BOTH_WAY
+end
+
+if
+    0AB0:   key_pressed 51 // num 3
+then                      
+    0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 2@
+    if
+        10@ == 1
+    then
+        11@ = 1
+        jump @nn
+    end 
+    jump @KILL_ONE_WAY
+end
+
+
+/*
+if
+    0AB0:   key_pressed 48 // num 0 = lock
+then
+    wait 500
+    if
+        10@ == 1
+    then
+        10@ = 0
+        if
+            11@ == 0
+        then
+            jump @KILL_BOTH_WAY
+        else
+            jump @KILL_ONE_WAY
+        end
+    else
+        10@ = 1 // lock = 1
+    end
+end
+ */
+
+
+jump @nn
+    
+:KILL_BOTH_WAY
+wait 0
+if and
+    056D:   actor 1@ defined
+    056D:   actor 2@ defined
+    8118: not   actor 1@ dead
+    8118: not   actor 2@ dead
+jf @nn     
+gosub @PLAY_ANIM
+0209: 17@ = random_int_in_ranges 4 8
+07FE: set_actor 1@ fighting_style_to 17@ moves 6
+0209: 17@ = random_int_in_ranges 4 8
+07FE: set_actor 2@ fighting_style_to 17@ moves 6
+05E2: AS_actor 1@ kill_actor 2@
+05E2: AS_actor 2@ kill_actor 1@
+jump @nn
+
+:KILL_ONE_WAY
+wait 0
+if and
+    056D:   actor 1@ defined
+    056D:   actor 2@ defined
+    8118: not   actor 1@ dead
+    8118: not   actor 2@ dead
+jf @nn  
+gosub @PLAY_ANIM
+0209: 17@ = random_int_in_ranges 4 8
+07FE: set_actor 1@ fighting_style_to 17@ moves 6
+05E2: AS_actor 1@ kill_actor 2@
+jump @nn
+
+:PLAY_ANIM
+wait 0
+04ED: load_animation "RIOT"
+if 
+    04EE:   animation "RIOT" loaded 
+jf @PLAY_ANIM     
+0812: AS_actor $PLAYER_ACTOR perform_animation "RIOT_PUNCHES" IFP "RIOT" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB
+return

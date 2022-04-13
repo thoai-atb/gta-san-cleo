@@ -1,0 +1,40 @@
+{$CLEO}
+
+0000: "Buy Boat"
+
+:Begin
+wait 0
+
+if and
+     0ADC:   test_cheat "BOAT"
+     0256:   player $PLAYER_CHAR defined 
+     04AD:   actor $PLAYER_ACTOR in_water
+     not Actor.Animation($PLAYER_ACTOR) == "CLIMB_IDLE"
+     not Actor.Animation($PLAYER_ACTOR) == "CLIMB_JUMP_B"
+     not Actor.Animation($PLAYER_ACTOR) == "CLIMB_PULL"
+     not Actor.Animation($PLAYER_ACTOR) == "CLIMB_STAND"
+     not Actor.Animation($PLAYER_ACTOR) == "FALL_FALL"
+jf @Begin
+
+ Model.Load(#DINGHY)
+:Load
+wait 0
+if
+  Model.Available(#DINGHY)
+jf @Load
+05C2: AS_actor $PLAYER_ACTOR show_the_finger
+04C4: store_coords_to 10@ 11@ 12@ from_actor $PLAYER_ACTOR with_offset 0.0 1.0 -1.0
+2@ = Actor.Angle($PLAYER_ACTOR)
+0109: player $PLAYER_CHAR money += -1000
+00A5: 1@ = create_car #DINGHY at 10@ 11@ 12@
+000B: 2@ += 90.0
+0175: set_car 1@ Z_angle_to 2@
+Car.RemoveReferences(1@)
+Model.Destroy(#DINGHY)
+jump @Begin
+
+
+
+
+
+

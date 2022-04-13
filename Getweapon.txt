@@ -1,0 +1,297 @@
+{$CLEO}
+
+0000: "Get weapons"
+
+:non
+wait 0
+
+if
+   0ADC:   test_cheat "KNIFE"
+then
+    Model.Load(#KNIFECUR)
+    repeat
+    wait 0
+    until  Model.Available(#KNIFECUR)
+    01B2: give_actor $PLAYER_ACTOR weapon 4 ammo 1 // Load the weapon model before using this
+    Model.Destroy(#KNIFECUR)
+end
+
+if
+   0ADC:   test_cheat "KATANA"
+then
+    Model.Load(#KATANA)
+    repeat
+    wait 0
+    until  Model.Available(#KATANA)
+    01B2: give_actor $PLAYER_ACTOR weapon 8 ammo 1 // Load the weapon model before using this
+    Model.Destroy(#KATANA)
+end
+
+if
+   0ADC:   test_cheat "CHAIN"
+then
+    Model.Load(#CHNSAW)
+    repeat
+    wait 0
+    until  Model.Available(#CHNSAW)
+    01B2: give_actor $PLAYER_ACTOR weapon 9 ammo 1 // Load the weapon model before using this
+    Model.Destroy(#CHNSAW)
+end
+
+if
+   0ADC:   test_cheat "GREN"
+then
+    Model.Load(#grenade)
+    repeat
+    wait 0
+    until  Model.Available(#GRENADE)
+    01B2: give_actor $PLAYER_ACTOR weapon 16 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#GRENADE)
+end
+
+if
+   0ADC:   test_cheat "MOLO"
+then
+    Model.Load(#molotov)
+     repeat
+    wait 0
+    until  Model.Available(#molotov)
+    01B2: give_actor $PLAYER_ACTOR weapon 18 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#MOLOTOV)
+end
+
+if
+   0ADC:   test_cheat "TEAR"
+then
+    Model.Load(#TEARGAS)
+     repeat
+    wait 0
+    until  Model.Available(#TEARGAS)
+    01B2: give_actor $PLAYER_ACTOR weapon 17 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#TEARGAS)
+end
+  
+if
+   0ADC:   test_cheat "SATCHEL"
+then
+    Model.Load(#satchel)
+     repeat
+    wait 0
+    until  Model.Available(#satchel)
+    01B2: give_actor $PLAYER_ACTOR weapon 39 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#SATCHEL)
+end
+
+if
+   0ADC:   test_cheat "ROCKETLA"
+then
+    Model.Load(#ROCKETLA)
+     repeat
+    wait 0
+    until  Model.Available(#rocketla)
+    01B2: give_actor $PLAYER_ACTOR weapon 35 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#ROCKETLA)
+end
+
+if
+   0ADC:   test_cheat "FLAME"
+then
+    Model.Load(#FLAME)
+    repeat
+    wait 0
+    until  Model.Available(#FLAME)
+    01B2: give_actor $PLAYER_ACTOR weapon 37 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#FLAME)
+end
+
+if
+   0ADC:   test_cheat "MINI"
+then
+    Model.Load(#MINIGUN)
+        repeat
+    wait 0
+    until  Model.Available(#MINIGUN)
+    01B2: give_actor $PLAYER_ACTOR weapon 38 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#MINIGUN)
+end
+
+if
+   0ADC:   test_cheat "HEET"
+then
+    Model.Load(#HEATSEEK)
+        repeat
+    wait 0
+    until  Model.Available(#HEATSEEK)
+    01B2: give_actor $PLAYER_ACTOR weapon 36 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#HEATSEEK)
+end
+
+if
+   0ADC:   test_cheat "DESERT"
+then
+    Model.Load(#DESERT_EAGLE)
+        repeat
+    wait 0
+    until  Model.Available(#DESERT_EAGLE)                             
+    01B2: give_actor $PLAYER_ACTOR weapon 24 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#DESERT_EAGLE)
+end
+
+if
+   0ADC:   test_cheat "COLT"
+then
+    Model.Load(#COLT45)
+        repeat
+    wait 0
+    until  Model.Available(#COLT45)
+    01B2: give_actor $PLAYER_ACTOR weapon 22 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#COLT45)
+end
+
+if
+   0ADC:   test_cheat "SILEN"
+then
+    Model.Load(#SILENCED)
+        repeat
+    wait 0
+    until  Model.Available(#SILENCED)
+    01B2: give_actor $PLAYER_ACTOR weapon 23 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#SILENCED)
+end
+
+if
+   0ADC:   test_cheat "SPRAY"
+then
+    Model.Load(#SPRAYCAN)
+        repeat
+    wait 0
+    until  Model.Available(#SPRAYCAN)
+    01B2: give_actor $PLAYER_ACTOR weapon 41  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#SPRAYCAN)
+end
+
+if
+   0ADC:   test_cheat "FIREX"
+then
+    Model.Load(#FIRE_EX)
+        repeat
+    wait 0
+    until  Model.Available(#FIRE_EX)
+    01B2: give_actor $PLAYER_ACTOR weapon 42  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#FIRE_EX)
+end
+
+if
+   0ADC:   test_cheat "CAM"
+then
+    Model.Load(#CAMERA)
+        repeat
+    wait 0
+    until  Model.Available(#CAMERA)
+    01B2: give_actor $PLAYER_ACTOR weapon 43  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#CAMERA)
+end
+
+if
+   0ADC:   test_cheat "MP5"
+then
+    Model.Load(#MP5LNG)
+        repeat
+    wait 0
+    until  Model.Available(#MP5LNG)
+    01B2: give_actor $PLAYER_ACTOR weapon 29  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#MP5LNG)
+end
+
+if
+   0ADC:   test_cheat "TEC9"
+then
+    Model.Load(#TEC9)
+        repeat
+    wait 0
+    until  Model.Available(#TEC9)
+    01B2: give_actor $PLAYER_ACTOR weapon 32  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#TEC9)
+end
+
+if
+   0ADC:   test_cheat "UZI"
+then
+    Model.Load(#MICRO_UZI)
+        repeat
+    wait 0
+    until  Model.Available(#MICRO_UZI)
+    01B2: give_actor $PLAYER_ACTOR weapon 28  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#MICRO_UZI)
+end
+
+if
+   0ADC:   test_cheat "AK47"
+then
+    Model.Load(#AK47)
+        repeat
+    wait 0
+    until  Model.Available(#AK47)
+    01B2: give_actor $PLAYER_ACTOR weapon 30  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#AK47)
+end
+
+if
+   0ADC:   test_cheat "M4"
+then
+    Model.Load(#M4)
+        repeat
+    wait 0
+    until  Model.Available(#M4)
+    01B2: give_actor $PLAYER_ACTOR weapon 31  ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#M4)
+end
+
+if
+   0ADC:   test_cheat "SHOTGUN"
+then
+    Model.Load(#chromegun)
+        repeat
+    wait 0
+    until  Model.Available(#chromegun)
+    01B2: give_actor $PLAYER_ACTOR weapon 25 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#chromegun)
+end
+
+if
+   0ADC:   test_cheat "SNIPER"
+then
+    Model.Load(#SNIPER)
+        repeat
+    wait 0
+    until  Model.Available(#SNIPER)
+    01B2: give_actor $PLAYER_ACTOR weapon 34 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#SNIPER)
+end
+
+if
+   0ADC:   test_cheat "PARA"
+then
+    Model.Load(#GUN_PARA)
+        repeat
+    wait 0
+    until  Model.Available(#GUN_PARA)
+    01B2: give_actor $PLAYER_ACTOR weapon 46 ammo 999999 // Load the weapon model before using this
+    Model.Destroy(#GUN_PARA)
+end
+
+if
+   0ADC:   test_cheat "DROP"
+then
+   0470: 6@ = actor $PLAYER_ACTOR current_weapon
+   0555: remove_weapon 6@ from_actor $PLAYER_ACTOR
+end
+
+if
+    0ADC: test_cheat "JET"
+then
+    07A7: put_jetpack_on_actor $PLAYER_ACTOR
+end
+
+jump @non 
+

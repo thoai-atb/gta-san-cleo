@@ -1,0 +1,171 @@
+                // This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'GROUP_INSULTING'
+
+:BEGIN
+wait 0 
+if
+    Player.Defined($PLAYER_CHAR)
+else_jump @BEGIN
+
+:HOHOHO_CHECK
+if
+    0ADC:   test_cheat "hohoho"
+then 
+    jump @HOHOHO
+end
+
+:HOHOHIM_CHECK
+if
+    0ADC:   test_cheat "hohohim"
+then 
+    jump @HOHOHIM
+end
+
+:HOHOALL_CHECK
+if
+    0ADC:   test_cheat "hohoall"
+then 
+    jump @HOHOALL
+end
+
+:HOHOCAM_CHECK
+if
+    0ADC:   test_cheat "hohocam"
+then 
+    jump @HOHOCAM
+end
+
+
+jump @BEGIN
+
+:HOHOHO
+wait 0 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+05C1: AS_actor $PLAYER_ACTOR speak_from_audio_table 182 
+0470: 5@ = actor $PLAYER_ACTOR current_weapon 
+
+for 4@ = 1 to 100 step 1 
+    wait 0 
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+    if and
+       056D:   actor 3@ defined 
+       not Actor.Dead(3@)
+    jf continue
+    
+    05E2: AS_actor 3@ kill_actor $PLAYER_ACTOR 
+    0209: 17@ = random_int_in_ranges 4 8 
+    07FE: set_actor 3@ fighting_style_to 17@ moves 6 
+    
+    if
+        // 02D8:   actor 3@ current_weapon == 0
+        not Actor.Driving($PLAYER_ACTOR)
+    then
+        Actor.GiveWeaponAndAmmo(3@, 5@, 99999)
+    end
+end
+jump @BEGIN 
+
+:HOHOHIM      
+0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 6@
+
+if and
+   056D:   actor 6@ defined 
+   not Actor.Dead(6@)
+else_jump @BEGIN
+
+wait 0
+05C2: AS_actor $PLAYER_ACTOR show_the_finger 
+0812: AS_actor 6@ perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB          
+0470: 5@ = actor $PLAYER_ACTOR current_weapon 
+
+for 4@ = 1 to 100 step 1
+    wait 0 
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+    if and
+       056D:   actor 3@ defined 
+       not Actor.Dead(3@)
+       803B: not  3@ == 6@  // (int)
+    jf continue
+    
+    05E2: AS_actor 3@ kill_actor 6@ 
+    0209: 17@ = random_int_in_ranges 4 8 
+    07FE: set_actor 3@ fighting_style_to 17@ moves 6        
+    099F: AS_actor 3@ ignore_weapon_range 0
+
+    
+    if
+        // 02D8:   actor 3@ current_weapon == 0
+        80DF:   not actor $PLAYER_ACTOR driving
+    then
+        Actor.GiveWeaponAndAmmo(3@, 5@, 99999)
+    end
+end
+jump @BEGIN
+
+:HOHOALL
+wait 0
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB          
+0470: 5@ = actor $PLAYER_ACTOR current_weapon
+for 4@ = 1 to 100 step 1
+    wait 0
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET
+    0AE1: 6@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+    if and
+       056D:   actor 3@ defined 
+       not Actor.Dead(3@)   
+    jf continue
+    
+    // WHO TO KILL
+    if or      
+        856D: not actor 6@ defined 
+        Actor.Dead(6@) 
+        003B: 3@ == 6@
+    then
+        05E2: AS_actor 3@ kill_actor $PLAYER_ACTOR
+    else 
+        05E2: AS_actor 3@ kill_actor 6@ 
+    end
+     
+    // WEAPON AND FIGHTING STYLE  
+    0209: 17@ = random_int_in_ranges 4 8 
+    07FE: set_actor 3@ fighting_style_to 17@ moves 6        
+    099F: AS_actor 3@ ignore_weapon_range 0
+    if
+        // 02D8:   actor 3@ current_weapon == 0
+        80DF:   not actor $PLAYER_ACTOR driving
+    then
+        Actor.GiveWeaponAndAmmo(3@, 5@, 99999)
+    end
+end
+jump @BEGIN
+
+:HOHOCAM
+wait 0 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+
+for 4@ = 1 to 100 step 1 
+    wait 0 
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+    if and
+       056D:   actor 3@ defined 
+       not Actor.Dead(3@)
+    jf continue
+    if
+        02D8:   actor 3@ current_weapon == 0
+    then
+        Actor.GiveWeaponAndAmmo(3@, 43, 99999)
+        0209: 17@ = random_int_in_ranges 4 8 
+        07FE: set_actor 3@ fighting_style_to 17@ moves 6  
+        05E2: AS_actor 3@ kill_actor $PLAYER_ACTOR
+    end
+end
+jump @BEGIN 
+
+ 

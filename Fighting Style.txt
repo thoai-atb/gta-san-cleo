@@ -1,0 +1,17 @@
+  {$CLEO}
+  
+  0000: "Fighting Style"
+
+  :ft
+  wait 0
+  if
+    0AB0:   key_pressed 97
+  then
+    0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 1@
+    0209: 17@ = random_int_in_ranges 5 8
+    07FE: set_actor 1@ fighting_style_to 17@ moves 6
+  end
+  
+  jump @ft
+  
+

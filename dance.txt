@@ -1,0 +1,90 @@
+{$CLEO .cs}
+thread 'DANCE_GROUP'
+
+:BEGIN       
+wait 0
+04ED: load_animation "DANCING"
+10@ = 0  
+if
+    Player.Defined($PLAYER_CHAR)
+else_jump @BEGIN
+
+if
+    0ADC:   test_cheat "DANCE"
+then
+    jump @ACTIVATE
+end
+
+jump @BEGIN
+
+:ACTIVATE           
+wait 0
+if 
+    04EE:   animation "DANCING" loaded 
+jf @BEGIN
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+29@ = Audiostream.Load("CLEO\MP3\Carelessfadeout.wav")
+Audiostream.PerformAction(29@, PLAY)
+gosub @EFFECT_FADE       
+
+:LOOP
+wait 0
+015D: set_gamespeed 0.6    
+0109: player $PLAYER_CHAR money += -10
+10@ += 1
+
+for 4@ = 1 to 100 step 1
+    wait 0
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET
+    if
+        056D:   actor 3@ defined
+    jf continue
+    if
+        0184: actor 3@ health > 5
+    then
+        0812: AS_actor 3@ perform_animation "DNCE_M_A" IFP "DANCING" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 500 // versionB
+        0393: actor 3@ perform_animation "DNCE_M_A" at 0.7 times_normal_rate
+    else
+        0223: set_actor 3@ health_to 0
+        0A10: increase_integer_stat 120 by 1 
+    end
+end   
+
+if or                                   
+    not Player.Defined($PLAYER_CHAR)
+    10@ > 18
+then
+    jump @DEACTIVATE
+end
+
+jump @LOOP
+
+:DEACTIVATE
+wait 0
+if
+    not Actor.Dead($PLAYER_ACTOR)
+then
+    // 0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+    gosub @EFFECT_FADE_OUT
+end
+
+jump @BEGIN
+
+:EFFECT_FADE
+wait 500
+0169: set_fade_color_RGB 100 50 100 
+fade 0 1000
+wait 1000     
+fade 1 3000
+return
+
+:EFFECT_FADE_OUT
+wait 500  
+0169: set_fade_color_RGB 100 50 100
+fade 0 200
+wait 200 
+fade 1 200
+015D: set_gamespeed 1.0
+0169: set_fade_color_RGB 0 0 0  
+return

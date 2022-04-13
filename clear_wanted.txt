@@ -1,0 +1,34 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'clear-wanted' 
+
+:TES1_11
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)  
+else_jump @TES1_11 
+if
+    0ADC:   test_cheat "POP"
+else_jump @TES1_11 
+
+:TES1_CELLPHONE
+wait 0
+    Model.Load(#CELLPHONE)  
+if
+    Model.Available(#CELLPHONE)
+jf @TES1_CELLPHONE
+
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+wait 4500 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0
+
+010D: set_player $PLAYER_CHAR wanted_level_to 0
+0109: player $PLAYER_CHAR money += -100
+
+wait 2000
+
+Model.Destroy(#CELLPHONE)
+
+jump @TES1_11 

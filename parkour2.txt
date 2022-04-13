@@ -1,0 +1,242 @@
+// This file was decompiled using SASCM.ini published on 2021-07-05
+{$CLEO .cs}
+
+0000: NOP 
+wait 0 
+10@ = 16.0 
+
+:NONAME_16
+wait 0 
+if 
+   not is_key_pressed 79 
+jf @NONAME_716 
+if 
+is_key_pressed 17 
+jf @NONAME_148 
+if and
+is_key_pressed 107 
+   not 10@ >= 36.0 
+jf @NONAME_99 
+10@ += 2.0 
+8@ = 107 
+gosub @NONAME_655 
+
+:NONAME_99
+if and
+is_key_pressed 109 
+  10@ > 6.0 
+jf @NONAME_148 
+10@ -= 2.0 
+8@ = 109 
+gosub @NONAME_655 
+
+:NONAME_148
+if 
+8818:   not actor $PLAYER_ACTOR in_air 
+jf @NONAME_782 
+if 
+   not Actor.Animation($PLAYER_ACTOR) == "GETUP"
+jf @NONAME_16 
+if or
+   Actor.Animation($PLAYER_ACTOR) == "JUMP_LAUNCH"
+   Actor.Animation($PLAYER_ACTOR) == "JUMP_LAUNCH_R"
+jf @NONAME_16 
+if 
+00E1:   player 0 pressed_key 14 
+jf @NONAME_16 
+
+:NONAME_253
+wait 5 
+if 
+00E1:   player 0 pressed_key 14 
+jf @NONAME_16 
+Actor.StorePos($PLAYER_ACTOR, 11@, 12@, 13@)
+04C4: store_coords_to 14@ 15@ 16@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 -2.0 
+if and
+  23@ > -1.0 
+86BD:   not no_obstacles_between 11@ 12@ 13@ and 14@ 15@ 16@ solid 1 car 1 actor 0 object 1 particle 0 
+if 
+0818:   actor $PLAYER_ACTOR in_air 
+jf @NONAME_253 
+wait 0 
+083D: get_actor $PLAYER_ACTOR velocity_in_direction_XYZ 24@ 25@ 28@ 
+if 
+00E1:   player 0 pressed_key 16 
+jf @NONAME_510 
+Actor.StorePos($PLAYER_ACTOR, 1@, 2@, 3@)
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 0.0 10.0 0.0 
+0063: 4@ -= 1@ // (float) 
+0063: 5@ -= 2@ // (float) 
+005B: 24@ += 4@ // (float) 
+005B: 25@ += 5@ // (float) 
+083C: set_actor $PLAYER_ACTOR velocity_in_direction_XYZ 24@ 25@ 3.5 
+jump @NONAME_644 
+
+:NONAME_510
+if and
+80E1:   not player 0 pressed_key 0 
+80E1:   not player 0 pressed_key 1 
+jf @NONAME_704 
+Actor.StorePos($PLAYER_ACTOR, 1@, 2@, 3@)
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 0.0 2.0 0.0 
+24@ *= 0.4 
+25@ *= 0.4 
+0063: 4@ -= 1@ // (float) 
+0063: 5@ -= 2@ // (float) 
+005B: 24@ += 4@ // (float) 
+005B: 25@ += 5@ // (float) 
+083C: set_actor $PLAYER_ACTOR velocity_in_direction_XYZ 24@ 25@ 9.0 
+
+:NONAME_644
+wait 100 
+jump @NONAME_782 
+
+:NONAME_655
+wait 0 
+if 
+   not is_key_pressed 8@ 
+jf @NONAME_655 
+0092: 11@ = float 10@ to_integer 
+01E4: show_text_1number_lowpriority GXT 'NUMBER' number 11@ time 500 flag 1  // ~1~
+return 
+
+:NONAME_704
+wait 600 
+jump @NONAME_16 
+
+:NONAME_716
+wait 2000 
+if 
+is_key_pressed 70 
+jf @NONAME_16 
+
+:NONAME_736
+wait 0 
+if 
+is_key_pressed 79 
+jf @NONAME_736 
+wait 2000 
+if 
+is_key_pressed 78 
+jf @NONAME_736 
+jump @NONAME_16 
+
+:NONAME_782
+wait 0 
+if 
+0818:   actor $PLAYER_ACTOR in_air 
+jf @NONAME_16 
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 1.0 
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 0.0 2.0 1.0 
+if 
+06BD:   no_obstacles_between 1@ 2@ 3@ and 4@ 5@ 6@ solid 1 car 0 actor 0 object 1 particle 0 
+jf @NONAME_782 
+if 
+is_key_pressed 87 
+jf @NONAME_930 
+8@ = 87 
+jump @NONAME_966 
+
+:NONAME_930
+if 
+is_key_pressed 83 
+jf @NONAME_959 
+8@ = 83 
+jump @NONAME_966 
+
+:NONAME_959
+jump @NONAME_782 
+
+:NONAME_966
+wait 0 
+if 
+0818:   actor $PLAYER_ACTOR in_air 
+jf @NONAME_16 
+if 
+   not is_key_pressed 8@ 
+jf @NONAME_966 
+29@ = 0.0 
+
+:NONAME_1012
+   not 29@ >= 1.0 
+jf @NONAME_1073 
+29@ += 0.1 
+if 
+is_key_pressed 8@ 
+jf @NONAME_1062 
+jump @NONAME_1080 
+
+:NONAME_1062
+wait 1 
+jump @NONAME_1012 
+
+:NONAME_1073
+jump @NONAME_16 
+
+:NONAME_1080
+wait 0 
+if 
+  8@ == 87 
+jf @NONAME_1112 
+25@ = -360.0 
+
+:NONAME_1112
+if 
+  8@ == 83 
+jf @NONAME_1140 
+25@ = 360.0 
+
+:NONAME_1140
+21@ = 0.0 
+22@ = 0.0 
+23@ = Actor.Angle($PLAYER_ACTOR)
+
+:NONAME_1168
+wait 0 
+0819: 12@ = actor $PLAYER_ACTOR distance_from_ground 
+Actor.StorePos($PLAYER_ACTOR, 1@, 2@, 3@)
+04C4: store_coords_to 4@ 5@ 6@ from_actor $PLAYER_ACTOR with_offset 0.0 1.0 1.0 
+if and
+  12@ > 1.0 
+06BD:   no_obstacles_between 1@ 2@ 3@ and 4@ 5@ 6@ solid 1 car 0 actor 0 object 1 particle 0 
+jf @NONAME_1403 
+if 
+  8@ == 83 
+jf @NONAME_1307 
+005B: 21@ += 10@ // (float) 
+jump @NONAME_1315 
+
+:NONAME_1307
+0063: 21@ -= 10@ // (float) 
+
+:NONAME_1315
+083E: set_actor $PLAYER_ACTOR rotation 21@ 22@ 23@ while_in_air 
+if 
+  8@ == 83 
+jf @NONAME_1375 
+if 
+  21@ >= 360.0 
+jf @NONAME_1168 
+jump @NONAME_1396 
+
+:NONAME_1375
+if 
+   not 21@ > -360.0 
+jf @NONAME_1168 
+
+:NONAME_1396
+jump @NONAME_1410 
+
+:NONAME_1403
+jump @NONAME_16 
+
+:NONAME_1410
+wait 0 
+21@ = 0.0 
+if 
+   not is_key_pressed 8@ 
+jf @NONAME_1447 
+jump @NONAME_16 
+
+:NONAME_1447
+jump @NONAME_1168 

@@ -1,0 +1,81 @@
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'punish-position' 
+
+:BEGIN
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)  
+else_jump @BEGIN 
+if
+    0AB0:   key_pressed 109
+then
+    gosub @LOAD
+    jump @STORE_NEW
+end
+if
+    0AB0: key_pressed 107
+then
+    gosub @LOAD
+    jump @PUNISH
+end
+jump @BEGIN 
+
+:LOAD
+wait 0
+04ED: load_animation  "GRAVEYARD"
+if
+    04EE:   animation "GRAVEYARD" loaded
+jf @LOAD
+return
+
+:STORE_NEW
+wait 0 
+0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 1@ 
+
+:PUNISH
+wait 0
+if
+    056D:   actor 1@ defined
+jf @BEGIN
+
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 1@ 2000 ms
+05C2: AS_actor $PLAYER_ACTOR show_the_finger 
+
+05C1: AS_actor $PLAYER_ACTOR speak_from_audio_table 110 // 136 //182 //135
+ 
+wait 500
+0605: actor 1@ perform_animation "MRNM_LOOP" IFP "GRAVEYARD" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time 999999999
+
+jump @BEGIN
+
+
+/*
+:LOOP
+wait 0
+if or        
+    0AB0:   key_pressed 109
+    Actor.Dead(1@)
+    not Player.Defined($PLAYER_CHAR)
+then
+    jump @BEGIN
+end
+                     
+if
+    0184: actor 1@ health > 5
+then
+    0605: actor 1@ perform_animation "MRNM_LOOP" IFP "GRAVEYARD" framedelta 4.0 loopA 1 lockX 1 lockY 1 lockF 0 time 500
+else
+    0321: AS_actor 1@ die_headshotted
+    0223: set_actor 1@ health_to 0
+    0A10: increase_integer_stat 120 by 1 
+    jump @BEGIN
+end
+
+if
+    0611:   actor 1@ performing_animation "MRNM_LOOP"
+jf @BEGIN
+
+jump @LOOP
+*/

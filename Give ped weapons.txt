@@ -1,0 +1,30 @@
+{$CLEO}
+
+0000:"Give ped weapons"
+
+0A8D: 32@ = read_memory 9867644 size 1 virtual_protect 0 
+if 
+  32@ == 0 
+then
+0A8C: write_memory 9867644 size 1 value 1 virtual_protect 0 
+end
+
+:nn
+wait 0
+if and
+  80DF: not  actor $PLAYER_ACTOR driving
+  0256:   player $PLAYER_CHAR defined 
+jf @nn 
+
+if
+  0ADC:   test_cheat "RRR"
+then
+  0AB5: store_actor $PLAYER_ACTOR closest_vehicle_to 3@ closest_ped_to 1@
+  if
+      056D:   actor 1@ defined
+  jf @nn
+  0470: 2@ = actor $PLAYER_ACTOR current_weapon
+  01B2: give_actor 1@ weapon 2@ ammo 99999 // Load the weapon model before using this 
+end
+    
+jump @nn                                   

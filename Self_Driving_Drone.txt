@@ -1,0 +1,70 @@
+{$CLEO}
+
+0000: "robot"
+
+:nn
+wait 0
+if and
+0ADC:   test_cheat "MMM"
+not Actor.Driving($PLAYER_ACTOR)
+jf @nn
+
+:nn1
+wait 0
+Model.Load(#KART)
+04ED: load_animation "CARRY"
+if and
+Model.Available(#KART)
+04EE:   animation "CARRY" loaded
+jf @nn1
+
+0605: actor $PLAYER_ACTOR perform_animation "PUTDWN" IFP "CARRY" rate 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+wait 1000
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 3.0 1.0
+Car.Create(0@, #KART, 1@, 2@, 3@)
+1@ = Actor.Angle($PLAYER_ACTOR)
+Car.Angle(0@) = 1@
+5@ = Marker.CreateAboveCar(0@)
+Marker.SetColor(5@, 4)
+0224: set_car 0@ health_to 0
+
+:nn2
+wait 0
+if and
+not Car.Wrecked(0@)
+not Actor.Dead($PLAYER_ACTOR)
+8AB0: not  key_pressed 78
+jf @nn3
+
+
+Car.SetSpeedInstantly(0@, 30.0)
+0098: 4@ = random_float_in_ranges_0.0_to_1.0
+
+if
+    0021:   4@ > 0.1
+then
+    jump @nn2
+end
+    
+0407: store_coords_to 1@ 2@ 3@ from_car 0@ with_offset 0.0 0.0 2.0
+0107: 7@ = create_object 1225 at 1@ 2@ 3@   
+0392: make_object 7@ moveable 1                  
+071F: set_object 7@ health_to 0   
+Object.Throw(7@, 0.0, 0.0, 10.0) 
+Object.SetImmunities(7@, false, false, false, false, false)                     
+0208: 1@ = random_float_in_ranges -1.0 1.0
+0208: 2@ = random_float_in_ranges -1.0 1.0
+0208: 3@ = random_float_in_ranges -1.0 1.0    
+05A1: set_object 7@ rotation_velocity_about_an_axis 1@ 2@ 3@ through_center_of_body  
+Object.RemoveReferences(7@)   
+jump @nn2
+
+
+:nn3
+wait 0
+Marker.Disable(5@)
+Car.RemoveReferences(0@)
+jump @nn
+
+
+

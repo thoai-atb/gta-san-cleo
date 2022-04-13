@@ -1,0 +1,71 @@
+// This file was decompiled using SASCM.ini published on 2021-07-05
+{$CLEO .cs}
+
+script_name 'MEDIC' 
+
+:MEDIC_11
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MEDIC_11 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @MEDIC_11 
+store_closest_entities $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 10@ 
+if 
+056D:   actor 10@ defined 
+jf @MEDIC_11 
+if and
+   not 10@ == -1 
+   Actor.Dead(10@)
+89A8:   not actor 10@ headshoted 
+00F3:   actor $PLAYER_ACTOR near_actor 10@ radius 1.0 1.0 sphere 0 on_foot 
+is_key_pressed 76 
+jf @MEDIC_11 
+04ED: load_animation "MEDIC" 
+23@ = Actor.Angle(10@)
+089F: get_actor 10@ pedtype_to 20@ 
+0665: get_actor 10@ model_to 2@ 
+Model.Load(2@)
+038B: load_requested_models 
+if 
+   not 20@ == 6 
+jf @MEDIC_405 
+if 
+04EE:   animation "MEDIC" loaded 
+jf @MEDIC_11 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 10@ 
+0605: actor $PLAYER_ACTOR perform_animation "CPR" IFP "MEDIC" framedelta 4.0 loop 1 lockX 1 lockY 1 lockF 0 time 7000 
+04C4: store_coords_to 22@ 23@ 24@ from_actor 10@ with_offset 0.0 0.5 -1.0 
+Actor.Health(10@) = 0
+wait 8000 
+Actor.DestroyInstantly(10@)
+Actor.Create(11@, 20@, 2@, 22@, 23@, 24@)
+Actor.Angle($PLAYER_ACTOR) = 23@
+03FE: set_actor 11@ money 0 
+wait 0 
+0812: AS_actor 11@ perform_animation "GETUP" IFP "PED" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+wait 2000 
+jump @MEDIC_374 
+
+:MEDIC_374
+$151 += 1 
+Actor.RemoveReferences(11@)
+0628: update_float_stat_to $151 stat_id 151 
+wait 100 
+jump @MEDIC_11 
+
+:MEDIC_405
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 10@ 
+0605: actor $PLAYER_ACTOR perform_animation "CPR" IFP "MEDIC" framedelta 4.0 loop 1 lockX 1 lockY 1 lockF 0 time 7000 
+04C4: store_coords_to 22@ 23@ 24@ from_actor 10@ with_offset 0.0 0.5 -1.0 
+Actor.Health(10@) = 0
+wait 8000 
+Actor.DestroyInstantly(10@)
+Actor.Create(11@, PedType.CivMale, 2@, 22@, 23@, 24@)
+Actor.Angle($PLAYER_ACTOR) = 23@
+03FE: set_actor 11@ money 0 
+wait 0 
+0812: AS_actor 11@ perform_animation "GETUP" IFP "PED" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+wait 2000 
+jump @MEDIC_374 

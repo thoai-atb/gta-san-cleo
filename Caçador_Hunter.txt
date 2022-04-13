@@ -1,0 +1,50 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'HUNTER' 
+
+:HUNTER_11
+wait 0 
+0A8D: 0@ = read_memory 9867536 size 4 virtual_protect 0 
+if 
+04A4:   0@ == 1213550164 // == constant 
+else_jump @HUNTER_11 
+Model.Load(#HUNTER)                
+Model.Load(#ARMY)
+Model.Load(#CELLPHONE)
+038B: load_requested_models 
+
+:HUNTER_62
+wait 0 
+if and
+   Model.Available(#HUNTER)
+   Model.Available(#ARMY)
+   Model.Available(#CELLPHONE)
+else_jump @HUNTER_62 
+
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1
+wait 2500
+05C1: AS_actor $PLAYER_ACTOR speak_from_audio_table 136
+wait 2500
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0
+
+for 10@ = 1 to 20 step 1
+    0208: 3@ = random_float_in_ranges 0.0 360.0
+    02F6: 0@ = sine 3@ // (float)
+    02F7: 1@ = cosine 3@ // (float)
+    0013: 0@ *= 100.0
+    0013: 1@ *= 100.0
+    04C4: store_coords_to 3@ 4@ 5@ from_actor $PLAYER_ACTOR with_offset 0@ 1@ 150.0 
+    7@ = Car.Create(#HUNTER, 3@, 4@, 5@)
+    8@ = Actor.CreateAsDriver(Mission1, #ARMY, 7@)
+    0825: set_helicopter 7@ instant_rotor_start 
+    0724: heli 7@ follow_and_attack_player $PLAYER_ACTOR radius 30.0 
+    wait 1000
+end   
+
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#ARMY)
+Model.Destroy(#HUNTER)
+0A8C: write_memory 9867536 size 4 value 0 virtual_protect 0 
+jump @HUNTER_11 

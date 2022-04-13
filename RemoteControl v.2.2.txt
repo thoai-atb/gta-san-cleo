@@ -1,0 +1,339 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .cs}
+
+//-------------MAIN---------------
+thread 'KRRC' 
+
+:KRRC_11
+wait 0 
+if and
+   Player.Defined($PLAYER_CHAR)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.DrivingPlane($PLAYER_ACTOR)
+  not Actor.Driving($PLAYER_ACTOR)
+else_jump @KRRC_11 
+jump @KRRC_61 
+
+:KRRC_61
+wait 0 
+if and
+  0ADC:   test_cheat "NNN"
+  not Actor.Driving($PLAYER_ACTOR)
+else_jump @KRRC_61 
+jump @KRRC_96 
+
+:KRRC_96
+wait 0
+Model.Load(#KART)  
+Model.Load(#BOMB)
+04ED: load_animation "CARRY"
+if and
+Model.Available(#KART) 
+Model.Available(#BOMB)
+04EE:   animation "CARRY" loaded
+jf @KRRC_96   
+
+0605: actor $PLAYER_ACTOR perform_animation "PUTDWN" IFP "CARRY" rate 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+wait 1000
+
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 2.0 1.0
+Car.Create(0@, #KART, 1@, 2@, 3@)
+1@ = Actor.Angle($PLAYER_ACTOR)
+Car.Angle(0@) = 1@
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, 40, 1)
+01EC: make_car 0@ very_heavy 1
+
+
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+wait 0 
+0407: store_coords_to 1@ 2@ 3@ from_car 0@ with_offset 0.1 0.0 0.0 
+02C2: car 0@ drive_to 1@ 2@ 3@ 
+jump @KRRC_166 
+
+:KRRC_166
+wait 0 
+if 
+   Player.Defined($PLAYER_ACTOR)
+else_jump @KRRC_1244 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+else_jump @KRRC_11 
+jump @KRRC_209 
+
+:KRRC_209
+wait 0
+041A: 1@ = actor $PLAYER_ACTOR weapon 40 ammo
+if and
+   not Car.Wrecked(0@)
+   not Actor.Dead($PLAYER_ACTOR)   
+   1@ == 1
+else_jump @KRRC_1244 
+jump @KRRC_211
+
+:KRRC_211
+wait 0
+if
+02D8:   actor $PLAYER_ACTOR current_weapon == 40
+jf @KRRC_209
+jump @KRRC_237
+
+:KRRC_237
+if 
+0AB0:   key_pressed 71
+else_jump @KRRC_259 
+jump @KRRC_635 
+
+:KRRC_259
+if 
+0AB0:   key_pressed 107 
+else_jump @KRRC_281 
+jump @KRRC_671 
+
+:KRRC_281
+if 
+0AB0:   key_pressed 109 
+else_jump @KRRC_303 
+jump @KRRC_705 
+
+:KRRC_303
+if 
+0AB0:   key_pressed 74 
+else_jump @KRRC_325 
+jump @KRRC_739 
+
+:KRRC_325
+if 
+0AB0:   key_pressed 72 
+else_jump @KRRC_399 
+jump @KRRC_347 
+
+:KRRC_347
+if and
+0AB0:   key_pressed 72
+0AB0:   key_pressed 74 
+else_jump @KRRC_373 
+jump @KRRC_919 
+
+:KRRC_373
+if and
+0AB0:   key_pressed 72
+0AB0:   key_pressed 71
+else_jump @KRRC_775 
+jump @KRRC_883 
+
+:KRRC_399
+if 
+0AB0:   key_pressed 84 
+else_jump @KRRC_421 
+jump @KRRC_955 
+
+:KRRC_421
+if 
+0AB0:   key_pressed 85
+else_jump @KRRC_443 
+jump @KRRC_989 
+
+:KRRC_443
+if 
+0AB0:   key_pressed 98 
+else_jump @KRRC_465 
+jump @KRRC_1023 
+
+:KRRC_465
+if 
+0AB0:   key_pressed 89
+else_jump @KRRC_539 
+jump @KRRC_487 
+
+:KRRC_487
+if and
+0AB0:   key_pressed 89 
+0AB0:   key_pressed 74
+else_jump @KRRC_513 
+jump @KRRC_811 
+
+:KRRC_513
+if and
+0AB0:   key_pressed 89 
+0AB0:   key_pressed 71
+else_jump @KRRC_1059 
+jump @KRRC_847 
+
+:KRRC_539
+if and
+0AB0:   key_pressed 17 
+0AB0:   key_pressed 89 
+else_jump @KRRC_565 
+jump @KRRC_1095 
+
+:KRRC_565
+if and
+0AB0:   key_pressed 17 
+0AB0:   key_pressed 72
+else_jump @KRRC_591 
+jump @KRRC_1139 
+
+:KRRC_591
+if 
+0AB0:   key_pressed 97 
+else_jump @KRRC_613 
+jump @KRRC_1176 
+
+:KRRC_613
+if 
+0AB0:   key_pressed 99 
+else_jump @KRRC_166 
+jump @KRRC_1210 
+
+:KRRC_635
+wait 0 
+if 
+   not Car.Wrecked(0@)       
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 10, 50)
+jump @KRRC_237 
+
+:KRRC_671
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+067F: set_car 0@ lights 1 
+jump @KRRC_259 
+
+:KRRC_705
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+067F: set_car 0@ lights 2 
+jump @KRRC_281 
+
+:KRRC_739
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 11, 50)
+jump @KRRC_303 
+
+:KRRC_775
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 3, 50)
+jump @KRRC_325 
+
+:KRRC_811
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 8, 50)
+jump @KRRC_465 
+
+:KRRC_847
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 7, 50)
+jump @KRRC_465 
+
+:KRRC_883
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 13, 50)
+jump @KRRC_325 
+
+:KRRC_919
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 14, 50)
+jump @KRRC_325 
+
+:KRRC_955
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetSpeedInstantly(0@, 20.0)
+07D5: set_car 0@ velocity_in_direction_XYZ 0.0 0.0 0.1 rotation_velocitiesXY 0.0 0.0 unk 0.0
+jump @KRRC_399 
+
+:KRRC_989
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+02F8: get_car 0@ Z_angle_sine_to 1@
+02F9: get_car 0@ Z_angle_cosine_to 2@
+0017: 1@ /= 100.0
+0017: 2@ /= 100.0
+07D5: set_car 0@ velocity_in_direction_XYZ 1@ 2@ 0.05 rotation_velocitiesXY 0.0 0.0 unk 0.0
+jump @KRRC_421 
+
+:KRRC_1023
+wait 0 
+if                                
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 1, 50)
+jump @KRRC_443 
+
+:KRRC_1059
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetAnimation(0@, 9, 50)
+jump @KRRC_465 
+
+:KRRC_1095
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetMaxSpeed(0@, 300.0)
+Car.SetDriverBehaviour(0@, FollowRoad)
+jump @KRRC_539 
+
+:KRRC_1139
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+Car.SetMaxSpeed(0@, 0.0)
+jump @KRRC_565 
+
+:KRRC_1176
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+0918: set_car 0@ engine_operation 1 
+jump @KRRC_591 
+
+:KRRC_1210
+wait 0 
+if 
+   not Car.Wrecked(0@)
+else_jump @KRRC_1244 
+0918: set_car 0@ engine_operation 0 
+jump @KRRC_613 
+
+:KRRC_1244
+0224: set_car 0@ health_to 0
+Car.RemoveReferences(0@)
+0555: remove_weapon 40 from_actor $PLAYER_ACTOR
+jump @KRRC_11 
+wait 2000 
+jump @KRRC_11 
+

@@ -1,0 +1,87 @@
+{$CLEO .cs}
+thread 'TAI_CHI_GROUP'
+
+:BEGIN       
+wait 0
+04ED: load_animation "PARK"  
+if
+    Player.Defined($PLAYER_CHAR)
+else_jump @BEGIN
+
+if
+    0ADC:   test_cheat "TAI"
+then
+    jump @ACTIVATE
+end
+
+jump @BEGIN
+
+:ACTIVATE           
+wait 0
+if 
+    04EE:   animation "PARK" loaded 
+jf @BEGIN
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB
+29@ = Audiostream.Load("CLEO\MP3\MeditationBell.wav")
+gosub @EFFECT_FADE 
+Audiostream.PerformAction(29@, PLAY)
+
+:LOOP
+wait 0    
+0109: player $PLAYER_CHAR money += -10
+
+for 4@ = 1 to 100 step 1
+    wait 0
+    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET
+    if
+        056D:   actor 3@ defined
+    jf continue
+    if
+        0184: actor 3@ health > 5
+    then
+        0812: AS_actor 3@ perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 500 // versionB
+    else
+        0223: set_actor 3@ health_to 0
+        0A10: increase_integer_stat 120 by 1 
+    end
+end   
+
+if or
+    0ADC: test_cheat "TAI"
+    not Player.Defined($PLAYER_CHAR)
+then
+    jump @DEACTIVATE
+end
+
+jump @LOOP
+
+:DEACTIVATE
+wait 0
+if
+    not Actor.Dead($PLAYER_ACTOR)
+then
+    0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+    gosub @EFFECT_FADE
+end
+
+// for 4@ = 1 to 100 step 1
+//    wait 0
+//    Actor.StorePos($PLAYER_ACTOR, 0@, 1@, 2@)
+//    0AE1: 3@ = random_actor_near_point 0@ 1@ 2@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+//    if
+//        056D:   actor 3@ defined
+//    jf continue
+//    0812: AS_actor 3@ perform_animation "TAI_CHI_OUT" IFP "PARK" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // version
+// end 
+ 
+jump @BEGIN
+
+:EFFECT_FADE
+wait 500
+0169: set_fade_color_RGB 255 255 255
+fade 0 400
+wait 200 
+fade 1 400
+0169: set_fade_color_RGB 0 0 0  
+return

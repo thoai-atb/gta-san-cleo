@@ -1,0 +1,29 @@
+// This file was decompiled using SASCM.ini published on 2021-07-05
+{$CLEO .cs}
+
+0000: NOP 
+
+:PARA_2
+script_name 'PARA' 
+04ED: load_animation "PARACHUTE" 
+
+:PARA_26
+wait 0 
+if or
+   Actor.Animation($PLAYER_ACTOR) == "PARA_FLOAT"
+   Actor.Animation($PLAYER_ACTOR) == "PARA_STEERL"
+   Actor.Animation($PLAYER_ACTOR) == "PARA_STEERR"
+jf @PARA_26 
+jump @PARA_101 
+
+:PARA_101
+wait 0 
+if and
+044B:   actor $PLAYER_ACTOR on_foot 
+   Actor.Animation($PLAYER_ACTOR) == "FALL_FRONT"
+   Actor.HasWeapon($PLAYER_ACTOR, 46)
+jf @PARA_2 
+Player.CanMove($PLAYER_CHAR, False)
+0812: AS_actor $PLAYER_ACTOR perform_animation "PARA_LAND" IFP "PARACHUTE" framedelta 10.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+Player.CanMove($PLAYER_CHAR, True)
+jump @PARA_2 

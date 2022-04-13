@@ -1,0 +1,56 @@
+// This file was decompiled using SASCM.ini published on 2021-07-05
+{$CLEO .cs}
+
+0000: NOP 
+script_name 'FACEPALM' 
+
+:FACEPALM_21
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @FACEPALM_21 
+jump @FACEPALM_48 
+
+:FACEPALM_48
+wait 0 
+04ED: load_animation "FACEPALM" 
+04ED: load_animation "FACEPALM_BACK" 
+
+:FACEPALM_81
+wait 0 
+if and
+04EE:   animation "FACEPALM" loaded 
+04EE:   animation "FACEPALM_BACK" loaded 
+jf @FACEPALM_81 
+jump @FACEPALM_132 
+
+:FACEPALM_132
+wait 0 
+if and
+   not Actor.Driving($PLAYER_ACTOR)
+84AD:   not actor $PLAYER_ACTOR in_water 
+8818:   not actor $PLAYER_ACTOR in_air 
+is_key_pressed 190 
+jf @FACEPALM_132 
+jump @FACEPALM_174 
+
+:FACEPALM_174
+wait 0 
+0605: actor $PLAYER_ACTOR perform_animation "FACEPALM" IFP "FACEPALM" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+wait 1370 
+jump @FACEPALM_230 
+
+:FACEPALM_230
+wait 0 
+if 
+is_key_pressed 190 
+jf @FACEPALM_230 
+0605: actor $PLAYER_ACTOR perform_animation "FACEPALM_BACK" IFP "FACEPALM_BACK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 1370 
+jump @FACEPALM_312 
+
+:FACEPALM_312
+wait 0 
+04EF: release_animation "FACEPALM" 
+04EF: release_animation "FACEPALM_BACK" 
+jump @FACEPALM_21 

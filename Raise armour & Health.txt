@@ -1,0 +1,29 @@
+{$CLEO}
+0000: "Raising Armour & Health"
+:raise
+wait 0
+wait 500
+04DD: 1@ = actor $PLAYER_ACTOR armour
+if 
+    1@ > 0
+then
+    035F: actor $PLAYER_ACTOR armour += 1
+end
+
+0226: 2@ = actor $PLAYER_ACTOR health
+if
+    2@ > 0
+then
+    2@ += 1
+    0223: set_actor $PLAYER_ACTOR health_to 2@
+end    
+
+if and
+   Actor.Animation($PLAYER_ACTOR) == "FALL_FALL"
+   0818:   actor $PLAYER_ACTOR in_air 
+then
+    2@ -= 5
+    0223: set_actor $PLAYER_ACTOR health_to 2@
+end 
+jump @raise
+
