@@ -1,0 +1,74 @@
+{$CLEO .cs}
+thread 'MIND_CONTROL'
+
+:BEGIN
+wait 0 
+if
+    Player.Defined($PLAYER_CHAR)
+else_jump @BEGIN
+
+:CHECK
+if
+    0ADC:   test_cheat "mind"
+then 
+    jump @MIND
+end
+
+jump @BEGIN
+
+:MIND
+wait 0 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB
+wait 500 
+0AB5: store_char $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 3@
+if and 
+    056D:   actor 3@ defined
+    8118:   not actor 3@ dead
+jf @DONE
+
+0187: 33@ = create_marker_above_actor 3@
+0165: set_marker 33@ color_to 3
+
+:LOOP
+wait 0
+if and  
+    056D:   actor 3@ defined
+    8118:   not actor 3@ dead
+jf @DONE  
+07DD: set_actor 3@ attack_rate 100 // previously known as temper_to
+
+if and      
+    056D:   actor 4@ defined
+    8118:   not actor 4@ dead
+then    
+else
+    gosub @TARGET
+end
+
+if
+    0ADC:   test_cheat "mind"
+then 
+    jump @DONE
+end
+
+jump @LOOP
+
+:DONE
+wait 0
+Marker.Disable(33@)
+jump @BEGIN
+    
+// PICK UP TARGET
+:TARGET
+wait 0
+Actor.StorePos(3@, 0@, 1@, 2@)
+0AE1: 4@ = random_char_near_point 0@ 1@ 2@ in_radius 20.0 find_next 1 pass_deads 1
+if and
+    056D:   actor 4@ defined
+    8118:   not actor 4@ dead
+    803B:   not 4@ == 3@  // (int)
+jf @TARGET
+05E2: AS_actor 3@ kill_actor 4@
+return
+
+

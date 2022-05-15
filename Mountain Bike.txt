@@ -5,7 +5,7 @@
 :nn
 wait 0
 if and
- 0AB0:   key_pressed 106
+ 0ADC:   test_cheat "MOUNT"
  8965:  not actor $PLAYER_ACTOR swimming
  80DF: not  actor $PLAYER_ACTOR driving
  not Actor.Animation($PLAYER_ACTOR) == "CLIMB_IDLE"

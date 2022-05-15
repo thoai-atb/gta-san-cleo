@@ -21,13 +21,13 @@ if
 jf @TES1_CELLPHONE
 
 0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
-wait 4500 
+wait 3000 
 0729: AS_actor $PLAYER_ACTOR hold_cellphone 0
 
 010D: set_player $PLAYER_CHAR wanted_level_to 0
 0109: player $PLAYER_CHAR money += -100
 
-wait 2000
+wait 3000
 
 Model.Destroy(#CELLPHONE)
 

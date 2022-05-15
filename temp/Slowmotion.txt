@@ -1,0 +1,58 @@
+// This file was decompiled using SASCM.ini published by GTAG (http://gtag.gtagaming.com/opcode-database) on 14.6.2013
+{$CLEO .CS}
+
+//-------------MAIN---------------
+0000: NOP 
+                                                                                                                                                          
+:NONAME_2
+0005: $LOCK = 0
+wait 0 
+
+if 
+    0ADC:   test_cheat "romance"
+then
+0005: $LOCK = 1
+29@ = Audiostream.Load("CLEO\MP3\Carelessfadeout.wav")
+Audiostream.PerformAction(29@, PLAY)
+Actor.Driving($PLAYER_ACTOR)
+wait 2000
+0169: set_fade_color_RGB 100 50 100 
+fade 0 400 
+wait 500 
+fade 1 1600 
+015D: set_gamespeed 0.33 
+wait 7000          
+Audiostream.Release(29@)
+015D: set_gamespeed 1.0 
+0169: set_fade_color_RGB 25 140 178 
+fade 0 500 
+wait 400 
+fade 1 250 
+0169: set_fade_color_RGB 0 0 0 
+wait 600 
+end
+
+if
+    0ADC:   test_cheat "hello"
+then
+0005: $LOCK = 1
+29@ = Audiostream.Load("CLEO\MP3\Hellofadeout.wav")
+Audiostream.PerformAction(29@, PLAY)
+Actor.Driving($PLAYER_ACTOR)
+0169: set_fade_color_RGB 50 100 50 
+fade 0 400 
+wait 500 
+fade 1 1600
+015D: set_gamespeed 0.33 
+wait 7000
+Audiostream.Release(29@)
+015D: set_gamespeed 1.0 
+0169: set_fade_color_RGB 150 56 0 
+fade 0 500 
+wait 400 
+fade 1 250 
+0169: set_fade_color_RGB 0 0 0 
+wait 600 
+end
+
+jump @NONAME_2

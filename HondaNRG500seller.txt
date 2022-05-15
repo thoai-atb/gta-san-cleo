@@ -1,80 +1,79 @@
-    {$CLEO}
-    
-    0000: "Bike seller"
-    
-    :nn
-    wait 0
-    077E: get_active_interior_to 20@ 
-    if  and
-        20@ == 0
-        0ADC:   test_cheat "BIK"
-        80DF: not  actor $PLAYER_ACTOR driving
-    then
-        10@ = #NRG500
-        jump @nn1
-    end
-    
-    jump @nn
-    
-    :nn1
-    wait 0
-        Model.Load(#CELLPHONE) 
-        Model.Load(10@) 
-        023C: load_special_actor 'BBTHIN' as 1   
-    if  and
-        023D:  special_actor 1 loaded
-        Model.Available(#CELLPHONE)
-        Model.Available(10@)
-    jf @nn1
-    
-    0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
-    wait 4500 
-    0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
-   
-    0208: 3@ = random_float_in_ranges 0.0 360.0
-    02F6: 0@ = sine 3@ // (float)
-    02F7: 1@ = cosine 3@ // (float)
-    0013: 0@ *= 200.0
-    0013: 1@ *= 200.0
+{$CLEO}
+
+0000: "Bike seller"
+
+:nn
+wait 0
+077E: get_active_interior_to 20@ 
+if  and
+    20@ == 0
+    0ADC:   test_cheat "BIK"
+    80DF: not  actor $PLAYER_ACTOR driving
+then
+    10@ = #NRG500
+    jump @nn1
+end
+
+jump @nn
+
+:nn1
+wait 0
+    Model.Load(#CELLPHONE) 
+    Model.Load(10@) 
+    023C: load_special_actor 'BBTHIN' as 1   
+if  and
+    023D:  special_actor 1 loaded
+    Model.Available(#CELLPHONE)
+    Model.Available(10@)
+jf @nn1
+
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+wait 4500 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+
+0208: 3@ = random_float_in_ranges 0.0 360.0
+02F6: 0@ = sine 3@ // (float)
+02F7: 1@ = cosine 3@ // (float)
+0013: 0@ *= 200.0
+0013: 1@ *= 200.0
 
 
-    04C4: store_coords_to 3@ 4@ 5@ from_actor $PLAYER_ACTOR with_offset 0@ 1@ 0.0 
-    02C1: store_to 0@ 1@ 2@ car_path_coords_closest_to 3@ 4@ 5@
-    
-    3@ = Car.Create(10@, 0@, 1@, 2@)
-    0224: set_car 3@ health_to 3000
-    0229: set_car 3@ primary_color_to 66 secondary_color_to 1
-    00AE: set_car 3@ traffic_behaviour_to 2
-    0ABF: set_vehicle 3@ engine_state_to 1 
-    0918: set_car 3@ engine_operation 1 
-    
-    4@ = Actor.CreateAsDriver(Mission1, #SPECIAL01, 3@)
-    5@ = Marker.CreateAboveCar(3@)
-    Marker.SetColor(5@, 4)
-    04C4: store_coords_to 6@ 7@ 8@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 0.0 
-    02C1: store_to 0@ 1@ 2@ car_path_coords_closest_to 6@ 7@ 8@ 
-    Car.DriveTo(3@, 0@, 1@, 2@)
-    
-    
-    :nn2
-    wait 0 
-    04C4: store_coords_to 6@ 7@ 8@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 0.0 
-    if or
-    0741:  actor $PLAYER_ACTOR busted
-    0117:  player $PLAYER_CHAR wasted
-    01AD:   car 3@ sphere 0 near_point 6@ 7@ radius 4.0 4.0 
-    jf @nn2 
-    Model.Destroy(#CELLPHONE)    
-    0633: AS_actor 4@ exit_car
-    wait 1000
-    018C: play_sound 1150 at 0.0 0.0 0.0
-    0109: player $PLAYER_CHAR money += -10000
-    Model.Destroy(#SPECIAL01)
-    Model.Destroy(10@)
-    Marker.Disable(5@)
-    Car.RemoveReferences(3@)
-    Actor.RemoveReferences(4@)
+04C4: store_coords_to 3@ 4@ 5@ from_actor $PLAYER_ACTOR with_offset 0@ 1@ 0.0 
+02C1: store_to 0@ 1@ 2@ car_path_coords_closest_to 3@ 4@ 5@
 
-    jump @nn 
-   
- 
+3@ = Car.Create(10@, 0@, 1@, 2@)
+0224: set_car 3@ health_to 3000
+0229: set_car 3@ primary_color_to 66 secondary_color_to 1
+00AE: set_car 3@ traffic_behaviour_to 2
+0ABF: set_vehicle 3@ engine_state_to 1 
+0918: set_car 3@ engine_operation 1 
+
+4@ = Actor.CreateAsDriver(Mission1, #SPECIAL01, 3@)
+5@ = Marker.CreateAboveCar(3@)
+Marker.SetColor(5@, 4)
+04C4: store_coords_to 6@ 7@ 8@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 0.0 
+02C1: store_to 0@ 1@ 2@ car_path_coords_closest_to 6@ 7@ 8@ 
+Car.DriveTo(3@, 0@, 1@, 2@)
+
+
+:nn2
+wait 0 
+04C4: store_coords_to 6@ 7@ 8@ from_actor $PLAYER_ACTOR with_offset 0.0 0.0 0.0 
+if or
+0741:  actor $PLAYER_ACTOR busted
+0117:  player $PLAYER_CHAR wasted
+01AD:   car 3@ sphere 0 near_point 6@ 7@ radius 4.0 4.0 
+jf @nn2 
+Model.Destroy(#CELLPHONE)    
+0633: AS_actor 4@ exit_car
+wait 1000
+018C: play_sound 1150 at 0.0 0.0 0.0
+0109: player $PLAYER_CHAR money += -10000
+Model.Destroy(#SPECIAL01)
+Model.Destroy(10@)
+Marker.Disable(5@)
+Car.RemoveReferences(3@)
+Actor.RemoveReferences(4@)
+
+jump @nn 
+

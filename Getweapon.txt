@@ -94,7 +94,7 @@ then
 end
 
 if
-   0ADC:   test_cheat "FLAME"
+   0ADC:   test_cheat "THROW"
 then
     Model.Load(#FLAME)
     repeat
@@ -171,7 +171,7 @@ then
 end
 
 if
-   0ADC:   test_cheat "FIREX"
+   0ADC:   test_cheat "EXTING"
 then
     Model.Load(#FIRE_EX)
         repeat

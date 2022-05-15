@@ -1,0 +1,76 @@
+{$CLEO .cs}
+0000: "Lock vehicle"
+
+:begin
+wait 0
+if and
+    056D:   actor $PLAYER_ACTOR defined
+    0256:   player $PLAYER_CHAR defined
+jf @begin
+
+if
+    0AB0:   key_pressed 221   // ]
+then
+    jump @lock
+end
+
+if         
+    0AB0:   key_pressed 219   // [
+then
+    jump @unlock
+end
+
+jump @begin
+
+:lock
+wait 0    
+04ED: load_animation "HEIST9" 
+if
+    04EE:   animation "HEIST9" loaded 
+jf @lock
+0605: actor $PLAYER_ACTOR perform_animation "USE_SWIPECARD" IFP "HEIST9" rate 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+0AB5: store_char $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 1@
+if
+    056E:   car 0@ defined
+jf @begin  
+Car.DoorStatus(0@) = 2       
+Car.StorePos(0@, 14@, 15@, 16@)                     
+018C: play_sound 1135 at 14@ 15@ 16@   //1159 explosion
+
+// CAR JUMP RANDOM
+0208: 14@ = random_float_in_ranges -0.1 0.1 
+0208: 15@ = random_float_in_ranges -0.1 0.1
+0208: 16@ = random_float_in_ranges -0.1 0.1
+07D5: set_car 0@ velocity_in_direction_XYZ 14@ 15@ 16@ rotation_velocitiesXY 0.0 0.0 unk 0.0
+
+Car.RemoveReferences(0@)
+Actor.RemoveReferences(1@)   
+wait 500
+jump @begin
+
+:unlock
+wait 0     
+04ED: load_animation "HEIST9"  
+if
+    04EE:   animation "HEIST9" loaded 
+jf @unlock
+0605: actor $PLAYER_ACTOR perform_animation "USE_SWIPECARD" IFP "HEIST9" rate 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+0AB5: store_char $PLAYER_ACTOR closest_vehicle_to 0@ closest_ped_to 1@
+if
+    056E:   car 0@ defined
+jf @begin  
+Car.DoorStatus(0@) = 1
+Car.StorePos(0@, 14@, 15@, 16@)                     
+018C: play_sound 1135 at 14@ 15@ 16@   //1159 explosion
+
+// CAR JUMP RANDOM
+0208: 14@ = random_float_in_ranges -0.1 0.1 
+0208: 15@ = random_float_in_ranges -0.1 0.1
+0208: 16@ = random_float_in_ranges -0.1 0.1
+07D5: set_car 0@ velocity_in_direction_XYZ 14@ 15@ 16@ rotation_velocitiesXY 0.0 0.0 unk 0.0
+
+Car.RemoveReferences(0@)
+Actor.RemoveReferences(1@)
+wait 500
+jump @begin
+

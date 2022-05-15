@@ -1,0 +1,58 @@
+{$CLEO .cs}
+thread "SLOWMOCJ"
+
+:BEGIN       
+wait 0       
+if
+    Player.Defined($PLAYER_CHAR)
+else_jump @BEGIN
+
+if
+    0AB0:   key_pressed 106   // star
+then
+    jump @ACTIVATE
+end
+
+jump @BEGIN
+
+
+:ACTIVATE           
+wait 0   
+015D: set_gamespeed 0.45
+0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB
+29@ = Audiostream.Load("CLEO\MP3\SlowIn.wav")                                                                              
+30@ = Audiostream.Load("CLEO\MP3\SlowTheme.wav")   
+wait 500
+Audiostream.PerformAction(29@, PLAY)    
+Audiostream.PerformAction(30@, PLAY)
+
+:LOOP
+wait 0
+0109: player $PLAYER_CHAR money += -100
+015D: set_gamespeed 0.1
+if or
+    0AB0:   key_pressed 106
+    not Player.Defined($PLAYER_CHAR)
+then
+    jump @DEACTIVATE
+end
+   
+wait 100    
+jump @LOOP
+
+:DEACTIVATE
+wait 0                      
+29@ = Audiostream.Load("CLEO\MP3\SlowOut.wav")
+Audiostream.PerformAction(29@, PLAY)    
+015D: set_gamespeed 0.45                   
+if
+    not Actor.Dead($PLAYER_ACTOR)
+then
+    0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+end 
+wait 500
+015D: set_gamespeed 1.0   
+Audiostream.PerformAction(30@, STOP)    
+
+wait 1000      
+jump @BEGIN
