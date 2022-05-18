@@ -65,7 +65,8 @@ for 4@ = 1 to 100 step 1
     
     05E2: AS_actor 3@ kill_actor $PLAYER_ACTOR 
     0209: 17@ = random_int_in_ranges 4 8 
-    07FE: set_actor 3@ fighting_style_to 17@ moves 6 
+    07FE: set_actor 3@ fighting_style_to 17@ moves 6  
+    07DD: set_actor 3@ attack_rate 100 // previously known as temper_to
     
     if
         // 02D8:   actor 3@ current_weapon == 0
@@ -102,7 +103,8 @@ for 4@ = 1 to 100 step 1
     05E2: AS_actor 3@ kill_actor 6@ 
     0209: 17@ = random_int_in_ranges 4 8 
     07FE: set_actor 3@ fighting_style_to 17@ moves 6        
-    099F: AS_actor 3@ ignore_weapon_range 0
+    099F: AS_actor 3@ ignore_weapon_range 0  
+    07DD: set_actor 3@ attack_rate 100 // previously known as temper_to
 
     
     if
@@ -143,6 +145,7 @@ for 4@ = 1 to 100 step 1
     0209: 17@ = random_int_in_ranges 4 8 
     07FE: set_actor 3@ fighting_style_to 17@ moves 6        
     099F: AS_actor 3@ ignore_weapon_range 0
+    07DD: set_actor 3@ attack_rate 100 // previously known as temper_to
     if
         // 02D8:   actor 3@ current_weapon == 0
         80DF:   not actor $PLAYER_ACTOR driving
@@ -175,7 +178,8 @@ for 4@ = 1 to 100 step 1
        not Actor.Dead(3@)
     jf continue
     
-    0672: AS_actor 3@ attack_car 0@
+    0672: AS_actor 3@ attack_car 0@  
+    07DD: set_actor 3@ attack_rate 100 // previously known as temper_to
     
     Actor.GiveWeaponAndAmmo(3@, 9, 9999)
 end

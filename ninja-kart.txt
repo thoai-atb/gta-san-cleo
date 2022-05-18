@@ -1,0 +1,80 @@
+{$CLEO}
+
+0000: "KKK"
+
+:begin
+wait 0
+if and
+    0ADC:   test_cheat "KKK"
+    not Actor.Driving($PLAYER_ACTOR)
+jf @begin
+
+:activate
+wait 0
+Model.Load(#KART)
+04ED: load_animation "CARRY"
+if and
+    Model.Available(#KART)
+    04EE:   animation "CARRY" loaded
+jf @activate
+                                  
+0605: actor $PLAYER_ACTOR perform_animation "PUTDWN" IFP "CARRY" rate 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1
+wait 1000
+04C4: store_coords_to 1@ 2@ 3@ from_actor $PLAYER_ACTOR with_offset 0.0 3.0 1.0
+Car.Create(0@, #KART, 1@, 2@, 3@)
+1@ = Actor.Angle($PLAYER_ACTOR)
+Car.Angle(0@) = 1@
+0224: set_car 0@ health_to 10000 
+// 5@ = Marker.CreateAboveCar(0@)
+// Marker.SetColor(5@, 4)       
+
+Car.StorePos(0@, 1@, 2@, 3@)
+
+for 5@ = 1 to 100 step 1 
+    wait 0 
+    0AE1: 4@ = random_actor_near_point 1@ 2@ 3@ in_radius 50.0 find_next 1 pass_deads 1 //IF and SET 
+    if and
+       056D:   actor 4@ defined    
+       not Actor.Dead(4@)  
+       056E:   car 0@ defined
+    jf continue                           
+    05D2: AS_actor 4@ run_to_and_hijack_car 0@ max_search_radius 20.0 traffic_behavior 3
+    064B: 4@ = create_particle "shootlight" at 1@ 2@ 3@ type 1   
+    064F: remove_references_to_particle 4@               
+end
+
+:loop
+wait 50
+if and
+    not Car.Wrecked(0@)
+    not Actor.Dead($PLAYER_ACTOR)
+    056D:   actor $PLAYER_ACTOR defined
+    8AB0:   not key_pressed 8 
+jf @end
+
+Car.StorePos(0@, 1@, 2@, 3@)
+0AE1: 4@ = random_char_near_point 1@ 2@ 3@ in_radius 20.0 find_next 1 pass_deads 1
+if
+    056D:   actor 4@ defined
+jf @loop
+Actor.StorePos(4@, 6@, 7@, 8@)    
+0063: 6@ -= 1@
+0063: 7@ -= 2@  
+0063: 8@ -= 3@
+6@ *= 0.05
+7@ *= 0.05
+8@ *= 0.05
+07D5: set_car 0@ velocity_in_direction_XYZ 6@ 7@ 8@ rotation_velocitiesXY 0.0 0.0 unk 0.0  
+064B: 4@ = create_particle "shootlight" at 1@ 2@ 3@ type 1   
+064F: remove_references_to_particle 4@               
+// 018C: play_sound 1141 at  1@ 2@ 3@  // 1141
+
+jump @loop
+
+:end
+wait 0                     
+// wait 500
+// Marker.Disable(5@)
+Car.Health(0@) = -1     
+Car.RemoveReferences(0@)
+jump @begin

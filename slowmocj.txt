@@ -19,10 +19,11 @@ jump @BEGIN
 :ACTIVATE           
 wait 0   
 015D: set_gamespeed 0.45
-0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB
+// 0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB
 29@ = Audiostream.Load("CLEO\MP3\SlowIn.wav")                                                                              
 30@ = Audiostream.Load("CLEO\MP3\SlowTheme.wav")   
-wait 500
+wait 200
+038E: draw_box_position 320.0 224.0 size 640.0 448.0 RGBA 0 0 0 75
 Audiostream.PerformAction(29@, PLAY)    
 Audiostream.PerformAction(30@, PLAY)
 
@@ -48,9 +49,10 @@ Audiostream.PerformAction(29@, PLAY)
 if
     not Actor.Dead($PLAYER_ACTOR)
 then
-    0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+    // 0812: AS_actor $PLAYER_ACTOR perform_animation "BIKE_ELBOWL" IFP "PED" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
 end 
-wait 500
+wait 200
+03F0: enable_text_draw 0
 015D: set_gamespeed 1.0   
 Audiostream.PerformAction(30@, STOP)    
 
